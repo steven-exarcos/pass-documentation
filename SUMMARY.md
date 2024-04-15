@@ -10,7 +10,7 @@
   * [Latest Release](welcome-guide/latest-release.md)
   * [PASS Roadmap](welcome-guide/pass-roadmap.md)
   * [Setup and Run PASS Locally](welcome-guide/setup-run-pass.md)
-  * [Collaboration with other Institutions](welcome-guide/collaboration-other-institutions.md)
+  * [Collaboration with Other Institutions](welcome-guide/collaboration-other-institutions.md)
   * [Contributing to PASS](welcome-guide/contributing-to-pass.md)
 * [Developer Documentation](developer-documentation/README.md)
 * [PASS Infrastructure](infrastructure-documenation/README.md)
