@@ -2,7 +2,7 @@
 
 The NIH Manuscript Submission Loader (NIHMS Loader) contains the components required to download, transform and load Submission information from NIHMS to PASS. The project includes two command line tools. The first uses the NIH API to download the CSV(s) containing compliant, non-compliant, and in-process publication information. The second tool reads those files, transforms the data to the PASS data model and then loads them to PASS.
 
-For background information on PACM, see the [user guide](https://www.ncbi.nlm.nih.gov/pmc/utils/pacm/static/pacm-user-guide.pdf). Limited information on the API is provided by the [NLM Technical Bulletin](https://www.nlm.nih.gov/pubs/techbull/mj19/brief/mj19_api_public_access_compliance.html)
+For background information on the NIH Public Access Compliance Monitor (PACM), see the [user guide](https://www.ncbi.nlm.nih.gov/pmc/utils/pacm/static/pacm-user-guide.pdf). Limited information on the API is provided by the [NLM Technical Bulletin](https://www.nlm.nih.gov/pubs/techbull/mj19/brief/mj19_api_public_access_compliance.html)
 
 ## Topic Summary
 
@@ -50,7 +50,6 @@ You will need to set values for the following properties:
 - nihmsetl.api.url.param.ipf
 - nihmsetl.api.url.param.api-token 
 
-
 Below is the full set of properties for the NIHMS Harvester. These properties are set in the `resources/application.properties` file in the `nihms-data-harvest` module.
 
 | Property                           | Default Value          | Notes                                                                                                                                                                                      |
@@ -84,16 +83,18 @@ By default all 3 publication statuses - compliant, non-compliant, and in-process
     -p, -inprocess, --inprocess - Download in-process publication CSV.
     -n, -noncompliant, --noncompliant - Download non-compliant publication CSV.
 
-You can also specify a start date, by default the PACM system sets the start date to 1 year prior to the date of the download. You can change this by adding a start date parameter:
+You can also specify a start date, by default the PACM system sets the start date to 1 year prior to the date of the download. You can change this by adding a start date parameter. This will return all records published since the date provided. The syntax for this parameter is mm-yyyy .
 
-    -s, -startDate --startDate - This will return all records published since the date provided. The syntax is mm-yyyy .
+    -s, -startDate --startDate 
 
 So, for example, to download the compliant publications published since December 2012, you would do the following:
 
-> java -jar nihms-data-harvest-cli-exec.jar -s 12-2012 -c
+```shell
+java -jar nihms-data-harvest-cli-exec.jar -s 12-2012 -c
+```
 
 On running this command, files will be downloaded and renamed with a prefix according to their status ("compliant", " noncompliant", or "inprocess") and a timestamp integer e.g. noncompliant_nihmspubs_20180507104323.csv.
-NIHMS Data Transform-Load CLI
+
 
 ### NIHMS Transform and Load
 
@@ -127,7 +128,9 @@ By default all 3 publication statuses - compliant, non-compliant, and in-process
 
 So, for example, to process non-compliant spreadsheets only:
 
-> java -jar nihms-data-transform-load-cli-exec.jar -n
+```shell
+java -jar nihms-data-transform-load-cli-exec.jar -n
+```
 
 When run, each row will be loaded into the application and new Publications, Submissions, and RepositoryCopies will be created in PASS as needed. The application will also update any Deposit.repositoryCopy links where a new one is discovered. Once a CSV file has been processed, it will be renamed with a suffix of ".done" e.g. noncompliant_nihmspubs_20180507104323.csv.done. To re-process the file, simply rename it to remove the .done suffix and re-run the application.
 
@@ -149,7 +152,9 @@ docker run -e NIHMS_API_INST=YOUR_INST -e NIHMS_API_IPF=YOUR_IPF -e NIHMS_API_TO
 
 ## Next Step / Institution Configuration
 
-Configuring the NIHMS loader to run at an institution requires several NIH/NLM accounts to be setup. 
+Configuring the NIHMS loader to run at an institution requires several NIH/NLM accounts to be setup. The first step would be to familiarize yourself with the [PACM Guide](https://www.ncbi.nlm.nih.gov/pmc/utils/pacm/static/pacm-user-guide.pdf). Institutions that are universities typically have an Office of Research and that is a good starting point to finding out more information how PACR roles are assigned, typically a Signing Officer at the Office of Research can perform this function.
+
+Once access to PACM has been established, configuring where the Data Harvester and the Data Transform-Load applications is the next step. Since they are Java applications they can be scheduled as cron jobs on a server or run in the cloud. At Johns Hopkins University these applications are run by using [AWS Batch and ECS](../welcome-guide/deployment-architecture.md#pass-deployment-architecture).
 
 
 ## Related Information
