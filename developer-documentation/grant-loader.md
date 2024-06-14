@@ -62,6 +62,34 @@ in the PASS backend. The JHU implementation also treats the COEUS/FIBI database 
 data. If a grant is being passed in for update, it is assumed that all records for that grant are included in the
 input.
 
+## Grant Data
+
+In order for PASS to map grant data to the associated Objects within PASS, the Grant Loader needs to ingest a CSV file with the following fields and data types:
+
+| Column                | Type/Size      | Required | Description                                                                                                                                                                                                                                   |
+|-----------------------|----------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| GRANT_NUMBER          | TEXT/255       | Y        | Unique identifier for the grant (institutional Grant ID)                                                                                                                                                                                      |
+| GRANT_TITLE           | TEXT/255       | Y        | The title of the grant                                                                                                                                                                                                                        |
+| AWARD_NUMBER          | TEXT/255       | N        | Unique identifier for the award                                                                                                                                                                                                               |
+| AWARD_STATUS          | TEXT/255       | N        | The status of the award. Valid values: active, pre-award, terminated                                                                                                                                                                          |
+| AWARD_DATE            | DATE           | N        | The date the grant award was created. Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.SSS if time is required. Date/Time is (UTC timezone)                                                                                                          |
+| AWARD_START           | TIMESTAMP      | Y        | The timestamp the grant award begins. Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.SSS if time is required. Date/Time is (UTC timezone)                                                                                                          |
+| AWARD_END             | TIMESTAMP      | Y        | The timestamp the grant award ends. Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.SSS if time is required. Date/Time is (UTC timezone)                                                                                                            |
+| PRIMARY_FUNDER_NAME   | TEXT/255       | N        | The Primary Funder Name (Funder of original source of funds). If not set, the Direct Funder will also be set as Primary Funder.                                                                                                              |
+| PRIMARY_FUNDER_CODE   | TEXT/255       | N        | The Primary Funder unique identifier (institutional Funder ID). If not set, the Direct Funder will also be set as Primary Funder.                                                                                                            |
+| DIRECT_FUNDER_NAME    | TEXT/255       | Y        | The Direct Funder Name (Funder from which funds are directly received)                                                                                                                                                                        |
+| DIRECT_FUNDER_CODE    | TEXT/255       | Y        | The Direct Funder unique identifier (institutional Funder ID)                                                                                                                                                                                 |
+| PI_FIRST_NAME         | TEXT/255       | Y        | First name of PI                                                                                                                                                                                                                             |
+| PI_MIDDLE_NAME        | TEXT/255       | N        | Middle name of PI                                                                                                                                                                                                                            |
+| PI_LAST_NAME          | TEXT/255       | Y        | Last name of PI                                                                                                                                                                                                                              |
+| PI_EMAIL              | TEXT/255       | Y        | Email address of PI                                                                                                                                                                                                                          |
+| PI_INSTITUTIONAL_ID   | TEXT/128       | Y        | Institutional User ID of PI. This is typically the User ID in the institution's Identity Access Management system. This value is optional if PI_EMPLOYEE_ID exists. If User ID exists in this record, it is important that the User ID is available to PASS during the authentication process. |
+| PI_EMPLOYEE_ID        | TEXT/128       | Y        | Employee ID of PI. This value is optional if PI_INSTITUTIONAL_ID exists. If Employee ID exists in this record, it is important that the Employee ID is available to PASS during the authentication process.                                    |
+| PI_ROLE               | TEXT/1         | Y        | Role of PI on grant (PI or Co-PI). Valid values: P, C. P=PI, C=Co-PI                                                                                                                                                                          |
+| UPDATE_TIMESTAMP      | TIMESTAMP      | N        | Last update timestamp. Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.SSS if time is required. Date/Time is (UTC timezone)                                                                                                                         |
+
+
+
 ## Usage
 
 Refer to the application.properties file to determine which properties that need runtime values set. The grant loader
