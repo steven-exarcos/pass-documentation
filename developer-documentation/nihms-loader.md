@@ -95,7 +95,6 @@ java -jar nihms-data-harvest-cli-exec.jar -s 12-2012 -c
 
 On running this command, files will be downloaded and renamed with a prefix according to their status ("compliant", " noncompliant", or "inprocess") and a timestamp integer e.g. noncompliant_nihmspubs_20180507104323.csv.
 
-
 ### NIHMS Transform and Load
 
 The NIHMS Data Transform-Load CLI reads data in from CSVs that were downloaded from the PACM system, converts them to PASS compliant data and loads them into the PASS database.
