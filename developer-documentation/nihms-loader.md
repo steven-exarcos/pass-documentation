@@ -135,9 +135,9 @@ When run, each row will be loaded into the application and new Publications, Sub
 
 ### Running the Harvester and Data Transform-Load using Docker
 
-If you're running the latest docker image, you will need to perform the follow docker commands:
+To run both the Harvest and Data Transform-Load using Docker you will also need [PASS docker](../welcome-guide/setup-run-pass.md) running, otherwise it will fail on the Transform-Load step.
 
-Pull the image, and be sure to replace the image tag `1.8.0-snapshot` with the version that you want to pull and run.
+Once PASS Docker is running, use docker pull to get the Pass NIHMS Loader image, and be sure to replace the image tag `1.8.0-snapshot` with the version that you want to pull and run.
 
 ```shell
 docker pull ghcr.io/eclipse-pass/pass-nihms-loader:1.8.0-snapshot
