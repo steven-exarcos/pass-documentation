@@ -211,4 +211,3 @@ Optionally as a last step, setting up the [NIH Manuscript Submission](https://ww
 - NIHMS Resources
   - [NIH Manuscript Submission](https://www.nihms.nih.gov)
   - [NIH Manuscript Submission Process](https://www.nihms.nih.gov/about/overview/)
-  
