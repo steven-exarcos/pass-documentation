@@ -155,15 +155,15 @@ docker run -eNIHMS_API_INST=YOUR_INST -eNIHMS_API_IPF=YOUR_IPF -eNIHMS_API_TOKEN
 
 #### Data Flow Overview
 
-- Initialization:
+- **Initialization**:
     - `NihmsHarvesterCLIRunner` starts and processes command-line arguments.
     - `NihmsHarvesterCLI` configures and initializes `NihmsHarvester` using `NihmsHarvesterConfig`.
-- URL Construction:
+- **URL Construction**:
     - `NihmsHarvester` uses `UrlBuilder` and `UrlType` to create URLs needed to access NIHMS data.
-- Data Download:
+- **Data Download**:
   - `NihmsHarvesterDownloader` retrieves data from the constructed URLs.
   - Downloaded data is passed back to `NihmsHarvester`.
-- Data Processing:
+- **Data Processing**:
     - `NihmsHarvester` processes the downloaded data.
 
 #### Interactions and Dependencies
@@ -176,8 +176,14 @@ docker run -eNIHMS_API_INST=YOUR_INST -eNIHMS_API_IPF=YOUR_IPF -eNIHMS_API_TOKEN
 
 #### Data Flow Overview
 
-
-
+- **Data Transformation and Loading**:
+  - `NihmsTransformLoadCLIRunner` and `NihmsTransformLoadCLI` handle command-line interactions for data transformation and loading.
+  - `NihmsTransformLoadService` transforms publication data and loads it using `SubmissionLoader`.
+  - `PmidLookup` service to retrieve a PMID records from the [NBCI Entrez API](https://www.ncbi.nlm.nih.gov/books/NBK25497/). 
+- **Data Transfer**:
+  - `SubmissionDTO` encapsulates transformed submission data for transfer between components.
+  - `NihmsPassClientService` service to provide interactions with the data via the PASS client.
+  - `SubmissionLoader` loads the final submission data into PASS and accomplishes this by interfacing with the `NihmsPassClientService`.
 
 ## Next Step / Institution Configuration
 
