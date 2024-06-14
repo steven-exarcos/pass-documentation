@@ -1,5 +1,6 @@
 # PASS Grant Loader
 
+The PASS Grant Loader ingests grant data from an institution and maps the data to the appropriate PASS Objects in the PASS Data Model.
 
 ## Summary
 
@@ -88,8 +89,6 @@ In order for PASS to map grant data to the associated Objects within PASS, the G
 | PI_ROLE               | TEXT/1         | Y        | Role of PI on grant (PI or Co-PI). Valid values: P, C. P=PI, C=Co-PI                                                                                                                                                                          |
 | UPDATE_TIMESTAMP      | TIMESTAMP      | N        | Last update timestamp. Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.SSS if time is required. Date/Time is (UTC timezone)                                                                                                                         |
 
-
-
 ## Usage
 
 Refer to the application.properties file to determine which properties that need runtime values set. The grant loader
@@ -104,7 +103,11 @@ Here is an example using Java system properties `-D`.
 ### Arguments
 
 You can run the above command with `-h` to get a full list of arguments for the grant loader.  In the example
-above, we use `startDateTime` and `awardEndDate` for an example.
+above, we use `startDateTime` and `awardEndDate` as 
+
+### Running the Grant Loader in Docker
+
+
 
 ## Next Step / Institution Configuration
 
