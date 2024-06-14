@@ -4,7 +4,7 @@ The NIH Manuscript Submission Loader (NIHMS Loader) contains the components requ
 
 For background information on the NIH Public Access Compliance Monitor (PACM), see the [user guide](https://www.ncbi.nlm.nih.gov/pmc/utils/pacm/static/pacm-user-guide.pdf). Limited information on the API is provided by the [NLM Technical Bulletin](https://www.nlm.nih.gov/pubs/techbull/mj19/brief/mj19_api_public_access_compliance.html)
 
-## Topic Summary
+## Summary
 
 The NIHMS Loader operates in two stages:
 
