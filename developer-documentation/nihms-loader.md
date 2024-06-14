@@ -144,10 +144,10 @@ Pull the image, and be sure to replace the image tag `1.8.0-snapshot` with the v
 docker pull ghcr.io/eclipse-pass/pass-nihms-loader:1.8.0-snapshot
 ```
 
-Run the docker image with the following environment variables, using the [docker -e parameter](https://docs.docker.com/reference/cli/docker/container/run/).
+Run the docker image with the following environment variables, using the [docker -e parameter](https://docs.docker.com/reference/cli/docker/container/run/). On Windows you may have double quote the parameters, for example `"-eNIHMS_API_INST=YOUR_INST"`.
 
 ```shell
-docker run -e NIHMS_API_INST=YOUR_INST -e NIHMS_API_IPF=YOUR_IPF -e NIHMS_API_TOKEN=YOUR_API_TOKEN ghcr.io/eclipse-pass/pass-nihms-loader:1.8.0-snapshot
+docker run -eNIHMS_API_INST=YOUR_INST -eNIHMS_API_IPF=YOUR_IPF -eNIHMS_API_TOKEN=YOUR_API_TOKEN ghcr.io/eclipse-pass/pass-nihms-loader:1.8.0-snapshot
 ```
 
 ## Next Step / Institution Configuration
