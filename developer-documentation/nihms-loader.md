@@ -1,10 +1,12 @@
 # NIHMS Loader
 
-The NIH Manuscript Submission Loader (NIHMS Loader) contains the components required to download, transform and load Submission information from NIHMS to PASS. The project includes two command line tools. The first uses the NIH API to download the CSV(s) containing compliant, non-compliant, and in-process publication information. The second tool reads those files, transforms the data to the PASS data model and then loads them to PASS.
-
-For background information on the NIH Public Access Compliance Monitor (PACM), see the [user guide](https://www.ncbi.nlm.nih.gov/pmc/utils/pacm/static/pacm-user-guide.pdf). Limited information on the API is provided by the [NLM Technical Bulletin](https://www.nlm.nih.gov/pubs/techbull/mj19/brief/mj19_api_public_access_compliance.html)
+The NIH Manuscript Submission Loader (NIHMS Loader) contains the components required to download, transform and load Submission information from NIHMS to PASS. 
 
 ## Summary
+
+The NIHMS Loader is a module contained in [Pass-Support](https://github.com/eclipse-pass/pass-support) and is composed of two Java command line tools. The first uses the NIH API to download the CSV(s) containing compliant, non-compliant, and in-process publication information. The second tool reads those files, transforms the data to the PASS data model and then loads them to PASS.
+
+For background information on the NIH Public Access Compliance Monitor (PACM), see the [user guide](https://www.ncbi.nlm.nih.gov/pmc/utils/pacm/static/pacm-user-guide.pdf). Limited information on the API is provided by the [NLM Technical Bulletin](https://www.nlm.nih.gov/pubs/techbull/mj19/brief/mj19_api_public_access_compliance.html)
 
 The NIHMS Loader operates in two stages:
 
@@ -148,6 +150,34 @@ Run the docker image with the following environment variables, using the [docker
 ```shell
 docker run -eNIHMS_API_INST=YOUR_INST -eNIHMS_API_IPF=YOUR_IPF -eNIHMS_API_TOKEN=YOUR_API_TOKEN ghcr.io/eclipse-pass/pass-nihms-loader:1.8.0-snapshot
 ```
+
+### NIHMS Data Harvester Classes and Relationships
+
+#### Data Flow Overview
+
+- Initialization:
+    - `NihmsHarvesterCLIRunner` starts and processes command-line arguments.
+    - `NihmsHarvesterCLI` configures and initializes `NihmsHarvester` using `NihmsHarvesterConfig`.
+- URL Construction:
+    - `NihmsHarvester` uses `UrlBuilder` and `UrlType` to create URLs needed to access NIHMS data.
+- Data Download:
+  - `NihmsHarvesterDownloader` retrieves data from the constructed URLs.
+  - Downloaded data is passed back to `NihmsHarvester`.
+- Data Processing:
+    - `NihmsHarvester` processes the downloaded data.
+
+#### Interactions and Dependencies
+
+- `NihmsHarvester` is the central class, relying on configurations from `NihmsHarvesterConfig`, URL construction from `UrlBuilder` and `UrlType`, and data downloading from `NihmsHarvesterDownloader`.
+- `NihmsHarvesterCLI` and `NihmsHarvesterCLIRunner` are entry points for the application, primarily handling user interaction and delegation to the core `NihmsHarvester`.
+- `UrlBuilder` and `UrlType` ensure that the URLs used for data retrieval are correctly constructed and categorized.
+
+### NIHMS Data Transform-Load Classes and Relationships
+
+#### Data Flow Overview
+
+
+
 
 ## Next Step / Institution Configuration
 

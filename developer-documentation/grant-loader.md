@@ -107,6 +107,51 @@ above, we use `startDateTime` and `awardEndDate` as
 
 ### Running the Grant Loader in Docker
 
+#### Run PASS Docker
+
+Since the Grant Loader will load data from a CSV into PASS, you will need an instance of PASS running. The quickest way to accomplish this is to run [PASS docker](../welcome-guide/setup-run-pass.md).
+
+Start pass-docker in local mode by running: 
+
+```shell
+docker compose -f docker-compose.yml -f eclipse-pass.local.yml up -d --no-build --quiet-pull
+```
+
+Once pass-docker is up and the loader container is done running, open a browser and go to http://localhost:8080/ and login with nih-user. This account is a test user account created when starting pass-docker locally. Ask pass dev for password. Go to Grants tab to view all the grants. For right now this page will be empty, but after running the Grant Loader it should have all the grants from the CSV file provided.
+
+#### Setup Grant Loader Test Directory
+
+- Create directory named grantloadertest
+- cd grantloadertest
+- Create empty file named grant_update_timestamps
+- Create empty file named policy.properties
+- Create file named env.list in containing the following below:
+
+```text
+APP_HOME_ENV=/data/grantloader
+POLICY_PROP_PATH=file:/data/grantloader/policy.properties
+PASS_CLIENT_URL=http://localhost:8080
+PASS_CLIENT_USER= (value from .eclipse-pass.local_env in pass-docker PASS_CORE_BACKEND_USER)
+PASS_CLIENT_PASSWORD= (value from .eclipse-pass.local_env in pass-docker PASS_CORE_BACKEND_PASSWORD)
+```
+
+Copy your grant CSV file to grantloadertest dir
+
+
+    Open a new terminal and cd to the pass-docker directory. You can checkout pass-docker from github here: https://github.com/eclipse-pass/pass-docker
+    
+
+Running Grant Loader Load
+
+    For testing purposes, we need to associate nih-user to a grant row in the CSV. You can modify one of your grant rows to change the user fields to Ser,,Nihu,nihuser@jhu.edu,NIHUSER,118110
+    Open a new terminal
+    cd to dir *above the grantloadertest dir.
+    Execute docker run -it -v ./grantloadertest:/data/grantloader --env-file ./grantloadertest/env.list --network host ghcr.io/eclipse-pass/jhu-grant-loader:1.6.0-SNAPSHOT -a load /data/grantloader/<your_file>.csv
+
+Once done, refresh the Grants tab in the browser to see your grant loaded.
+
+Note:
+If the grant csv contains new Funders, you should figure out PASS policy ID and put the funder local key to policy ID mapping in policy.properties (i.e. funder_local_key=pass_policy_id) before running the grant loader docker command.
 
 
 ## Next Step / Institution Configuration
