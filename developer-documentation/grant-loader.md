@@ -73,14 +73,18 @@ In order for PASS to map grant data to the associated Objects within PASS, the G
 Refer to the application.properties file to determine which properties that need runtime values set. The grant loader is a spring boot application, so use the standard Spring Boot configuration functionality
 [Spring Boot Configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config)
 
-Here is an example using Java system properties `-D`.
-```
-    java -jar jhu-grant-loader-0.6.0-SNAPSHOT.jar -a load file:./grant-data.csv
+Here is an example using Java system properties `-D`. Change the version `1.8.0-SNAPSHOT` to the version of the `jhu-grant-loader` jar that is being used.
+```shell
+java -jar jhu-grant-loader-1.8.0-SNAPSHOT.jar -a load file:./grant-data.csv
 ```
 
 ### Arguments
 
-You can run the above command with `-h` to get a full list of arguments for the grant loader.  In the example  above, we use `startDateTime` and `awardEndDate` as 
+You can run the above command with `-h` to get a full list of arguments for the grant loader.  In the example below, `startDateTime` and `awardEndDate` are used as parameters to limit the date range of the grant data:
+
+```shell
+java -jar jhu-grant-loader-1.8.0-SNAPSHOT.jar -a load file:./grant-data.csv
+```
 
 ### Running the Grant Loader in Docker
 
@@ -98,11 +102,11 @@ Once pass-docker is up and the loader container is done running, open a browser 
 
 #### Setup Grant Loader Test Directory
 
-- Create directory named `grantloadertest`
-- cd `grantloadertest`
-- Create empty file named `grant_update_timestamps`
-- Create empty file named `policy.properties`
-- Create file named `env.list` in containing the following below:
+- Create a directory named `grantloadertest`
+- cd to `grantloadertest`
+- Create an empty file named `grant_update_timestamps`
+- Create an empty file named `policy.properties`
+- Create a file named `env.list` in containing the following below. Be sure to update `PASS_CLIENT_USER` and `PASS_CLIENT_PASSWORD` with values from `.eclipse-pass.local_env`.
 
 ```text
 APP_HOME_ENV=/data/grantloader
@@ -112,9 +116,8 @@ PASS_CLIENT_USER= (value from .eclipse-pass.local_env in pass-docker PASS_CORE_B
 PASS_CLIENT_PASSWORD= (value from .eclipse-pass.local_env in pass-docker PASS_CORE_BACKEND_PASSWORD)
 ```
 
-- Copy your grant CSV file to `grantloadertest` directory:
+- Copy your grant CSV file to the `grantloadertest` directory.
 - Open a new terminal and cd to the pass-docker directory.
-
 
 #### Running Grant Loader Load
 
