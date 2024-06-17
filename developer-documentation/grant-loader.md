@@ -4,16 +4,7 @@ The PASS Grant Loader ingests grant data from an institution and maps the data t
 
 ## Summary
 
-This module comprises code for retrieving grant data from some kind of data source, and using that data to update
-the PASS backend. Typically, the data pull will populate a data structure, which will then be consumed by a loader
-class. While this sounds simple in theory, there are several considerations which may add to the complexity of
-implementations. An implementor must first determine data requirements for the use of the data once it has been ingested
-into PASS, and then map these requirements to data available from the data source. It may be that additional data from
-other services may be needed in order to populate the data structures to be loaded into PASS. On the loading side, the
-implementor may need to support different modes of ingesting data. Additional logic may be needed in the data loading
-apparatus to resolve the fields in the data assembled by the pull process. For example, we will need to consider that
-several systems may be updating PASS objects, and that other services may be more authoritative for certain fields than
-the service providing the grant data. The JHU implementation is complex regarding these issues.
+This module comprises code for retrieving grant data from some kind of data source, and using that data to update the PASS backend. Typically, the data pull will populate a data structure, which will then be consumed by a loader class. While this sounds simple in theory, there are several considerations which may add to the complexity of implementations. An implementor must first determine data requirements for the use of the data once it has been ingested into PASS, and then map these requirements to data available from the data source. It may be that additional data from other services may be needed in order to populate the data structures to be loaded into PASS. On the loading side, the implementor may need to support different modes of ingesting data. Additional logic may be needed in the data loading apparatus to resolve the fields in the data assembled by the pull process. For example, we will need to consider that several systems may be updating PASS objects, and that other services may be more authoritative for certain fields than the service providing the grant data. The JHU implementation is complex regarding these issues.
 
 ## Knowledge Needed / Skills Inventory
 
@@ -91,8 +82,7 @@ In order for PASS to map grant data to the associated Objects within PASS, the G
 
 ## Usage
 
-Refer to the application.properties file to determine which properties that need runtime values set. The grant loader
-is a spring boot application, so use the standard Spring Boot configuration functionality
+Refer to the application.properties file to determine which properties that need runtime values set. The grant loader is a spring boot application, so use the standard Spring Boot configuration functionality
 [Spring Boot Configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config)
 
 Here is an example using Java system properties `-D`.
@@ -102,8 +92,7 @@ Here is an example using Java system properties `-D`.
 
 ### Arguments
 
-You can run the above command with `-h` to get a full list of arguments for the grant loader.  In the example
-above, we use `startDateTime` and `awardEndDate` as 
+You can run the above command with `-h` to get a full list of arguments for the grant loader.  In the example  above, we use `startDateTime` and `awardEndDate` as 
 
 ### Running the Grant Loader in Docker
 
@@ -111,21 +100,21 @@ above, we use `startDateTime` and `awardEndDate` as
 
 Since the Grant Loader will load data from a CSV into PASS, you will need an instance of PASS running. The quickest way to accomplish this is to run [PASS docker](../welcome-guide/setup-run-pass.md).
 
-Start pass-docker in local mode by running: 
+Start `pass-docker` in local mode by running with the `dock-compose.yml` and `eclipse.pass.local.yml` configurations:
 
 ```shell
 docker compose -f docker-compose.yml -f eclipse-pass.local.yml up -d --no-build --quiet-pull
 ```
 
-Once pass-docker is up and the loader container is done running, open a browser and go to http://localhost:8080/ and login with nih-user. This account is a test user account created when starting pass-docker locally. Ask pass dev for password. Go to Grants tab to view all the grants. For right now this page will be empty, but after running the Grant Loader it should have all the grants from the CSV file provided.
+Once pass-docker is up and the loader container is done running, open a browser and go to http://localhost:8080/ and login with nih-user. More details about this account can be found on the [PASS docker](../welcome-guide/setup-run-pass.md) page. Go to Grants tab to view all the grants. For right now this page will be empty, but after running the Grant Loader it should have all the grants from the CSV file provided.
 
 #### Setup Grant Loader Test Directory
 
-- Create directory named grantloadertest
-- cd grantloadertest
-- Create empty file named grant_update_timestamps
-- Create empty file named policy.properties
-- Create file named env.list in containing the following below:
+- Create directory named `grantloadertest`
+- cd `grantloadertest`
+- Create empty file named `grant_update_timestamps`
+- Create empty file named `policy.properties`
+- Create file named `env.list` in containing the following below:
 
 ```text
 APP_HOME_ENV=/data/grantloader
@@ -135,18 +124,18 @@ PASS_CLIENT_USER= (value from .eclipse-pass.local_env in pass-docker PASS_CORE_B
 PASS_CLIENT_PASSWORD= (value from .eclipse-pass.local_env in pass-docker PASS_CORE_BACKEND_PASSWORD)
 ```
 
-Copy your grant CSV file to grantloadertest dir
+- Copy your grant CSV file to `grantloadertest` directory:
+- Open a new terminal and cd to the pass-docker directory.
 
 
-    Open a new terminal and cd to the pass-docker directory. You can checkout pass-docker from github here: https://github.com/eclipse-pass/pass-docker
-    
+#### Running Grant Loader Load
 
-Running Grant Loader Load
+For testing purposes, we need to associate nih-user to a grant row in the CSV.
 
-    For testing purposes, we need to associate nih-user to a grant row in the CSV. You can modify one of your grant rows to change the user fields to Ser,,Nihu,nihuser@jhu.edu,NIHUSER,118110
-    Open a new terminal
-    cd to dir *above the grantloadertest dir.
-    Execute docker run -it -v ./grantloadertest:/data/grantloader --env-file ./grantloadertest/env.list --network host ghcr.io/eclipse-pass/jhu-grant-loader:1.6.0-SNAPSHOT -a load /data/grantloader/<your_file>.csv
+- Modify one of your grant rows to change the user fields to: `Ser,,Nihu,nihuser@jhu.edu,NIHUSER,118110`
+- Open a new terminal window
+- cd to the directory that was created in the previous section: `grantloadertest`
+- Execute docker run -it -v ./grantloadertest:/data/grantloader --env-file ./grantloadertest/env.list --network host ghcr.io/eclipse-pass/jhu-grant-loader:1.6.0-SNAPSHOT -a load /data/grantloader/<your_file>.csv
 
 Once done, refresh the Grants tab in the browser to see your grant loaded.
 
