@@ -126,11 +126,12 @@ For testing purposes, we need to associate nih-user to a grant row in the CSV.
 - Modify one of your grant rows to change the user fields to: `Ser,,Nihu,nihuser@jhu.edu,NIHUSER,118110`
 - Open a new terminal window
 - cd to the directory that was created in the previous section: `grantloadertest`
-- Execute `docker run -it -v ./grantloadertest:/data/grantloader --env-file ./grantloadertest/env.list --network host ghcr.io/eclipse-pass/jhu-grant-loader:1.6.0-SNAPSHOT -a load /data/grantloader/<your_file>.csv`
+- Run `docker run -it -v ./grantloadertest:/data/grantloader --env-file ./grantloadertest/env.list --network host ghcr.io/eclipse-pass/jhu-grant-loader:1.8.0-SNAPSHOT -a load /data/grantloader/<your_file>.csv`
 - Once done, refresh the Grants tab in the browser to see your grant loaded.
 
-Note:
-If the grant csv contains new Funders, you should figure out PASS policy ID and put the funder local key to policy ID mapping in policy.properties (i.e. funder_local_key=pass_policy_id) before running the grant loader docker command.
+Troubleshooting:
+- If the grant csv contains new Funders, you should figure out PASS policy ID and put the funder local key to policy ID mapping in policy.properties (i.e. funder_local_key=pass_policy_id) before running the grant loader docker command.
+- If running on Windows references to the current directory should use `${PWD}` for Powershell or `%cd%` if using Windows Command Line, 
 
 
 ## Next Step / Institution Configuration
