@@ -24,35 +24,23 @@ This module comprises code for retrieving grant data from some kind of data sour
 
 ### Configuring using Spring Boot Profiles
 
-The grant loader uses Spring Boot Profiles to select the appropriate classes to be used for a given institution.
-There is a property in application.properties named `spring.profiles.active` that needs to be set when starting the
-grant loader.  This property can be set at runtime as well using the normal spring boot configuration functionality.
-[Spring Boot Configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config)
+The grant loader uses Spring Boot Profiles to select the appropriate classes to be used for a given institution. There is a property in application.properties named `spring.profiles.active` that needs to be set when starting the grant loader.  This property can be set at runtime as well using the normal spring boot configuration functionality: [Spring Boot Configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config).
 
-The code has been factored to ease development for multiple institutions. These are the institution-specific classes
-which typically need to be implemented and annotated with the `@Profile` annotation:
+The code has been factored to ease development for multiple institutions. These are the institution-specific classes which typically need to be implemented and annotated with the `@Profile` annotation:
 
 #### Connector
 
-The Connector class connects to the data store for an institution's implementation, and operates on the data to supply,
-in as standard a form as possible, the data to be consumed by the Updater.
+The Connector class connects to the data store for an institution's implementation, and operates on the data to supply, in as standard a form as possible, the data to be consumed by the Updater.
 
 #### Updater
 
-The Updater class takes the data supplied by the Connector and creates or updates the corresponding objects in the PASS
-repository accordingly. There is a Default class whose children may override certain substantive methods if the local
-policies require.
+The Updater class takes the data supplied by the Connector and creates or updates the corresponding objects in the PASS repository accordingly. There is a Default class whose children may override certain substantive methods if the local policies require.
 
 ### Profiles
 
 #### JHU (jhu)
 
-The JHU implementation is used to pull data from the COEUS/FIBI Oracle database views for the purpose of performing regular
-updates. We look at grants which have been updated since a particular time (typically the time of the previous update),
-join this with user and funder information associated with the grant, and then use this information to update the data
-in the PASS backend. The JHU implementation also treats the COEUS/FIBI database as authoritative for all fields in the
-data. If a grant is being passed in for update, it is assumed that all records for that grant are included in the
-input.
+The JHU implementation is used to pull data from the COEUS/FIBI database views for the purpose of performing regular updates. We look at grants which have been updated since a particular time (typically the time of the previous update), join this with user and funder information associated with the grant, and then use this information to update the data in the PASS backend. The JHU implementation also treats the COEUS/FIBI database as authoritative for all fields in the data. If a grant is being passed in for update, it is assumed that all records for that grant are included in the input.
 
 ## Grant Data
 
@@ -135,9 +123,8 @@ For testing purposes, we need to associate nih-user to a grant row in the CSV.
 - Modify one of your grant rows to change the user fields to: `Ser,,Nihu,nihuser@jhu.edu,NIHUSER,118110`
 - Open a new terminal window
 - cd to the directory that was created in the previous section: `grantloadertest`
-- Execute docker run -it -v ./grantloadertest:/data/grantloader --env-file ./grantloadertest/env.list --network host ghcr.io/eclipse-pass/jhu-grant-loader:1.6.0-SNAPSHOT -a load /data/grantloader/<your_file>.csv
-
-Once done, refresh the Grants tab in the browser to see your grant loaded.
+- Execute `docker run -it -v ./grantloadertest:/data/grantloader --env-file ./grantloadertest/env.list --network host ghcr.io/eclipse-pass/jhu-grant-loader:1.6.0-SNAPSHOT -a load /data/grantloader/<your_file>.csv`
+- Once done, refresh the Grants tab in the browser to see your grant loaded.
 
 Note:
 If the grant csv contains new Funders, you should figure out PASS policy ID and put the funder local key to policy ID mapping in policy.properties (i.e. funder_local_key=pass_policy_id) before running the grant loader docker command.
