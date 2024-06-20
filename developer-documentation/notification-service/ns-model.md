@@ -1,4 +1,4 @@
-# Notification Services Model
+# Notification Services - Model
 
 ![Notification Services Model](./notifications-model.png)
 

@@ -1,4 +1,4 @@
-# Notification Services Configuration
+# Notification Services - Configuration
 
 The required runtime configuration for Notification Services (NS) is composed of a configuration file and a set of environment variables.
 

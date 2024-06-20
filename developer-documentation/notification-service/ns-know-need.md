@@ -1,4 +1,5 @@
-# Notification Services Knowledge Needed / Skills Inventory
+# Notification Services - Knowledge Needed / Skills Inventory
+
 The knowledge needed to comprehend the NS documentation is a general understanding of the PASS submission workflow and proxy 
 submitter functionality.  Understanding the major components and communication channels between the components is 
 also valuable for this document.

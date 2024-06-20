@@ -24,11 +24,11 @@ Note that NS is able to support many notification use cases, but the proxy submi
 
 In this guide we step through various topics on Notification Services:
 
-- Knowledge Needed / Skills Inventory
-- Technologies Utilized
-- Model 
-- Business Logic
-- Template
-- Dispatch
-- Configuration
-- Institution Configuration
+- [Knowledge Needed / Skills Inventory](./ns-know-need.md)
+- [Technologies Utilized](./ns-tech-util.md)
+- [Model](./ns-model.md)
+- [Business Logic](./ns-business.md)
+- [Template](./ns-templates.md)
+- [Dispatch](./ns-dispatch.md)
+- [Configuration](./ns-configuration.md)
+- [Institution Configuration](./ns-new-institution.md)

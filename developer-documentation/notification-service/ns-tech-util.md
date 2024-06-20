@@ -1,4 +1,4 @@
-# Notification Services Technologies Utilized
+# Notification Services - Technologies Utilized
 
 The code for NS can be found in the pass-support repository here: https://github.com/eclipse-pass/pass-support/tree/main/pass-notification-service
 
