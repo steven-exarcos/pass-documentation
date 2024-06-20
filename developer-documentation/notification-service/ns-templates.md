@@ -1,4 +1,4 @@
-# Notification Services Templates
+# Notification Services - Templates
 
 Templates are used to customize the subject, body, and footer of email messages that result from a notification.  Each 
 notification type has a corresponding template, and the templates and their content are configured in the 
