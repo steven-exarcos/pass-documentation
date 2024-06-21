@@ -146,8 +146,8 @@ Troubleshooting:
 
 2. Data Retrieval:
 
-- `GrantLoaderApp` uses the `GrantConnector` to retrieve data from the data source (e.g., database, CSV file).
-- The `GrantConnector` implementation (e.g., for JHU) fetches the data and returns it as a list of `GrantIngestRecord` objects.
+- `GrantLoaderApp` uses the `GrantConnector` interface to retrieve data from the data source (e.g., database, CSV file).
+- The `CoeusConnector` implementation (e.g., for JHU) fetches the data and returns it as a list of `GrantIngestRecord` objects.
 
 3. Data Processing:
 
