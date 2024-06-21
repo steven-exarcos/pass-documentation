@@ -98,42 +98,47 @@ Start `pass-docker` in local mode by running with the `dock-compose.yml` and `ec
 docker compose -f docker-compose.yml -f eclipse-pass.local.yml up -d --no-build --quiet-pull
 ```
 
-Once pass-docker is up and the loader container is done running, open a browser and go to http://localhost:8080/ and login with nih-user. More details about this account can be found on the [PASS docker](../../welcome-guide/setup-run-pass.md) page. Go to Grants tab to view all the grants. For right now this page will be empty, but after running the Grant Loader it should have all the grants from the CSV file provided.
+Once pass-docker is up and the loader container is done running, open a browser and go to http://localhost:8080/ and login with nih-user. More details about this account can be found on the [PASS docker](../../welcome-guide/setup-run-pass.md) page. Go to Grants tab to view all the grants. This page will be empty, but after running the Grant Loader it will have all the grants from the CSV file provided.
 
 #### Setup Grant Loader Test Directory
 
-- Create a directory named `grantloadertest`
-- cd to `grantloadertest`
-- Create an empty file named `grant_update_timestamps`
-- Create an empty file named `policy.properties`
-- Create a file named `env.list` in containing the following below. Be sure to update `PASS_CLIENT_USER` and `PASS_CLIENT_PASSWORD` with values from `.eclipse-pass.local_env`.
-
-```text
-APP_HOME_ENV=/data/grantloader
-POLICY_PROP_PATH=file:/data/grantloader/policy.properties
-PASS_CLIENT_URL=http://localhost:8080
-PASS_CLIENT_USER= (value from .eclipse-pass.local_env in pass-docker PASS_CORE_BACKEND_USER)
-PASS_CLIENT_PASSWORD= (value from .eclipse-pass.local_env in pass-docker PASS_CORE_BACKEND_PASSWORD)
-```
-
-- Copy your grant CSV file to the `grantloadertest` directory.
-- Open a new terminal and cd to the pass-docker directory.
+1. Create a directory named `grantloadertest`
+2. Change to the directory: `cd grantloadertest`.
+3. Create the following files:
+   - `grant_update_timestamps` (empty)
+   - `policy.properties` (empty)
+   - `env.list` with content:
+   ```text
+   APP_HOME_ENV=/data/grantloader
+   POLICY_PROP_PATH=file:/data/grantloader/policy.properties
+   PASS_CLIENT_URL=http://localhost:8080
+   PASS_CLIENT_USER=<value from .eclipse-pass.local_env in pass-docker PASS_CORE_BACKEND_USER>
+   PASS_CLIENT_PASSWORD=<value from .eclipse-pass.local_env in pass-docker PASS_CORE_BACKEND_PASSWORD>
+   ```
+4. Copy your grant CSV file to the `grantloadertest` directory.
+5. Open a new terminal and cd to the pass-docker directory.
 
 #### Running Grant Loader Load
 
 For testing purposes, we need to associate nih-user to a grant row in the CSV.
 
-- Modify one of your grant rows to change the user fields to: `Ser,,Nihu,nihuser@jhu.edu,NIHUSER,118110`
-- Open a new terminal window
-- cd to the directory that was created in the previous section: `grantloadertest`
-- Run `docker run -it -v ./grantloadertest:/data/grantloader --env-file ./grantloadertest/env.list --network host ghcr.io/eclipse-pass/jhu-grant-loader:1.8.0-SNAPSHOT -a load /data/grantloader/<your_file>.csv`
-- Once done, refresh the Grants tab in the browser to see your grant loaded.
+1. Modify one of your grant rows to change the user fields to:
+```text
+   Ser,,Nihu,nihuser@jhu.edu,NIHUSER,118110
+```
+2. Open a new terminal window and navigate to `grantloadertest`
+3. Run 
+```text
+docker run -it -v ./grantloadertest:/data/grantloader --env-file ./grantloadertest/env.list --network host ghcr.io/eclipse-pass/jhu-grant-loader:1.8.0-SNAPSHOT -a load /data/grantloader/<your_file>.csv`
+```
+4. Once done, refresh the Grants tab in the browser to see your grant loaded.
 
 Troubleshooting:
 - If the grant csv contains new Funders, you should figure out PASS policy ID and put the funder local key to policy ID mapping in policy.properties (i.e. funder_local_key=pass_policy_id) before running the grant loader docker command.
 - If running on Windows references to the current directory should use `${PWD}` for Powershell or `%cd%` if using Windows Command Line, 
 
-
 ## Next Step / Institution Configuration
+
+Institutional configuration is going to be highly dependent on where the institutional grant data comes from. At JHU, we have a PostgreSQL database and the data is pulled from the database using [AWS Batch and ECS](../../welcome-guide/deployment-architecture.md#pass-deployment-architecture). There can be multiple ways to set up the infrastructure, but the simplest setup is to have a CSV file exported to a directory where the Grant Loader can ingest the file using the `-a` parameter.
 
 ## Related Information
