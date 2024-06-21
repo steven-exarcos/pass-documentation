@@ -137,7 +137,7 @@ When run, each row will be loaded into the application and new Publications, Sub
 
 ### Running the Harvester and Data Transform-Load using Docker
 
-To run both the Harvest and Data Transform-Load using Docker you will also need [PASS docker](../welcome-guide/setup-run-pass.md) running, otherwise it will fail on the Transform-Load step.
+To run both the Harvest and Data Transform-Load using Docker you will also need [PASS docker](../../welcome-guide/setup-run-pass.md) running, otherwise it will fail on the Transform-Load step.
 
 Once PASS Docker is running, use docker pull to get the Pass NIHMS Loader image, and be sure to replace the image tag `1.8.0-snapshot` with the version that you want to pull and run.
 
@@ -199,7 +199,7 @@ docker run -eNIHMS_API_INST=YOUR_INST -eNIHMS_API_IPF=YOUR_IPF -eNIHMS_API_TOKEN
 
 Configuring the NIHMS loader to run at an institution requires several NIH/NLM accounts to be setup. The first step would be to familiarize yourself with the [PACM Guide](https://www.ncbi.nlm.nih.gov/pmc/utils/pacm/static/pacm-user-guide.pdf). Institutions that are universities typically have an Office of Research and that is a good starting point to finding out more information how PACR roles are assigned, typically a Signing Officer at the Office of Research can perform this function.
 
-Once access to PACM has been established, configuring the infrastructure where the Data Harvester and the Data Transform-Load applications is the next step. Since they are Java applications they can be scheduled as cron jobs on a server or run in the cloud. At Johns Hopkins University these applications are run by using [AWS Batch and ECS](../welcome-guide/deployment-architecture.md#pass-deployment-architecture).
+Once access to PACM has been established, configuring the infrastructure where the Data Harvester and the Data Transform-Load applications is the next step. Since they are Java applications they can be scheduled as cron jobs on a server or run in the cloud. At Johns Hopkins University these applications are run by using [AWS Batch and ECS](../../welcome-guide/deployment-architecture.md#pass-deployment-architecture).
 
 Optionally as a last step, setting up the [NIH Manuscript Submission](https://www.nihms.nih.gov) account would enable seeing which submissions have been made and how far along they are in the process. Once a submission makes its way through this process it appears in the PubMed Central data. This can be useful when troubleshooting records that you might expect to be in the PubMed Central data.
 

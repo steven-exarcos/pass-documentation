@@ -90,7 +90,7 @@ java -jar jhu-grant-loader-1.8.0-SNAPSHOT.jar -a load file:./grant-data.csv
 
 #### Run PASS Docker
 
-Since the Grant Loader will load data from a CSV into PASS, you will need an instance of PASS running. The quickest way to accomplish this is to run [PASS docker](../welcome-guide/setup-run-pass.md).
+Since the Grant Loader will load data from a CSV into PASS, you will need an instance of PASS running. The quickest way to accomplish this is to run [PASS docker](../../welcome-guide/setup-run-pass.md).
 
 Start `pass-docker` in local mode by running with the `dock-compose.yml` and `eclipse.pass.local.yml` configurations:
 
@@ -98,7 +98,7 @@ Start `pass-docker` in local mode by running with the `dock-compose.yml` and `ec
 docker compose -f docker-compose.yml -f eclipse-pass.local.yml up -d --no-build --quiet-pull
 ```
 
-Once pass-docker is up and the loader container is done running, open a browser and go to http://localhost:8080/ and login with nih-user. More details about this account can be found on the [PASS docker](../welcome-guide/setup-run-pass.md) page. Go to Grants tab to view all the grants. For right now this page will be empty, but after running the Grant Loader it should have all the grants from the CSV file provided.
+Once pass-docker is up and the loader container is done running, open a browser and go to http://localhost:8080/ and login with nih-user. More details about this account can be found on the [PASS docker](../../welcome-guide/setup-run-pass.md) page. Go to Grants tab to view all the grants. For right now this page will be empty, but after running the Grant Loader it should have all the grants from the CSV file provided.
 
 #### Setup Grant Loader Test Directory
 
