@@ -172,5 +172,3 @@ Troubleshooting:
 ## Next Step / Institution Configuration
 
 Institutional configuration is going to be highly dependent on where the institutional grant data comes from. At JHU, we have a PostgreSQL database and the data is pulled from the database using [AWS Batch and ECS](../../welcome-guide/deployment-architecture.md#pass-deployment-architecture). There can be multiple ways to set up the infrastructure, but the simplest setup is to have a CSV file exported to a directory where the Grant Loader can ingest the file using the `-a` parameter.
-
-## Related Information
