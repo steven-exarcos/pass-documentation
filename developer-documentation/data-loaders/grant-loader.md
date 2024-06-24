@@ -155,19 +155,19 @@ Troubleshooting:
 
 4. Data Ingestion:
 
-- The processed grant data is passed to the `PassUpdater`, which extends `AbstractDefaultPassUpdater`.
-- The `PassUpdater` creates or updates PASS objects (grants, users, funders) in the PASS repository.
-- The `PassUpdater` interacts with the PassClient to perform the actual create and update operations.
+- The processed grant data is passed to the `JhuPassUpdater`, which extends `AbstractDefaultPassUpdater`.
+- The `JhuPassUpdater` updates PASS objects (grants, users, funders) in the PASS repository.
+- The `JhuPassUpdater` interacts with the PassClient to perform the actual create and update operations.
 
 5. Error Handling:
 
-- Any exceptions during the data retrieval or ingestion process are handled by `GrantDataException`.
+- Exceptions specific to the data retrieval or ingestion are handled by `GrantDataException`.
 - Errors are logged, and appropriate messages are reported to the CLI user via `PassCliException`.
 
 6. Statistics Tracking:
 
 - The `PassUpdateStatistics` class tracks the number of grants, funders, and users created or updated.
-- Statistics are updated in the `PassUpdater` and can be reset or reported as needed.
+- Statistics are updated in the `PassUpdater` and can be reset or reported.
 
 ## Next Step / Institution Configuration
 
