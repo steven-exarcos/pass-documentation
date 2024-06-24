@@ -193,7 +193,7 @@ docker run -eNIHMS_API_INST=YOUR_INST -eNIHMS_API_IPF=YOUR_IPF -eNIHMS_API_TOKEN
 - `NihmsTransformLoadService` orchestrates the transformation of data using `NihmsPublicationToSubmission` and the loading of data using `SubmissionLoader`.
 - `NihmsPublicationToSubmission` is responsible for transforming PMC publication data and associated data to a `SubmissionDTO`, which is composed of `Grant`, `Publication`, `RepositoryCopy`, and `Submission` objects.
 - `SubmissionDTO` acts as a container for the transformed data.
-- `SubmissionLoader` is responsible for the final step of loading the data into the system.
+- `SubmissionLoader` is responsible for the final step of loading the data into PASS.
 
 ## Next Step / Institution Configuration
 
