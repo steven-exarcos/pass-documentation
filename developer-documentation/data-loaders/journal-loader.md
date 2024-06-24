@@ -26,9 +26,10 @@ The Journal Loader parses the PMC type A journal `.csv` file, and/or the [MEDLIN
 
 ## Usage
 
-Using java system properties to launch the journal loader:
+Using java system properties to launch the journal loader. Note: update the version of the jar name to the one that is being used.
+
 ```shell
-java -Dpmc=https://www.ncbi.nlm.nih.gov/pmc/front-page/NIH_PA_journal_list.csv -Dmedline=https://ftp.ncbi.nih.gov/pubmed/J_Medline.txt -Dpass.core.url=http://localhost:8080 -Dpass.core.user=USER -Dpass.core.password=PASS -jar pass-journal-loader-nih/target/pass-journal-loader-nih-0.6.0-SNAPSHOT-exe.jar
+java -Dpmc=https://www.ncbi.nlm.nih.gov/pmc/front-page/NIH_PA_journal_list.csv -Dmedline=https://ftp.ncbi.nih.gov/pubmed/J_Medline.txt -Dpass.core.url=http://localhost:8080 -Dpass.core.user=USER -Dpass.core.password=PASS -jar pass-journal-loader-nih/target/pass-journal-loader-nih-1.8.0-SNAPSHOT-exe.jar
 ```
 
 ### Properties or Environment Variables
@@ -60,34 +61,22 @@ Adjust the logging level of a particular component, e.g. `LOG.org.eclipse.pass=W
 
 ## Journal Loader Classes & Data Flow Overview
 
-### Data Flow 
+### Data Flow
+
 1. Initialization:
 
-  - The `Main` class initializes the application and calls the `BatchJournalFinder` to start processing.
+  - The `Main` class initializes the application and calls the `BatchJournalFinder` and `LoaderEngine` to start processing.
 
 2. File Processing:
 
-  - `BatchJournalFinder` processes each file using the appropriate reader (`JournalReader`, `MedlineReader`, `NihTypeAReader`).
-    - The `main` method in `BatchJournalFinder` initiates the process, collects files to be processed, and calls `processFiles`.
-    - `processFiles` iterates over the list of files and calls `processFile` for each file.
+  - `BatchJournalFinder` processes each file using the appropriate reader (`MedlineReader`, `NihTypeAReader`).
+    - The `load` method in `BatchJournalFinder` initiates the process, collects files to be processed.
 
-3. Journal Finding:
-
-  - Within `processFile`, `JournalFinder` is used to find journal information based on the data read.
-    - `JournalFinder` methods `findJournal` and `findJournalByISSN` retrieve journal information based on the title or ISSN.
-
-4. Data Loading:
+3. Data Loading:
 
   - Processed journal data is passed to `LoaderEngine` to be loaded into the target system.
-    - `LoaderEngine` methods:
-      - `initialize` sets up the loading environment.
-      - `loadData` takes a list of `JournalData` objects and loads them.
-      - `cleanup` finalizes and cleans up the loading process.
-5. Logging:
+  - If a journal is not found then a new one will be created, otherwise it will update the journal.
 
-  - Throughout the process, `LogUtil` is used to log information and errors.
-    - `log` method logs general messages.
-    - `logError` method logs error messages along with exceptions.
 
 # Next Step / Institution Configuration
 
