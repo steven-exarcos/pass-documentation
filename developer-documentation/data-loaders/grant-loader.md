@@ -151,11 +151,14 @@ Troubleshooting:
 
 3. Data Processing:
 
-- The `GrantIngestRecord` objects are processed, validated, and mapped to the PASS data model using utility methods from `GrantDataUtils`.
+- The `GrantIngestRecord` objects are built by the `CoeusConnecter` by the `retrieveUpdates` method.
+  - The `CoeusConnecter` implements `GrantConnector`, and is specific the COEUS database at JHU. Another institution should have an implementing class for their institution.
+- A `LocalKey` is built using utility methods from `GrantDataUtils` and is used by the `AbstractDefaultPassUpdater`
 
 4. Data Ingestion:
 
 - The processed grant data is passed to the `JhuPassUpdater`, which extends `AbstractDefaultPassUpdater`.
+  - An institution with specific needs for updating their data should extend the `AbstractDefaultPassUpdater`. The `JhuPassUpdater` is specific to JHU implementation.
 - The `JhuPassUpdater` updates PASS objects (grants, users, funders) in the PASS repository.
 - The `JhuPassUpdater` interacts with the PassClient to perform the actual create and update operations.
 
