@@ -41,7 +41,6 @@ The following are required to run this tool:
 - Java 17+
 - Download the latest [docker image](https://github.com/eclipse-pass/pass-support/pkgs/container/pass-nihms-loader) or download the latest [pass-support release](https://github.com/eclipse-pass/pass-support/releases) and compile the `pass-nihms-loader` module
 - Account for the NIH PACM website, and obtain an API key. The API key is only valid for 3 months, so it will need to be updated periodically. There are a couple of ways of obtaining an account and it is institution specific.
-- Create a data folder that files will be downloaded to.
 
 ### Data Harvest Configuration
 
@@ -121,11 +120,11 @@ Here is an example using Java system properties -D.
 
 Once the Data Transform-Load CLI has been configured, there are a few additional options you can add when running from the command line.
 
-By default all 3 publication statuses - compliant, non-compliant, and in-process CSVs will be downloaded. To download one or two of them, you can add them individually at the command line:
+By default, all 3 publication statuses: `compliant`, `non-compliant`, and `in-process` CSVs will be downloaded. To download one or two of them, you can add them individually at the command line:
 
-    -c, -compliant, --compliant - Download compliant publication CSV.
-    -p, -inprocess, --inprocess - Download in-process publication CSV.
-    -n, -noncompliant, --noncompliant - Download non-compliant publication CSV.
+    -c, -compliant, --compliant
+    -p, -inprocess, --inprocess
+    -n, -noncompliant, --noncompliant
 
 So, for example, to process non-compliant spreadsheets only:
 
@@ -204,6 +203,8 @@ Once access to PACM has been established, configuring the infrastructure where t
 Optionally as a last step, setting up the [NIH Manuscript Submission](https://www.nihms.nih.gov) account would enable seeing which submissions have been made and how far along they are in the process. Once a submission makes its way through this process it appears in the PubMed Central data. This can be useful when troubleshooting records that you might expect to be in the PubMed Central data.
 
 ## Related Information
+
+The resources below will assist in setting up the accounts required to run the NIHMS Loader and understanding the submission process.
 
 - PubMed Central Resources
   - [PACM Guide](https://www.ncbi.nlm.nih.gov/pmc/utils/pacm/static/pacm-user-guide.pdf)
