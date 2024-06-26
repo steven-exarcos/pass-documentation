@@ -38,7 +38,7 @@ The Updater class takes the data supplied by the Connector and creates or update
 
 ### Profiles
 
-#### JHU (jhu)
+#### JHU
 
 The JHU implementation is used to pull data from the COEUS/FIBI database views for the purpose of performing regular updates. We look at grants which have been updated since a particular time (typically the time of the previous update), join this with user and funder information associated with the grant, and then use this information to update the data in the PASS backend. The JHU implementation also treats the COEUS/FIBI database as authoritative for all fields in the data. If a grant is being passed in for update, it is assumed that all records for that grant are included in the input.
 
@@ -80,10 +80,18 @@ java -jar jhu-grant-loader-1.8.0-SNAPSHOT.jar -a load file:./grant-data.csv
 
 #### Arguments
 
-You can run the above command with `-h` to get a full list of arguments for the grant loader.  In the example below, `startDateTime` and `awardEndDate` are used as parameters to limit the date range of the grant data:
+You can run the above command with `-h` to get a full list of arguments for the grant loader.
+
+In this example below using the -a parameter instructs the grant loader to load data from a file CSV file. The action for the -a parameter is `pull` or `load`, to restrict the operation of the application to only pull data from Grant source system to store in a file, or to only load into PASS data taken from a stored file, respectively.
 
 ```shell
 java -jar jhu-grant-loader-1.8.0-SNAPSHOT.jar -a load file:./grant-data.csv
+```
+
+In another example below, `startDateTime` and `awardEndDate` are used as parameters to limit the date range of the grant data. Since no action is specified, the default is to perform a pull followed directly by a load, using the default source connection.
+
+```shell
+java -jar jhu-grant-loader-1.8.0-SNAPSHOT.jar -startDateTime <yyyy-mm-dd hh:mm:ss.m{mm}> -awardEndDate <MM/dd/yyyy>
 ```
 
 ### Running the Grant Loader in Docker
