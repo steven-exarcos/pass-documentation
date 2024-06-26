@@ -64,16 +64,11 @@ Adjust the logging level of a particular component, e.g. `LOG.org.eclipse.pass=W
 ### Data Flow
 
 1. Initialization:
-
   - The `Main` class initializes the application and calls the `BatchJournalFinder` and `LoaderEngine` to start processing.
-
 2. File Processing:
-
   - `BatchJournalFinder` processes each file using the appropriate reader (`MedlineReader`, `NihTypeAReader`).
     - The `load` method in `BatchJournalFinder` initiates the process, collects files to be processed.
-
 3. Data Loading:
-
   - Processed journal data is passed to `LoaderEngine` to be loaded into the target system.
   - If a journal is not found then a new one will be created, otherwise it will update the journal.
 
