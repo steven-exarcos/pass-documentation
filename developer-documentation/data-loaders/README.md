@@ -2,7 +2,7 @@
 
 The PASS Data Loaders are comprised of three components in the `pass-support` [repository](https://github.com/eclipse-pass/pass-support): [Pass Journal Loader](https://github.com/eclipse-pass/pass-support/tree/main/pass-journal-loader), [Pass NIHMS Loader](https://github.com/eclipse-pass/pass-support/tree/main/pass-nihms-loader), [Pass Grant Loader](https://github.com/eclipse-pass/pass-support/tree/main/pass-grant-loader). These three components are responsible for loading external data into PASS.
 
-# PASS Data Loaders Summary
+# Summary
 
 All three loaders are Java JAR command line applications and can be run from any platform that can run Java applications. These application utilize system properties and can be configured to run with different parameters.
 
