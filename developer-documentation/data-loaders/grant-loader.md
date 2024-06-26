@@ -148,38 +148,26 @@ Troubleshooting:
 ### Grant Loader Classes & Data Flow Overview
 
 1. Initialization and Configuration:
-
-- The application initializes with `GrantLoaderCLI`, which sets up the `GrantLoaderApp` with configurations from `GrantLoaderConfig`.
-- Spring Boot profiles are used to load institution-specific configurations.
-
+    - The application initializes with `GrantLoaderCLI`, which sets up the `GrantLoaderApp` with configurations from `GrantLoaderConfig`.
+    - Spring Boot profiles are used to load institution-specific configurations.
 2. Data Retrieval:
-
-- `GrantLoaderApp` uses the `GrantConnector` interface to retrieve data from the data source (e.g., database, CSV file).
-- The `CoeusConnector` implementation (e.g., for JHU) fetches the data and returns it as a list of `GrantIngestRecord` objects.
-
+    - `GrantLoaderApp` uses the `GrantConnector` interface to retrieve data from the data source (e.g., database, CSV file).
+    - The `CoeusConnector` implementation (e.g., for JHU) fetches the data and returns it as a list of `GrantIngestRecord` objects.
 3. Data Processing:
-
-- The `GrantIngestRecord` objects are built by the `CoeusConnecter` by the `retrieveUpdates` method.
-  - The `CoeusConnecter` implements `GrantConnector`, and is specific the COEUS database at JHU. Another institution should have an implementing class for their institution.
-- A `LocalKey` is built using utility methods from `GrantDataUtils` and is used by the `AbstractDefaultPassUpdater`
-
+    - The `GrantIngestRecord` objects are built by the `CoeusConnecter` by the `retrieveUpdates` method.
+      - The `CoeusConnecter` implements `GrantConnector`, and is specific the COEUS database at JHU. Another institution should have an implementing class for their institution.
+    - A `LocalKey` is built using utility methods from `GrantDataUtils` and is used by the `AbstractDefaultPassUpdater`
 4. Data Ingestion:
-
-- The processed grant data is passed to the `JhuPassUpdater`, which extends `AbstractDefaultPassUpdater`.
-  - An institution with specific needs for updating their data should extend the `AbstractDefaultPassUpdater`. The `JhuPassUpdater` is specific to JHU implementation.
-- The `JhuPassUpdater` updates PASS objects (grants, users, funders) in the PASS repository.
-- The `JhuPassUpdater` interacts with the PassClient to perform the actual create and update operations.
-
+    - The processed grant data is passed to the `JhuPassUpdater`, which extends `AbstractDefaultPassUpdater`.
+      - An institution with specific needs for updating their data should extend the `AbstractDefaultPassUpdater`. The `JhuPassUpdater` is specific to JHU implementation.
+    - The `JhuPassUpdater` updates PASS objects (grants, users, funders) in the PASS repository, and interacts with the PassClient to perform the actual create and update operations.
 5. Error Handling:
-
-- Exceptions specific to the data retrieval or ingestion are handled by `GrantDataException`.
-- Errors are logged, and appropriate messages are reported to the CLI user via `PassCliException`.
-
+    - Exceptions specific to the data retrieval or ingestion are handled by `GrantDataException`.
+    - Errors are logged, and appropriate messages are reported to the CLI user via `PassCliException`.
 6. Statistics Tracking:
-
-- The `PassUpdateStatistics` class tracks the number of grants, funders, and users created or updated.
-- Statistics are updated in the `PassUpdater` and can be reset or reported.
+    - The `PassUpdateStatistics` class tracks the number of grants, funders, and users created or updated.
+    - Statistics are updated in the `PassUpdater` and can be reset or reported.
 
 ## Next Step / Institution Configuration
 
-Institutional configuration is going to be highly dependent on where the institutional grant data comes from. At JHU, we have a PostgreSQL database and the data is pulled from the database using [AWS Batch and ECS](../../welcome-guide/deployment-architecture.md#pass-deployment-architecture). There can be multiple ways to set up the infrastructure, but the simplest setup is to have a CSV file exported to a directory where the Grant Loader can ingest the file using the `-a` parameter.
+Institutional configuration is going to be highly dependent on where the institutional grant data comes from. At JHU, we have a Postgres database and the data is pulled from the database using [AWS Batch and ECS](../../welcome-guide/deployment-architecture.md#pass-deployment-architecture). There can be multiple ways to set up the infrastructure, but the simplest setup is to have a CSV file exported to a directory where the Grant Loader can ingest the file using the `-a` parameter.
