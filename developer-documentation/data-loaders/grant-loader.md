@@ -42,7 +42,7 @@ The Updater class takes the data supplied by the Connector and creates or update
 
 The JHU implementation is used to pull data from the COEUS/FIBI database views for the purpose of performing regular updates. We look at grants which have been updated since a particular time (typically the time of the previous update), join this with user and funder information associated with the grant, and then use this information to update the data in the PASS backend. The JHU implementation also treats the COEUS/FIBI database as authoritative for all fields in the data. If a grant is being passed in for update, it is assumed that all records for that grant are included in the input.
 
-## Grant Data
+### Grant Data
 
 In order for PASS to map grant data to the associated Objects within PASS, the Grant Loader needs to ingest a CSV file with the following fields and data types:
 
@@ -68,17 +68,17 @@ In order for PASS to map grant data to the associated Objects within PASS, the G
 | PI_ROLE               | TEXT/1         | Y        | Role of PI on grant (PI or Co-PI). Valid values: P, C. P=PI, C=Co-PI                                                                                                                                                                          |
 | UPDATE_TIMESTAMP      | TIMESTAMP      | N        | Last update timestamp. Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.SSS if time is required. Date/Time is (UTC timezone)                                                                                                                         |
 
-## Usage
+### Usage
 
-Refer to the application.properties file to determine which properties that need runtime values set. The grant loader is a spring boot application, so use the standard Spring Boot configuration functionality
-[Spring Boot Configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config)
+Refer to the application.properties file to determine which properties that need runtime values set. The grant loader is a spring boot application, so use the standard Spring Boot configuration functionality according to the
+[Spring Boot Configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config) documentation.
 
 Here is an example using Java system properties `-D`. Change the version `1.8.0-SNAPSHOT` to the version of the `jhu-grant-loader` jar that is being used.
 ```shell
 java -jar jhu-grant-loader-1.8.0-SNAPSHOT.jar -a load file:./grant-data.csv
 ```
 
-### Arguments
+#### Arguments
 
 You can run the above command with `-h` to get a full list of arguments for the grant loader.  In the example below, `startDateTime` and `awardEndDate` are used as parameters to limit the date range of the grant data:
 
