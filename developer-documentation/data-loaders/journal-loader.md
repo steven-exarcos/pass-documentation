@@ -79,5 +79,7 @@ Journal loader is simple to configure. It will run on any system that can run Ja
 
 # Related Information
 
+The following resources are the sources of the journal information that is loaded into pass:
+
 - [PubMed Central](https://www.ncbi.nlm.nih.gov/pmc/)
 - [NLM MEDLINE](https://www.nlm.nih.gov/medline/medline_overview.html)
