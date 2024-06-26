@@ -1,4 +1,4 @@
-# PASS Grant Loader
+# Grant Loader
 
 The PASS Grant Loader ingests grant data from an institution and maps the data to the appropriate PASS Objects in the PASS Data Model.
 
