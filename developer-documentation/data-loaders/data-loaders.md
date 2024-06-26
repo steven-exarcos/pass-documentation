@@ -8,7 +8,7 @@ All three loaders are Java JAR command line applications and can be run from any
 
 ## [Grant Loader](./grant-loader.md)
 
-The Grant Loader is designed to automate the ingestion and processing of grant data from various sources into PASS. It handles the loading of grants using predefined configurations and mappings, ensuring the correct representation and association of grant data. Since there are predefined fields that are required to represent a grant and institutions may have varying representations, specific implementations may be needed in order to accommodate other institutions. The design of the Grant Loader is flexible in that in can accommodate extension to a certain degree.
+The Grant Loader is designed to automate the ingestion and processing of grant data from various sources into PASS. It handles the loading of grants using predefined configurations and mappings, ensuring the correct representation and association of grant data. Since there are predefined fields that are required to represent a grant and institutions may have varying representations, specific implementations may be needed in order to accommodate other institutions. The design of the Grant Loader is flexible in that in can accommodate development of connectors to varying data sources.
 
 ## [Journal Loader](./journal-loader.md)
 
