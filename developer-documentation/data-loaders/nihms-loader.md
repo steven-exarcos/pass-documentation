@@ -48,9 +48,9 @@ The following are required to run this tool:
 There are several ways to configure the Data Harvest CLI. Data Harvest CLI is a Spring Boot Application, so it can be configured using [Spring Boot Configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config)
 
 You will need to set values for the following properties: 
-- nihmsetl.api.url.param.inst
-- nihmsetl.api.url.param.ipf
-- nihmsetl.api.url.param.api-token 
+- `nihmsetl.api.url.param.inst`
+- `nihmsetl.api.url.param.ipf`
+- `nihmsetl.api.url.param.api-token`
 
 Below is the full set of properties for the NIHMS Harvester. These properties are set in the `resources/application.properties` file in the `nihms-data-harvest` module.
 
