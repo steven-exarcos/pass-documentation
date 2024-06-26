@@ -88,7 +88,7 @@ In this example below using the -a parameter instructs the grant loader to load 
 java -jar jhu-grant-loader-1.8.0-SNAPSHOT.jar -a load file:./grant-data.csv
 ```
 
-In another example below, `startDateTime` and `awardEndDate` are used as parameters to limit the date range of the grant data. Since no action is specified, the default is to perform a pull followed directly by a load, using the default source connection.
+In another example below, `startDateTime` and `awardEndDate` are used as parameters to limit the date range of the grant data. Since no action is specified, the default is to perform a pull followed directly by a load, using the default connection source.
 
 ```shell
 java -jar jhu-grant-loader-1.8.0-SNAPSHOT.jar -startDateTime <yyyy-mm-dd hh:mm:ss.m{mm}> -awardEndDate <MM/dd/yyyy>
