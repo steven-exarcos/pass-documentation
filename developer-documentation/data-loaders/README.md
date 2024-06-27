@@ -26,6 +26,8 @@ The NIHMS Loader specifically targets the loading and transformation of manuscri
 
 # Related Information
 
+The following resources cover external resources for data extraction and the infrastructure used to run the Data Loaders:
+
 - PubMed Central Resources
     - [PACM Guide](https://www.ncbi.nlm.nih.gov/pmc/utils/pacm/static/pacm-user-guide.pdf)
     - [PMC APIs](https://www.ncbi.nlm.nih.gov/pmc/tools/developers/#pmc-apis)
