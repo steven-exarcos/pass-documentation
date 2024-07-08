@@ -139,6 +139,7 @@ For testing purposes, we need to associate nih-user to a grant row in the CSV.
 ```text
 docker run -it -v ./grantloadertest:/data/grantloader --env-file ./grantloadertest/env.list --network host ghcr.io/eclipse-pass/jhu-grant-loader:1.8.0-SNAPSHOT -a load /data/grantloader/<your_file>.csv`
 ```
+Note, change the version `1.8.0-SNAPSHOT` to the version of the grant loader you want to use.
 4. Once done, refresh the Grants tab in the browser to see your grant loaded.
 
 Troubleshooting:
