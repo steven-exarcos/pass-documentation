@@ -73,9 +73,9 @@ In order for PASS to map grant data to the associated Objects within PASS, the G
 Refer to the application.properties file to determine which properties that need runtime values set. The grant loader is a spring boot application, so use the standard Spring Boot configuration functionality according to the
 [Spring Boot Configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config) documentation.
 
-Here is an example using Java system properties `-D`. Change the version `1.8.0-SNAPSHOT` to the version of the `jhu-grant-loader` jar that is being used.
+Here is an example using Java system properties `-D`.
 ```shell
-java -jar jhu-grant-loader-1.8.0-SNAPSHOT.jar -a load file:./grant-data.csv
+java -jar jhu-grant-loader-exec.jar -a load file:./grant-data.csv
 ```
 
 #### Arguments
@@ -85,13 +85,13 @@ You can run the above command with `-h` to get a full list of arguments for the 
 In this example below using the -a parameter instructs the grant loader to load data from a file CSV file. The action for the -a parameter is `pull` or `load`, to restrict the operation of the application to only pull data from Grant source system to store in a file, or to only load into PASS data taken from a stored file, respectively.
 
 ```shell
-java -jar jhu-grant-loader-1.8.0-SNAPSHOT.jar -a load file:./grant-data.csv
+java -jar jhu-grant-loader-exec.jar -a load file:./grant-data.csv
 ```
 
 In another example below, `startDateTime` and `awardEndDate` are used as parameters to limit the date range of the grant data. Since no action is specified, the default is to perform a pull followed directly by a load, using the default connection source.
 
 ```shell
-java -jar jhu-grant-loader-1.8.0-SNAPSHOT.jar -startDateTime <yyyy-mm-dd hh:mm:ss.m{mm}> -awardEndDate <MM/dd/yyyy>
+java -jar jhu-grant-loader-exec.jar -startDateTime <yyyy-mm-dd hh:mm:ss.m{mm}> -awardEndDate <MM/dd/yyyy>
 ```
 
 ### Running the Grant Loader in Docker
