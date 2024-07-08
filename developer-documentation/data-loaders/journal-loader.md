@@ -29,7 +29,7 @@ The Journal Loader parses the PMC type A journal `.csv` file, and/or the [MEDLIN
 Using java system properties to launch the journal loader. Note: update the version of the jar name to the one that is being used.
 
 ```shell
-java -Dpmc=https://www.ncbi.nlm.nih.gov/pmc/front-page/NIH_PA_journal_list.csv -Dmedline=https://ftp.ncbi.nih.gov/pubmed/J_Medline.txt -Dpass.core.url=http://localhost:8080 -Dpass.core.user=USER -Dpass.core.password=PASS -jar pass-journal-loader-nih/target/pass-journal-loader-nih-1.8.0-SNAPSHOT-exe.jar
+java -Dpmc=https://www.ncbi.nlm.nih.gov/pmc/front-page/NIH_PA_journal_list.csv -Dmedline=https://ftp.ncbi.nih.gov/pubmed/J_Medline.txt -Dpass.core.url=http://localhost:8080 -Dpass.core.user=USER -Dpass.core.password=PASS -jar pass-journal-loader-nih-1.8.0-SNAPSHOT-exe.jar
 ```
 
 ### Properties or Environment Variables
