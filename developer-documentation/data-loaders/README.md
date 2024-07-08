@@ -1,6 +1,6 @@
 # PASS Data Loaders
 
-The PASS Data Loaders are comprised of three components in the [Pass Support](https://github.com/eclipse-pass/pass-support) repository: [Pass Journal Loader](https://github.com/eclipse-pass/pass-support/tree/main/pass-journal-loader), [Pass NIHMS Loader](https://github.com/eclipse-pass/pass-support/tree/main/pass-nihms-loader), [Pass Grant Loader](https://github.com/eclipse-pass/pass-support/tree/main/pass-grant-loader). These three components are responsible for loading external data into PASS.
+The PASS Data Loaders are comprised of three components in the [Pass Support](https://github.com/eclipse-pass/pass-support) repository: [Pass Journal Loader](https://github.com/eclipse-pass/pass-support), [Pass NIHMS Loader](https://github.com/eclipse-pass/pass-support), [Pass Grant Loader](https://github.com/eclipse-pass/pass-support). These three components are responsible for loading external data into PASS.
 
 # Summary
 
