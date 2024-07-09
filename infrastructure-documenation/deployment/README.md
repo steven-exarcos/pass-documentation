@@ -6,6 +6,9 @@
 
 This guide covers the deployment architecture and release process for the PASS (Public Access Submission System) application. PASS is designed to be flexible and can adapt to various architectures, including cloud infrastructure, hybrid, or on-premises environments.
 
+## Going Forward
+
+As we move towards a cloud-native version of PASS there will be ongoing changes to the architecture, changes to the infrastructure, and changes to the deployment process, e.g. transitioning from Docker Compose to Kubernetes, or using Terraform for IAC.
 
 ## Technical Deep Dive
 
@@ -25,17 +28,17 @@ excerpt from [../docs/infra/digitalocean.md]
 
 The current PASS infrastructure is running in Amazon Web Service (AWS). It includes the following core components in its stack:
 
-* EC2 - Amazon Elastic Compute Cloud.
+* EC2 - Amazon Elastic Compute Cloud. Hosts Docker Compose.
 
-* ECS - Amazon Elastic Container Service.
+* ECS - Amazon Elastic Container Service. Hosts auxiliary microservices.
 
-* RDS - Amazon Relational Database Service.
+* RDS - Amazon Relational Database Service. Stores metadata.
 
-* S3 - Amazon S3.
+* S3 - Amazon S3. Used to store binary data that is managed by OCFL.
 
-* ALB - Amazon Application Load Balancer.
+* ALB - Amazon Application Load Balancer provides SSL to the frontend.
 
-* WAF - AWS Web Application Firewall.
+* WAF - AWS Web Application Firewall. Protects the frontend.
 
 ## Provisioning PASS
 
@@ -98,7 +101,8 @@ Release Notes : Release notes are generated and made available to stakeholders.
 excerpt from [../docs/dev/release-steps-with-automation.md]
 
 #### GitHub Actions
-.
+
+* [Working with GitHub CICD](github-cicd.md)
 
 ##### Workflow: Release All Projects
 
@@ -150,8 +154,8 @@ For more detailed information and configuration, refer to the pass-complete-rele
 
 ## Additional Resources
 
-PASS Documentation
+[PASS main](https://github.com/eclipse-pass/main)
 
-PASS Docker Repository
+[PASS Docker Repository](https://github.com/eclipse-pass/pass-docker)
 
 For further assistance or questions, please _______.
