@@ -81,9 +81,9 @@ on:
         required: true
 ```
 
-## AWS / EKS Integration
+## AWS Integration
 
-To interact with AWS services, including EKS (Elastic Kubernetes Service), you'll need to set up appropriate secrets and use AWS-specific actions in your workflows.
+To interact with AWS services, including ECR (Elastic Container Registry), you'll need to set up appropriate secrets and use AWS-specific actions in your workflows.
 
 ### Setting up AWS Credentials
 
@@ -92,10 +92,10 @@ Store your AWS credentials as secrets:
 1. `AWS_ACCESS_KEY_ID`
 2. `AWS_SECRET_ACCESS_KEY`
 
-### Example Workflow for EKS Deployment
+### Example Workflow for AWS Deployment
 
 ```yaml
-name: Deploy to EKS
+name: Deploy to ECR
 
 on:
   push:
@@ -127,18 +127,9 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-      - name: Update kube config
-        run: aws eks get-token --cluster-name my-cluster | kubectl apply -f -
-
-      - name: Deploy to EKS
-        run: |
-          kubectl set image deployment/my-app my-app=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          kubectl rollout status deployment/my-app
 ```
 
-This workflow builds a Docker image, pushes it to Amazon ECR, and deploys it to an EKS cluster.
-
-Remember to replace placeholder values like `my-cluster`, `my-ecr-repo`, and `my-app` with your actual resource names.
+This workflow builds a Docker image and pushes it to Amazon ECR.
 
 ## Best Practices
 
