@@ -1,161 +1,100 @@
-# Deployment.md
+# Eclipse PASS Deployment Guide
 
----
+## Table of Contents
+1. [Overview](#overview)
+2. [Deployment Architecture](#deployment-architecture)
+3. [Infrastructure Components](#infrastructure-components)
+4. [Deployment Process](#deployment-process)
+5. [Release Process](#release-process)
+6. [Additional Resources](#additional-resources)
 
 ## Overview
 
-This guide covers the deployment architecture and release process for the PASS (Public Access Submission System) application. PASS is designed to be flexible and can adapt to various architectures, including cloud infrastructure, hybrid, or on-premises environments.
+The Public Access Submission System (PASS) is an open-source platform designed to streamline compliance with funder and institutional open access policies. This guide outlines the deployment process for PASS, which is adaptable to various architectures including cloud, hybrid, or on-premises environments.
 
-## Going Forward
+> **Note**: PASS is transitioning towards a cloud-native version. Expect ongoing changes to the architecture, infrastructure, and deployment process, such as moving from Docker Compose to Kubernetes or implementing Infrastructure as Code with Terraform.
 
-As we move towards a cloud-native version of PASS there will be ongoing changes to the architecture, changes to the infrastructure, and changes to the deployment process, e.g. transitioning from Docker Compose to Kubernetes, or using Terraform for IAC.
+## Deployment Architecture
 
-## Technical Deep Dive
+The PASS deployment workflow involves:
 
-excerpt from [../welcome-guide/deployment-architecture.md]
+1. Code contributions to the Eclipse PASS Git repository
+2. GitHub Actions workflows for CI/CD
+3. AWS SQS for deployment initiation
+4. Liquibase for database schema management
+5. AWS RDS (PostgreSQL) for data storage
 
-### Deployment Architecture
+This architecture serves as a template and should be adapted to meet specific organizational requirements.
 
-The deployment workflow starts when developers contribute code to the Eclipse PASS Git repository. Changes in this repository trigger GitHub Actions workflows, which are part of an automated CI/CD pipeline facilitating the deployment of the updated code. In deployment SQS is utilized for initiating the deployment from a GitHub workflow that publishes a SNS topic to the queue. The PASS deployment files contain configurations and environment variables that assist in the deployment of the PASS application and supporting services. Liquibase is utilized to manage database schema changes, which interacts with an AWS RDS instance running PostgreSQL.&#x20;
+## Infrastructure Components
 
-For other organizations looking to adopt a similar AWS application and deployment model, it's important to recognize that while the core architecture offers a template, it should be adapted to meet an organization's own requirements and needs. Each organization will need to evaluate its own application demands, data sensitivity, and user base to tailor the cloud resources, network configurations, and security policies accordingly. Moreover, integrating other types of cloud infrastructure or even on-premise solutions might be necessary to address specific technological preferences or regulatory requirements. Hybrid cloud environments or multi-cloud strategies could be employed to leverage the strengths of various cloud providers, enhance resilience, and avoid vendor lock-in. PASS is designed to be flexible and can adapt to a variety of architectures; whether a cloud infrastructure, hybrid or on-premise.
+The current PASS infrastructure in AWS includes:
 
----
+- **EC2**: Hosts Docker Compose
+- **ECS**: Hosts auxiliary microservices
+- **RDS**: Stores metadata
+- **S3**: Stores binary data (managed by OCFL)
+- **ALB**: Provides SSL for the frontend
+- **WAF**: Protects the frontend
 
-excerpt from [../docs/infra/digitalocean.md]
+## Deployment Process
 
-## Deployment Infrastructure
+### Prerequisites
+- Docker and Docker Compose
+- Git
 
-The current PASS infrastructure is running in Amazon Web Service (AWS). It includes the following core components in its stack:
+### Steps for VM/EC2 Deployment Using Docker Compose
 
-* EC2 - Amazon Elastic Compute Cloud. Hosts Docker Compose.
+1. Install dependencies:
+   ```bash
+   apt-get -y update
+   apt-get install -y gnupg2 pass docker-compose
+   ```
 
-* ECS - Amazon Elastic Container Service. Hosts auxiliary microservices.
+2. Clone the repository:
+   ```bash
+   mkdir -p /src
+   cd /src
+   git clone git@github.com:eclipse-pass/pass-docker.git
+   cd pass-docker
+   git checkout minimal-assets
+   ```
 
-* RDS - Amazon Relational Database Service. Stores metadata.
-
-* S3 - Amazon S3. Used to store binary data that is managed by OCFL.
-
-* ALB - Amazon Application Load Balancer provides SSL to the frontend.
-
-* WAF - AWS Web Application Firewall. Protects the frontend.
-
-## Provisioning PASS
-
-### Installing PASS Dependencies
-
-#### VM/EC2 Instructions Using Docker Compose
-
-On the server, you will need [docker / docker-compose](https://docs.docker.com/compose/) and [pass-docker](https://github.com/eclipse-pass/pass-docker)
-
-
-```bash
-apt-get -y update
-apt-get install -y gnupg2 pass docker-compose
-mkdir -p /src
-cd /src
-git clone git@github.com:eclipse-pass/pass-docker.git
-cd pass-docker
-git checkout minimal-assets
-```
-
-### Runing PASS
-
-#### VM/EC2 Instructions Using Docker Compose
-```bash
-cd /src/pass-docker && \
-  docker-compose pull && \
-  docker-compose up
-```
-
----
-excerpt from [../docs/dev/release.md]
+3. Run PASS:
+   ```bash
+   cd /src/pass-docker && \
+     docker-compose pull && \
+     docker-compose up
+   ```
 
 ## Release Process
 
-A PASS release produces a set of Java artifacts, and Docker images.
+PASS uses semantic versioning (`MAJOR.MINOR.PATCH`). The release process includes:
 
-Each release of PASS has its own version which is used by every component. PASS uses `MAJOR.MINOR.PATCH` [semantic versioning](https://semver.org/) approach. The PASS Docker environment is updated with references to the released images.
-Source code is tagged and release notes made available.
+1. Code contribution
+2. CI/CD via GitHub Actions
+3. Building and testing
+4. Generating release artifacts (Java artifacts and Docker images)
+5. Publishing artifacts to repositories
+6. Triggering deployment via AWS SQS
+7. Updating infrastructure with new artifacts
+8. Generating release notes
 
-The PASS release process involves the following steps:
+### GitHub Actions Workflow
 
-Code Contribution : Developers contribute code changes to the PASS Git repository.
+The "Publish: Release All" workflow automates the release process:
 
-Continuous Integration (CI) : Changes in the repository trigger GitHub Actions workflows, which are part of an automated CI/CD pipeline.
+1. Builds and tests components
+2. Publishes Java artifacts
+3. Builds and pushes Docker images
+4. Creates GitHub Releases
 
-Build and Test : The CI pipeline builds and tests the PASS application, ensuring code quality and functionality.
-
-Release Artifacts : Upon successful testing, the pipeline generates release artifacts, including Java artifacts and Docker images.
-
-Artifact Publishing : Java artifacts are published to Sonatype Nexus and Maven Central repositories, while Docker images are pushed to the GitHub Container Registry.
-
-Deployment Trigger : The CI pipeline publishes a message to an Amazon Simple Queue Service (SQS) queue, initiating the deployment process.
-
-Infrastructure Updates : The deployment process updates the PASS infrastructure with the latest release artifacts, including updating the ECS cluster with the new Docker images.
-
-Release Notes : Release notes are generated and made available to stakeholders.
-
-
----
-excerpt from [../docs/dev/release-steps-with-automation.md]
-
-#### GitHub Actions
-
-* [Working with GitHub CICD](github-cicd.md)
-
-##### Workflow: Release All Projects
-
-The [Publish: Release All](/.github/workflows/pass-complete-release.yml) is a GitHub workflow that will release all the PASS projects in the correct order, build and push docker images, and create GitHub Releases.
-
-This workflow performs the following tasks:
-
-1. Checks out the PASS repository code.
-
-2. Sets up the build environment (e.g., Java, Docker).
-
-3. Builds and tests the PASS application components.
-
-4. Publishes Java artifacts to Sonatype Nexus and Maven Central.
-
-5. Builds and pushes Docker images to the GitHub Container Registry.
-
-6. Creates GitHub Releases with release notes and artifacts.
-
-# Example snippet from the "Publish: Release All" workflow
-jobs:
-  release:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'adopt'
-      - name: Build and Release
-        run: |
-          ./mvnw clean install
-          ./mvnw deploy -Prelease
-      - name: Build and Push Docker Images
-        run: |
-          docker build -t pass/app:${{ github.sha }} .
-          docker push pass/app:${{ github.sha }}
-      - name: Create GitHub Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: ${{ steps.release-notes.outputs.content }}
-
-For more detailed information and configuration, refer to the pass-complete-release.yml file in the AWS-PASS-Deploymnet repository.
+For detailed configuration, refer to the `pass-complete-release.yml` file in the AWS-PASS-Deployment repository.
 
 ## Additional Resources
 
-[PASS main](https://github.com/eclipse-pass/main)
+- [PASS main repository](https://github.com/eclipse-pass/main)
+- [PASS Docker repository](https://github.com/eclipse-pass/pass-docker)
 
-[PASS Docker Repository](https://github.com/eclipse-pass/pass-docker)
-
-For further assistance or questions, please _______.
+For further assistance or questions, please open an issue in the [PASS main repository](https://github.com/eclipse-pass/main/issues).
+```
