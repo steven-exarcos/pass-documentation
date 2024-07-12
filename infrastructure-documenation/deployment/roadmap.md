@@ -96,16 +96,4 @@ The target architecture will leverage Kubernetes for orchestration and cloud-nat
 - Training team members on Kubernetes and cloud-native technologies
 - Ensuring security and compliance in the new architecture
 
-## Timeline
-
-Some phases may run concurrently, others sequentially.
-
-- Phase 1: 1-2 sprints
-- Phase 2: 2-3 sprints
-- Phase 3: 3-4 sprints
-- Phase 4: 2-3 sprints
-- Phase 5: 2-3 sprints
-- Phase 6: 1-2 sprints
-- Phase 7: 2-3 sprints
-
 ---

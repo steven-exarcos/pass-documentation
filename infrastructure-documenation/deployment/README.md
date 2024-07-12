@@ -12,7 +12,7 @@
 
 The Public Access Submission System (PASS) is an open-source platform designed to streamline compliance with funder and institutional open access policies. This guide outlines the deployment process for PASS, which is adaptable to various architectures including cloud, hybrid, or on-premises environments.
 
-> **Note**: PASS is transitioning towards a cloud-native version. Expect ongoing changes to the architecture, infrastructure, and deployment process, such as moving from Docker Compose to Kubernetes or implementing Infrastructure as Code with Terraform.
+> **Note**: PASS is transitioning towards a cloud-native version. Expect ongoing changes to the architecture, infrastructure, and deployment process, such as moving from Docker Compose to Kubernetes or implementing Infrastructure as Code with Terraform. See (roadmap)[./roadmap.md] for more information.
 
 ## Deployment Architecture
 
@@ -91,10 +91,12 @@ The "Publish: Release All" workflow automates the release process:
 
 For detailed configuration, refer to the `pass-complete-release.yml` file in the AWS-PASS-Deployment repository.
 
+Please refer to [github-cicd.md](./github-cicd.md) for further information on its useage.
+
 ## Additional Resources
 
 - [PASS main repository](https://github.com/eclipse-pass/main)
 - [PASS Docker repository](https://github.com/eclipse-pass/pass-docker)
 
-For further assistance or questions, please open an issue in the [PASS main repository](https://github.com/eclipse-pass/main/issues).
+For further assistance or questions, please open an issue in the [PASS main repository](https://github.com/eclipse-pass/main/issues) or find us in [PASS Slack](#)!
 ```
