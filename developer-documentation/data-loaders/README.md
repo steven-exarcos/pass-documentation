@@ -4,7 +4,7 @@ The PASS Data Loaders are comprised of three components in the [Pass Support](ht
 
 # Summary
 
-All three loaders are Java JAR command line applications and can be run from any platform that can run Java applications. These application utilize system properties and can be configured to run with different parameters.
+All three loaders are Java JAR command line applications and can be run from any platform that can run Java applications. These applications utilize system properties and can be configured to run with different parameters.
 
 ## [Grant Loader](./grant-loader.md)
 
