@@ -1,7 +1,5 @@
 # Deposit Services - Technologies Utilized
 
-The code for DS can be found in the pass-support repository here: https://github.com/eclipse-pass/pass-support/tree/main/pass-deposit-services
-
 As mentioned, DS is a backend service that is written in [Java](https://www.java.com/en/) and 
 [Spring Boot](https://spring.io/projects/spring-boot).  The DS project is a [Maven](https://maven.apache.org/) 
 project which is used to execute the standard lifecycle tasks for software development (i.e. build/test/package/release) 
