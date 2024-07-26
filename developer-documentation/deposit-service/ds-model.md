@@ -184,4 +184,4 @@ Supports the transport of the package stream using S/FTP.
 #### SWORDv2
 
 Supports the transport of the package stream
-using [SWORD protocol version 2](http://swordapp.org/sword-v2/sword-v2-specifications/).
+using [SWORD protocol version 2](http://swordapp.github.io/SWORDv2-Profile/SWORDProfile.html).
