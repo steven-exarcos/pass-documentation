@@ -31,7 +31,7 @@ asynchronously to `SubmissionMessage` and `DepositMessages` messages emitted by 
 
 ## Submission/Deposit Logical Flow
 
-![Deposit Service Logical Flow](./ds-flow.png)
+<figure><img src="../../.gitbook/assets/ds-flow.png" alt=""><figcaption><p>Submission & Deposit Logical Flow</p></figcaption></figure>
 
 1. Listener waits for "Submission Complete" message. Invokes the Builder.
 2. Builder retrieves Submission and metadata from the Archive, instantiates internal Deposit Services model.
