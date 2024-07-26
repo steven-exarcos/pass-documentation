@@ -1,8 +1,11 @@
 # Deposit Services - Business
+The Deposit Services system processes messages concurrently from both deposit and submission queues, utilizing dedicated 
+listeners for each queue. This section outlines the workflow, detailing how messages are handled, processed, and how the
+corresponding resources are managed and updated throughout the deposit lifecycle.
 
 ## Message flow and Business Services
 
-Each Message listener (one each for the `deposit` and `submission` queues) can process messages concurrently.
+Each message listener, one each for the `deposit` and `submission` queues, can process messages concurrently.
 
 The `submission` queue is processed by the `SubmissionListener`,which resolves the `Submission` resource represented
 in the message, and hands off processing to the `SubmissionProcessor`. The `SubmissionProcessor` builds
@@ -14,10 +17,8 @@ being _in progress_.
 
 The `DepositTask` class contains the primary logic for packaging, streaming, and verifying the transfer of content from
 the PASS repository to downstream repositories. The `DepositTask` will determine if the transfer of custodial content 
-has succeeded, failed, or is indeterminable (i.e. an asyc deposit process that has not yet concluded). The status of the
-`Deposit` resource associated with the `Submission` will be updated accordingly.
-
-## TODO Maybe add a class sequence diagram describing above
+has succeeded, failed, or is indeterminable (i.e. an asynchronous deposit process that has not yet concluded). The 
+status of the `Deposit` resource associated with the `Submission` will be updated accordingly.
 
 ## Failure Handling
 
@@ -96,6 +97,11 @@ self-executing jar is deployed inside a simple Docker container.
 
 Deposit Services can be built by running:
 
-`mvn clean install`
-The main Deposit Services deployment artifact is found in deposit-core/target/pass-deposit-service-exec.jar. It is this
-jarfile that is included in the Docker image for Deposit Services, and posted on the GitHub Release page.
+```shell
+mvn clean install
+```
+
+The main Deposit Services deployment artifact is found in `deposit-core/target/pass-deposit-service-exec.jar`. It is this
+jar file that is included in the 
+[Docker image for Deposit Services](https://github.com/eclipse-pass/pass-support/pkgs/container/deposit-services-core), 
+and posted on the [GitHub Release page](https://github.com/eclipse-pass/pass-support/releases).
