@@ -23,35 +23,35 @@ largely enforced by _policies_ which are documented elsewhere), and are consider
 
 Submission status is enumerated in the `AggregatedDepositStatus` class. Deposit services considers the following values:
 
-* `NOT_STARTED` (_intermediate_): Incoming Submissions from the UI must have this status value
+* `NOT_STARTED` (_intermediate_): Incoming Submissions from the UI must have this status value.
 * `IN_PROGRESS` (_intermediate_): Deposit services places the Submission in an `IN_PROGRESS` state right away. When a
   thread observes a `Submission` in this state, it assumes that _another_ thread is processing this resource.
-* `FAILED` (_intermediate_): Occurs when a non-recoverable error happens when processing the `Submission`
+* `FAILED` (_intermediate_): Occurs when a non-recoverable error happens while processing the `Submission`.
 * `ACCEPTED` (_terminal_): Deposit services places the Submission into this state when all of its `Deposit`s have
-  been `ACCEPTED`
+  been `ACCEPTED`.
 * `REJECTED` (_terminal_): Deposit services places the Submission into this state when all of its `Deposit`s have
-  been `REJECTED`
+  been `REJECTED`.
 
 ## Deposit Status
 
 Deposit status is enumerated in the `DepositStatus` class. Deposit services considers the following values:
 
 * `SUBMITTED` (_intermediate_): the custodial content of the `Submission` has been successfully transferred to
-  the `Deposit`s `Repository`
-* `ACCEPTED` (_terminal_): the custodial content of the `Submission` has been accessioned by the `Deposit`
-  s `Repository` (i.e. custody of the `Submission` has successfully been transferred to the downstream `Repository`)
+  the `Deposit`s `Repository`.
+* `ACCEPTED` (_terminal_): the custodial content of the `Submission` has been accessioned by the `Deposit`.
+  s `Repository` (i.e. custody of the `Submission` has successfully been transferred to the downstream `Repository`.
 * `REJECTED` (_terminal_): the custodial content of the `Submission` has been rejected by the `Deposit`'s `Repository` (
-  i.e. the downstream `Repository` has refused to accept custody of the `Submission` content)
+  i.e. the downstream `Repository` has refused to accept custody of the `Submission` content).
 * `FAILED` (_intermediate_): the transfer of custodial content to the `Repository` failed, or there was some other error
-  updating the status of the `Deposit`
+  updating the status of the `Deposit`.
 
 ## RepositoryCopy Status
 
 RepositoryCopy status is enumerated in the `CopyStatus` class. Deposit services considers the following values:
 
-* `COMPLETE` (_terminal_): a copy of the custodial content is available in the `Repository` at this location
+* `COMPLETE` (_terminal_): a copy of the custodial content is available in the `Repository` at this location.
 * `IN_PROGRESS` (_intermediate_): a copy of the custodial content is _expected to be_ available in the `Repository` at
-  this location. The custodial content should not be expected to exist until the `Deposit` status is `ACCEPTED`
+  this location. The custodial content should not be expected to exist until the `Deposit` status is `ACCEPTED`.
 * `REJECTED` (_terminal_): the copy should be considered to be invalid. Even if the custodial content is made available
   at the location indicated by the `RepositoryCopy`, it should not be mistaken for a successful transfer of custody.
 
