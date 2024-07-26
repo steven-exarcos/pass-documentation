@@ -13,11 +13,11 @@ Services.
 
 PASS objects used by Deposit Services are:
 
-* **`Submission`**: read by Deposit Services, updates `Submission.AggregatedDepositStatus`.
-* **`Repository`**: only ever read by Deposit Services, never modified.
-* **`Deposit`**: are created and modified by Deposit Services.
-* **`RepositoryCopy`**: are created and modified by Deposit Services (note that the NIHMS loader also creates
-  `RepositoryCopy` resources).
+* **`Submission`**: Read by Deposit Services, updates `Submission.AggregatedDepositStatus`.
+* **`Repository`**: Only ever read by Deposit Services, never modified.
+* **`Deposit`**: Created and modified by Deposit Services.
+* **`RepositoryCopy`**: Created and modified by Deposit Services. Note that the NIHMS loader also creates
+  `RepositoryCopy` resources.
 
 <figure><img src="../../.gitbook/assets/pass-model.png" alt=""><figcaption><p>Deposit Services PASS Model</p>
 </figcaption></figure>
@@ -108,7 +108,7 @@ Services: different `Assembler` implementations can include metadata required fo
 ### Custodial and supplemental resources
 
 The term _custodial resource_ is used throughout: a custodial resource is content that was uploaded by the end user for
-deposit to a downstream repository: their data sets, manuscripts, etc. Non-custodial resources (i.e. _supplemental
+deposit to a downstream repository, such as their data sets, manuscripts, etc. Non-custodial resources (i.e. _supplemental
 resources_) include metadata describing the content, for example, BagIt tag files or DSpace METS XML files.
 
 #### Abstract Assembler and Archiving Package Stream
@@ -125,12 +125,12 @@ The `ArchivingPackageStream` contains shared logic for assembling multiple files
 #### MetadataBuilder and PackageStream.Metadata
 
 `PackageStream.Metadata` is an interface that provides package-level metadata. The `MetadataBuilder` is a fluent API for
-creating physical package-level metadata such as:
+creating physical package-level metadata, such as:
 
-* Packaging specification - a URI identifying the package specification used
-* Package size (bytes) and its checksum
-* The package name
-* Mime type, compression used, and archive format
+* Packaging specification - a URI identifying the package specification used.
+* Package size (bytes) and its checksum.
+* The package name.
+* Mime type, compression used, and archive format.
 
 The `PackageStream.metadata()` method returns the `PackageStream.Metadata` for a `PackageStream` instance. Because some
 metadata is unknown prior to streaming (e.g. the package size), the metadata returned by this method may be incomplete
@@ -165,7 +165,7 @@ assemble and stream all the BagIt metadata: bagit.txt and any other tag files.
 
 ## Transport
 
-Responsible for transferring the bytes of a package (i.e. a `PackageStream`) to an endpoint. The Transport API is
+Responsible for transferring the bytes of a package (i.e., a `PackageStream`) to an endpoint. The Transport API is
 designed to support any transport protocol. Each downstream repository in `repositories.json` must be configured with
 a `Transport` implementation.
 

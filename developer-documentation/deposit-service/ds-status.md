@@ -1,27 +1,25 @@
 # Deposit Services - Statuses
 
 Deposit services primarily acts on three types of resources: `Submission`, `Deposit`, and `RepositoryCopy`. Each of
-these resources carries a status. Managing and reacting to the values of resource status is a large part of what Deposit
-services does.
+these resources carries a status. Managing and reacting to the values of resource statuses is a major function of 
+Deposit Services.
 
-Abstractly, Deposit services considers the value of any status to be _intermediate_, or _terminal_.
+Abstractly, Deposit Services categorizes the value of any status as either _intermediate_, or _terminal_.
 
 > It isn't clear, yet, whether this abstract notion of _intermediate_ and _terminal_ need to be shared amongst
 > components of PASS. If so, then certain classes and interfaces in the Deposit Services code base should be extracted out
 > into a shared component.
 
-The semantics of _terminal_ state are that the resource has been through a workflow of some kind, and has reached the
-end of that workflow. Because the workflow has reached a terminus, no additional state is expected to be placed on the
-resource, and no existing state of the resource is expected to change.
+A _terminal_ status means the resource has completed its workflow and reached the end. No additional state changes are 
+expected, and the resource is considered final and read-only.
 
-The semantics of _intermediate_ state are that the resource is currently in a workflow of some kind, and has yet to
-reach the end of that workflow. Because the workflow has _not_ reached a terminus, the resource is expected to be
-modified at any time, until the _terminal_ state is achieved.
+An _intermediate_ status means the resource is still in progress within its workflow and has not yet reached completion. 
+The resource is expected to be modified until it achieves a _terminal_ status.
 
 A general pattern within Deposit services is that resources with _terminal_ status are explicitly accounted for (this is
 largely enforced by _policies_ which are documented elsewhere), and are considered "read-only".
 
-#### Submission Status
+## Submission Status
 
 Submission status is enumerated in the `AggregatedDepositStatus` class. Deposit services considers the following values:
 
@@ -34,7 +32,7 @@ Submission status is enumerated in the `AggregatedDepositStatus` class. Deposit 
 * `REJECTED` (_terminal_): Deposit services places the Submission into this state when all of its `Deposit`s have
   been `REJECTED`
 
-#### Deposit Status
+## Deposit Status
 
 Deposit status is enumerated in the `DepositStatus` class. Deposit services considers the following values:
 
@@ -47,7 +45,7 @@ Deposit status is enumerated in the `DepositStatus` class. Deposit services cons
 * `FAILED` (_intermediate_): the transfer of custodial content to the `Repository` failed, or there was some other error
   updating the status of the `Deposit`
 
-#### RepositoryCopy Status
+## RepositoryCopy Status
 
 RepositoryCopy status is enumerated in the `CopyStatus` class. Deposit services considers the following values:
 
@@ -61,7 +59,7 @@ RepositoryCopy status is subservient to the Deposit status. They will always be 
 cannot be `COMPLETE` if the Deposit is `REJECTED`. If a Deposit is `REJECTED`, then the RepositoryCopy must also
 be `REJECTED`.
 
-#### Common Permutations
+## Common Permutations
 
 There are some common permutations of these statuses that will be observed:
 
