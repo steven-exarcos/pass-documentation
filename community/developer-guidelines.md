@@ -10,6 +10,7 @@
 * Read through the PASS Community Guidelines.
 
 ## Change Request/Bug Report
+
 The process for initiating a change request or submitting a bug report is through submitting a GitHub issue.
 
 * When creating an issue to report a bug or suggest a new feature, use the [eclipse-pass/main repository](https://github.com/eclipse-pass/main/issues).
@@ -24,6 +25,7 @@ The process for initiating a change request or submitting a bug report is throug
 * For a general idea of how tests should be structured, see Martin Fowler’s [The Practical Testing Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html).
 
 ### Back-end
+
 * **Unit Tests**
     * If introducing new functionality, this should be tested, including at minimum two pathways: success and failure states.
         * A few examples of this are [here](https://github.com/eclipse-pass/pass-support/blob/79ad19ed4d2592c342e7cdfdf652a8f7aef3eaa2/pass-deposit-services/deposit-core/src/test/java/org/eclipse/pass/deposit/service/DepositProcessorIT.java#L54) and [here](https://github.com/eclipse-pass/pass-core/blob/e9e853ac7eea05f595fdcd5342ddea99c0798e38/pass-core-main/src/test/java/org/eclipse/pass/object/ElidePassClientTest.java#L84).
@@ -40,6 +42,7 @@ The process for initiating a change request or submitting a bug report is throug
     * Automated so they can be run frequently and consistently.
 
 ### UI
+
 * When testing the UI it is helpful to run [Ember locally for faster iteration](https://github.com/eclipse-pass/main/blob/main/docs/dev/running-pass-ui-on-your-host-machine.md).
 * Unit test when you can, when functions don't interact with rendering, but otherwise utilize component integration or ember application/acceptance tests where rendering is involved - this is what ember is best at.
 * Pass-ui is heavy on integration/application tests because it's rendering heavy and much of the business logic is in the back end.
