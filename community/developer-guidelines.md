@@ -2,7 +2,7 @@
 
 ## Getting Involved
 
-* Welcome to the PASS community! There are many ways to participate: trying out the PASS software, letting us know about bugs, suggesting documentation updates, or contributing code. After you’ve read this guide, if you have questions, please send us a message on our [Google Group](https://groups.google.com/g/pass-general) and we will be in touch shortly!
+* Welcome to the PASS community! There are many ways to participate: trying out the PASS software, letting us know about bugs, suggesting documentation updates, or contributing code. After you’ve read this guide, if you have questions, please send us a message on our [Google Group](https://groups.google.com/g/pass-general), and we will be in touch shortly!
 * We primarily use Slack to communicate about PASS development. To be invited to our Slack workspace please send us a message on our [Google Group](https://groups.google.com/g/pass-general).
 * Contributing to the project begins as a [contributor](https://www.eclipse.org/projects/handbook/#contributing-contributors) and may lead to being a [committer](https://www.eclipse.org/projects/handbook/#roles-cm). Whether you are a `contributor` or `committer` you will need to sign up for an [Eclipse account](https://accounts.eclipse.org/user/login).
     * A `contributor` can add to and improve PASS by creating issues and submitting pull requests. You’ll find more information about both of these tasks below.
@@ -62,7 +62,7 @@ The process for initiating a change request or submitting a bug report is throug
 
 * Read through the [PASS documentation style guide](https://docs.google.com/document/d/11aCooQCNhEq34yG9mGuFynY4xMDRJtPRuOOou9LaCgU/edit?usp=sharing).
 * The PASS team uses [GitBook](https://www.gitbook.com/) for managing and creating documentation. There are two ways to create new documentation with this system, through the GitBook web interface and through our GitHub `pass-documentation` repository.
-* The process for creating, editing, and managing documentation will vary depending which system you use:
+* The process for creating, editing, and managing documentation will vary depending on which system you use:
     * GitHub:
         * Use a personal branch that is checked out from `development` and is rebased back into development.
         * Ensure the branch is up-to-date with `development` before creating a pull request.
@@ -114,6 +114,6 @@ The process for initiating a change request or submitting a bug report is throug
 ## Protecting Sensitive Information
 
 * Take precaution to ensure that you’re not committing any credentials/keys/secrets.
-* If any sensitive information is accidentally committed, immediately notify the team on the `#pass-dev` slack channel.
+* If any sensitive information is accidentally committed, immediately notify the team on the `#pass-dev` Slack channel.
 * The core team will triage the severity of the leak and take the appropriate actions, such as removing it from the GitHub and GitBook commit history and rotating the compromised credentials.
 * Update GitHub secret scanning to catch any sensitive information that bypassed the original scan.
