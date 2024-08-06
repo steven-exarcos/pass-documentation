@@ -45,7 +45,7 @@ The process for initiating a change request or submitting a bug report is throug
 
 * When testing the UI it is helpful to run [Ember locally for faster iteration](https://github.com/eclipse-pass/main/blob/main/docs/dev/running-pass-ui-on-your-host-machine.md).
 * Unit test when you can, when functions don't interact with rendering, but otherwise utilize component integration or ember application/acceptance tests where rendering is involved - this is what ember is best at.
-* Pass-ui is heavy on integration/application tests because it's rendering heavy and much of the business logic is in the back end.
+* [Pass-ui](https://github.com/eclipse-pass/pass-ui) is heavy on integration/application tests because it's rendering heavy and much of the business logic is in the back end.
 * If you write an encapsulated piece of UI like a component, that component should have at least 1 integration test.
 * Application level testing is done with mocked data using Mirage. This needs to be updated diligently, so it doesn't fall out of sync with the real back end. If you are updating the API in a way that changes the contract with pass-ui, please at least create an issue for updating the UI mocking to accommodate these changes.
 * At least one test should be added for bug fixes to prevent regression.
