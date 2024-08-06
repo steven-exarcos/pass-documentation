@@ -20,7 +20,7 @@ The process for initiating a change request or submitting a bug report is throug
 
 ## Testing
 
-* It is suggested to run tests locally (`mvn verify` or `mvn clean install`) and run pass docker to test.
+* It is suggested to run tests locally (`mvn verify` or `mvn clean install`) and [run pass docker](../welcome-guide/setup-run-pass.md) to test.
 * For a general idea of how tests should be structured, see Martin Fowler’s [The Practical Testing Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html).
 
 ### Back-end
