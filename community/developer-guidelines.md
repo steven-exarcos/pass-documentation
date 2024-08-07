@@ -7,7 +7,6 @@
 * Contributing to the project begins as a [contributor](https://www.eclipse.org/projects/handbook/#contributing-contributors) and may lead to being a [committer](https://www.eclipse.org/projects/handbook/#roles-cm). Whether you are a `contributor` or `committer` you will need to sign up for an [Eclipse account](https://accounts.eclipse.org/user/login).
     * A `contributor` can add to and improve PASS by creating issues and submitting pull requests. You’ll find more information about both of these tasks below.
     * A `committer` is an individual who once was a `contributor`, but made significant contributions and was elected by the core team to become a `committer`. They can work directly in the repositories, create and close issues, and merge pull requests.
-* Read through the PASS Community Guidelines.
 
 ## Change Request/Bug Report
 
