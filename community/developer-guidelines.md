@@ -98,7 +98,18 @@ Would you like to suggest a change to PASS or report a bug? This is done by subm
 
 ## Pull Request Review Process
 
+* When reviewing the code, here are some advised areas to consider:
+  * Verify that the implemented logic aligns with the requirements and specifications.
+  * Look for any potential bugs or logical errors.
+  * Ensure code is adequately commented where necessary.
+  * Verify that sensitive configurations are externalized and not hard-coded.
+  * Ensure REST endpoints follow standard conventions (e.g., proper use of [HTTP methods](https://developer.mozilla.org/en-US/docs/Web/HTTP)).
 * Review any unit/integration tests and ensure they provide proper coverage.
+  * Ensure proper use of mocks and stubs to isolate components during testing.
+* Identify and suggest refactoring for any [code smells](https://linearb.io/blog/what-is-a-code-smell).
+  * Look for areas that could benefit from improved [design patterns or structures](https://www.baeldung.com/design-patterns-series).
+* Ensure that dependencies are properly managed and up-to-date.
+  * Check for any potential conflicts or unused dependencies.
 * Review commit messages.
 * Build the project and run tests locally using `mvn verify` or `mvn clean install`.
 
