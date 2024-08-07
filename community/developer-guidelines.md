@@ -10,7 +10,7 @@
 
 ## Change Request/Bug Report
 
-The process for initiating a change request or submitting a bug report is through submitting a GitHub issue.
+Would you like to suggest a change to PASS or report a bug? This is done by submitting a GitHub issue.
 
 * When creating an issue to report a bug or suggest a new feature, use the [eclipse-pass/main repository](https://github.com/eclipse-pass/main/issues).
 * If available for your particular issue use one of the available [issue templates in the main repository](https://github.com/eclipse-pass/main/issues/new/choose).
@@ -20,13 +20,13 @@ The process for initiating a change request or submitting a bug report is throug
 
 ## Testing
 
-* It is suggested to run tests locally (`mvn verify` or `mvn clean install`) and [run pass docker](../welcome-guide/setup-run-pass.md) to test.
-* For a general idea of how tests should be structured, see Martin Fowler’s [The Practical Testing Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html).
+* If you're planning to submit a code through a Pull Request (PR), please run tests locally first. For Java code, this can be done using `mvn verify` or `mvn clean install`. To test the complete project, [run pass docker](../welcome-guide/setup-run-pass.md) to test.
+* If you're planning to submit code which includes new tests, Martin Fowler’s [The Practical Testing Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html) is a great resource for understanding how to structure tests.
 
 ### Back-end
 
 * **Unit Tests**
-    * If introducing new functionality, this should be tested, including at minimum two pathways: success and failure states.
+    * If introducing new functionality, please ensure new code is covered by at least one unit test which includes both success and failure states.
         * A few examples of this are [here](https://github.com/eclipse-pass/pass-support/blob/79ad19ed4d2592c342e7cdfdf652a8f7aef3eaa2/pass-deposit-services/deposit-core/src/test/java/org/eclipse/pass/deposit/service/DepositProcessorIT.java#L54) and [here](https://github.com/eclipse-pass/pass-core/blob/e9e853ac7eea05f595fdcd5342ddea99c0798e38/pass-core-main/src/test/java/org/eclipse/pass/object/ElidePassClientTest.java#L84).
     * If performing a bug fix, include a test to ensure that the bug was fixed.
     * In general, unit tests should run quickly.
@@ -43,7 +43,7 @@ The process for initiating a change request or submitting a bug report is throug
 ### UI
 
 * When testing the UI it is helpful to run [Ember locally for faster iteration](https://github.com/eclipse-pass/main/blob/main/docs/dev/running-pass-ui-on-your-host-machine.md).
-* Unit test when you can, when functions don't interact with rendering, but otherwise utilize component integration or ember application/acceptance tests where rendering is involved - this is what ember is best at.
+* Include unit test when you can, such as when functions don't interact with rendering. Otherwise, utilize component integration or ember application/acceptance tests where rendering is involved - this is what ember is best at.
 * [Pass-ui](https://github.com/eclipse-pass/pass-ui) is heavy on integration/application tests because it's rendering heavy and much of the business logic is in the back end.
 * If you write an encapsulated piece of UI like a component, that component should have at least 1 integration test.
 * Application level testing is done with mocked data using Mirage. This needs to be updated diligently, so it doesn't fall out of sync with the real back end. If you are updating the API in a way that changes the contract with pass-ui, please at least create an issue for updating the UI mocking to accommodate these changes.
@@ -59,7 +59,7 @@ The process for initiating a change request or submitting a bug report is throug
 
 ## Documentation
 
-* Read through the [PASS documentation style guide](https://docs.google.com/document/d/11aCooQCNhEq34yG9mGuFynY4xMDRJtPRuOOou9LaCgU/edit?usp=sharing).
+* We encourage you to read through the [PASS documentation style guide](https://docs.google.com/document/d/11aCooQCNhEq34yG9mGuFynY4xMDRJtPRuOOou9LaCgU/edit?usp=sharing) prior to submitting a pull request.
 * The PASS team uses [GitBook](https://www.gitbook.com/) for managing and creating documentation. There are two ways to create new documentation with this system, through the GitBook web interface and through our GitHub `pass-documentation` repository.
 * The process for creating, editing, and managing documentation will vary depending on which system you use:
     * GitHub:
@@ -87,13 +87,13 @@ The process for initiating a change request or submitting a bug report is throug
     * Example: `978-fix-nihms-loader-etl`
 * The description in your pull request should include the following:
     * Summary of major changes and what the pull request will accomplish.
-    * Include instructions of how to test the changes.
+    * Instructions identifying how to test the changes.
 * Ensure that every PR is linked to a relevant ticket.
 * Update or add new documentation to the `pass-documentation` repository.
     * This would be a separate pull request, see the Documentation section for this process.
 * A pull request should not be merged unless all automated checks pass.
 * Merges should happen using the rebase strategy.
-    * If there have been changes to main, you may want to rebase your branch on main for additional safety.
+    * If there have been changes to the `main` code branch, you may want to rebase your branch on `main` for additional safety.
 * After a successful merge, delete the branch.
 
 ## Pull Request Review Process
