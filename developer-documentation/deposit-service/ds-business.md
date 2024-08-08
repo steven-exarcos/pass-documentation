@@ -60,20 +60,20 @@ is set in an application property named `pass.status.update.window.days`.
 
 ## Spring Error Handler
 
-Certain Spring sub-systems like Spring MVC, or Spring Messaging, support the notion of a "global" [`ErrorHandler`][2].
+Certain Spring sub-systems like Spring MVC, or Spring Messaging, support the notion of a "global" `ErrorHandler`.
 Deposit Services provides an implementation **`DepositServicesErrorHandler`**, and it is used to catch exceptions thrown
-by the `DepositListener`, `SubmissionListener`, and is adapted as a [`Thread.UncaughtExceptionHandler`][3] and
-as a [`RejectedExecutionHandler`][4].
+by the `DepositListener`, `SubmissionListener`, and is adapted as a `Thread.UncaughtExceptionHandler` and
+as a `RejectedExecutionHandler`.
 
-Deposit Services provides a `DepositServicesRuntimeException` (`DSRE` for short), which has a
-field `PassEntity resource`. If the `DepositServicesErrorHandler` catches a `DSRE` with a non-`null` resource, the error
-handler will test the type of the resource, mark it as failed, and save it in the repository.
+Deposit Services provides a `DepositServicesRuntimeException` (`DSRE`), which has a field `PassEntity resource`. 
+If the `DepositServicesErrorHandler` catches a `DSRE` with a non-`null` resource, the error handler will test the type 
+of the resource, mark it as failed, and save it in the repository.
 
-The take-home point is: `Deposit` and `Submission` resources will be marked as failed if
-a `DepositServicesRuntimeException` is thrown from one of the JMS processors, or from the `DepositTask`. As a developer,
-if an exceptional condition does **not** warrant a failure, then do not throw `DepositServicesRuntimeException`.
-Instead, consider logging a warning or throwing a `DSRE` with a `null` resource. Likewise, to fail a resource, all you
-need to do is throw a `DSRE` with a non-`null` resource. The `DepositServicesErrorHandler` will do the rest.
+In essence: `Deposit` and `Submission` resources will be marked as failed if a `DepositServicesRuntimeException` is 
+thrown from one of the JMS processors, or from the `DepositTask`. As a developer, if an exceptional condition does 
+**not** warrant a failure, then do not throw `DepositServicesRuntimeException`. Instead, consider logging a warning or 
+throwing a `DSRE` with a `null` resource. Likewise, to fail a resource, all you need to do is throw a `DSRE` with a 
+non-`null` resource. The `DepositServicesErrorHandler` will do the rest.
 
 Finally, one last word. Because the state of a resource can be modified at any time by any actor in the PASS
 infrastructure, the `DepositServicesErrorHandler` encapsulates the act of saving the failed state of a resource within
