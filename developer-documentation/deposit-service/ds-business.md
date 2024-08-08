@@ -91,7 +91,7 @@ If you are unfamiliar with sed annotations and conventions, the following resour
 about them:
 
 * [Baeldung](https://www.baeldung.com/spring-application-context)
-* [SprinBoot Docs](https://docs.spring.io/spring-boot/documentation.html)
+* [SpringBoot Docs](https://docs.spring.io/spring-boot/documentation.html)
 
 The entrypoint into the Deposit Services is the `DepositApp`. Spring beans are created entirely in Java code by the 
 `DepositConfig` and `JmsConfig` classes.
