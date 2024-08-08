@@ -35,10 +35,10 @@ is set in an application property named `pass.status.update.window.days`.
 
 `Submission` resources are failed when:
 
-1. Failure to build the Deposit Services model for a Submission
-2. There are no files attached to the Submission
+1. Failure to build the Deposit Services model for a Submission.
+2. There are no files attached to the Submission.
 3. Any file attached to the Submission is missing a location URI (the URI used to retrieve the bytes of the file).
-4. An error occurs saving the state of the `Submission` in the repository (arguably a transient error)
+4. An error occurs saving the state of the `Submission` in the repository (arguably a transient error).
 
 See `SubmissionProcessor` for details. Right now, when a `Submission` is failed, manual intervention may be required.
 Deposit Services does retry the failed `Deposit` resources of the `Submission`. However, some of the failure scenarios
@@ -47,10 +47,10 @@ the user interface, and resubmit it.
 
 `Deposit` resources are failed when:
 
-1. An error occurs building a package
-2. An error occurs streaming a package to a `Repository` (arguably transient)
-3. An error occurs polling (arguably transient) or parsing the status of a `Deposit`
-4. An error occurs saving the state of a `Deposit` in the repository (again, arguably transient)
+1. An error occurs building a package.
+2. An error occurs streaming a package to a `Repository` (arguably transient).
+3. An error occurs polling (arguably transient) or parsing the status of a `Deposit`.
+4. An error occurs saving the state of a `Deposit` in the repository (again, arguably transient).
 
 See `DepositTask` for details. Deposits fail for transient reasons; a server being down, an interruption in network
 communication, or invalid credentials for the downstream repository are just a few examples. As stated, DS will retry
@@ -60,11 +60,11 @@ is set in an application property named `pass.status.update.window.days`.
 ## Spring Error Handler
 
 Certain Spring sub-systems like Spring MVC, or Spring Messaging, support the notion of a "global" [`ErrorHandler`][2].
-Deposit services provides an implementation **`DepositServicesErrorHandler`**, and it is used to catch exceptions thrown
+Deposit Services provides an implementation **`DepositServicesErrorHandler`**, and it is used to catch exceptions thrown
 by the `DepositListener`, `SubmissionListener`, and is adapted as a [`Thread.UncaughtExceptionHandler`][3] and
 as a [`RejectedExecutionHandler`][4].
 
-Deposit services provides a `DepositServicesRuntimeException` (`DSRE` for short), which has a
+Deposit Services provides a `DepositServicesRuntimeException` (`DSRE` for short), which has a
 field `PassEntity resource`. If the `DepositServicesErrorHandler` catches a `DSRE` with a non-`null` resource, the error
 handler will test the type of the resource, mark it as failed, and save it in the repository.
 
@@ -88,7 +88,7 @@ Deposit Services is implemented using Spring Boot, which heavily relies on Sprin
 create and populate a Spring `ApplicationContext`, arguably the most important object managed by the Spring runtime.
 Unfortunately, if you aren't familiar with Spring or its conventions, it can make the code harder to understand.
 
-The entrypoint into the deposit services is the `DepositApp`. Spring beans are created entirely in Java code by the 
+The entrypoint into the Deposit Services is the `DepositApp`. Spring beans are created entirely in Java code by the 
 `DepositConfig` and `JmsConfig` classes.
 
 ## Build and Deployment
