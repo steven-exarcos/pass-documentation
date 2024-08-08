@@ -75,19 +75,23 @@ thrown from one of the JMS processors, or from the `DepositTask`. As a developer
 throwing a `DSRE` with a `null` resource. Likewise, to fail a resource, all you need to do is throw a `DSRE` with a 
 non-`null` resource. The `DepositServicesErrorHandler` will do the rest.
 
-Finally, one last word. Because the state of a resource can be modified at any time by any actor in the PASS
-infrastructure, the `DepositServicesErrorHandler` encapsulates the act of saving the failed state of a resource within
-a `CRI`. A _pre-condition_ for updating the resource is that it must _not_ be in a _terminal_ state. For example, if the
-error handler is updating the state from `SUBMITTED` to `FAILED`, but another actor has modified the state of the
-resource to `REJECTED` in the interim, the _pre-condition_ will fail. It makes no sense to modify the state of a
-resource after it is in its _terminal_ state. The take-home point is: the `DepositServicesErrorHandler` will not mark a
-resource as failed if it is in a _terminal_ state.
+Since the state of a resource can be modified at any time by any actor in the PASS infrastructure, the 
+`DepositServicesErrorHandler` encapsulates the act of saving the failed state of a resource within a `CRI`. A 
+_pre-condition_ for updating the resource is that it must _not_ be in a _terminal_ state. For example, if the error 
+handler is updating the state from `SUBMITTED` to `FAILED`, but another actor has modified the state of the resource to 
+`REJECTED` in the interim, the _pre-condition_ will fail. It makes no sense to modify the state of a resource after it 
+is in its _terminal_ state. The take-home point is: the `DepositServicesErrorHandler` will not mark a resource as failed 
+if it is in a _terminal_ state.
 
 ## Spring Boot Context
 
 Deposit Services is implemented using Spring Boot, which heavily relies on Spring-based annotations and conventions to
 create and populate a Spring `ApplicationContext`, arguably the most important object managed by the Spring runtime.
-Unfortunately, if you aren't familiar with Spring or its conventions, it can make the code harder to understand.
+If you are unfamiliar with sed annotations and conventions, the following resources would be beneficial to learning more
+about them:
+
+* [Baeldung](https://www.baeldung.com/spring-application-context)
+* [SprinBoot Docs](https://docs.spring.io/spring-boot/documentation.html)
 
 The entrypoint into the Deposit Services is the `DepositApp`. Spring beans are created entirely in Java code by the 
 `DepositConfig` and `JmsConfig` classes.
