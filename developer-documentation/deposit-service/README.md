@@ -1,4 +1,5 @@
 # Deposit Services
+
 Deposit Services (DS) facilitate the transfer of custodial content and metadata from end users to repositories, 
 ensuring proper packaging, validation, and adherence to public specifications. The code for DS can be found in 
 the [Pass Support](https://github.com/eclipse-pass/pass-support/tree/main/pass-deposit-services) repository.

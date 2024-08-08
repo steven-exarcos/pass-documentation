@@ -1,4 +1,5 @@
 # Deposit Services - Business
+
 The Deposit Services system processes messages concurrently from both deposit and submission queues, utilizing dedicated 
 listeners for each queue. This section outlines the workflow, detailing how messages are handled, processed, and how the
 corresponding resources are managed and updated throughout the deposit lifecycle.
@@ -92,6 +93,7 @@ The entrypoint into the Deposit Services is the `DepositApp`. Spring beans are c
 `DepositConfig` and `JmsConfig` classes.
 
 ## Build and Deployment
+
 Deposit Services' primary artifact is a single self-executing jar. In the PASS infrastructure, the Deposit Services
 self-executing jar is deployed inside a simple Docker container.
 
