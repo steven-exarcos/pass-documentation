@@ -80,7 +80,7 @@ Since the state of a resource can be modified at any time by any actor in the PA
 _pre-condition_ for updating the resource is that it must _not_ be in a _terminal_ state. For example, if the error 
 handler is updating the state from `SUBMITTED` to `FAILED`, but another actor has modified the state of the resource to 
 `REJECTED` in the interim, the _pre-condition_ will fail. It makes no sense to modify the state of a resource after it 
-is in its _terminal_ state. The take-home point is: the `DepositServicesErrorHandler` will not mark a resource as failed 
+is in its _terminal_ state. In conclusion, the `DepositServicesErrorHandler` will not mark a resource as failed 
 if it is in a _terminal_ state.
 
 ## Spring Boot Context
