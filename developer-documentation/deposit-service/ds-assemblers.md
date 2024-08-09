@@ -91,7 +91,7 @@ Examples:
 * `NihmsPackageProvider`
 * `BagItPackageProvider`
 
-### Recap
+## Assembler Development Recap
 
 Implementations of `AbstractAssembler` return an `ArchivingPackageStream` which uses a `PackageProvider` to path
 resources and generate supplemental metadata contained in the package.
