@@ -8,21 +8,37 @@ parameters such as message queues, the base url of Pass-Core, etc.
 
 ## Production Configuration Variables
 
-| Environment Variable                    | Default Value                | Description                                                                                                                                                                                                                      |
-|-----------------------------------------|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DSPACE_HOST`                           | localhost                    | the IP address or host name of the server running the SWORD protocol version 2 endpoint                                                                                                                                          
-| `DSPACE_PORT`                           | 8181                         | the TCP port exposing the SWORD protocol version 2 endpoint                                                                                                                                                                      
-| `DSPACE_SERVER`                         | dspace                       | the domain name of the DSpace server                                                                                                                                                                      
-| `PMC_FTP_HOST`                          | localhost                    | the IP address or  host name of the NIH FTP server                                                                                                                                                                               
-| `PMC_FTP_PORT`                          | 21                           | the TCP control port of the NIH FTP server                                                                                                                                                                                       
-| `PMC_FTP_USER`                          | nihmsftpuser                 | the PMC S/FTP user                                                                                                                                                                                       
-| `PMC_FTP_PASSWORD`                      | nihmsftppass                 | the PMC S/FTP password                                                                                                                                                                                     
-| `PASS_DEPOSIT_QUEUE_SUBMISSION_NAME`    | submission                   | the name of the JMS queue that has messages pertaining to `Submission` resources                                                                                                        
-| `PASS_DEPOSIT_QUEUE_DEPOSIT_NAME`       | deposit                      | the name of the JMS queue that has messages pertaining to `Deposit` resources                                                                                                            
-| `PASS_DEPOSIT_REPOSITORY_CONFIGURATION` | classpath:/repositories.json | points to a json file containing the configuration for the transport of custodial content to remote repositories. Values must be [Spring Resource URIs][1]. See below for customizing the repository configuration values. 
-| `PASS_CLIENT_URL`                       | localhost:8080               | the URL used to communicate with the PASS Core API. Normally this variable does not need to be changed (see note below)                                                                                                          
-| `PASS_CLIENT_PASSWORD`                  | fakepassword                 | the password used for `Basic` HTTP authentication to the PASS Core API                                                                                                                                                           
-| `PASS_CLIENT_USER`                      | fakeuser                     | the username used for `Basic` HTTP authentication to the PASS Core API                                                                                                                                                           
+| Environment Variable                    | Default Value                | Description                                                                                                                                                 |
+|-----------------------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DSPACE_HOST`                           | localhost                    | IP address or host name of the server running the SWORD protocol version 2 endpoint                                                                         |
+| `DSPACE_PORT`                           | 8181                         | TCP port exposing the SWORD protocol version 2 endpoint                                                                                                     |
+| `DSPACE_SERVER`                         | dspace                       | Domain name of the DSpace server                                                                                                                            |
+| `DSPACE_USER`                           | test@test.edu                | DSpace user                                                                                                                                                 |
+| `DSPACE_PASSWORD`                       | admin                        | DSpace password                                                                                                                                             |
+| `DSPACE_API_PROTOCOL`                   | https                        | Dspace API protocol                                                                                                                                         |
+| `DSPACE_API_PATH`                       | /server/api                  | Dspace API path                                                                                                                                             |
+| `INVENIORDM_API_BASE_URL`               |                              | Base URL for InvenioRDM API                                                                                                                                 |
+| `INVENIORDM_VERIFY_SSL_CERT`            | true                         | Required since the localhost InvenioRDM runs with self-signed certificate                                                                                   |
+| `INVENIORDM_API_TOKEN`                  |                              | InvenioRDM API token                                                                                                                                        |
+| `PMC_FTP_HOST`                          | localhost                    | IP address or host name of the NIH FTP server                                                                                                               |
+| `PMC_FTP_PORT`                          | 21                           | TCP control port of the NIH FTP server                                                                                                                      |
+| `PMC_FTP_USER`                          | nihmsftpuser                 | PMC S/FTP user                                                                                                                                              |
+| `PMC_FTP_PASSWORD`                      | nihmsftppass                 | PMC S/FTP password                                                                                                                                          |
+| `PASS_DEPOSIT_QUEUE_SUBMISSION_NAME`    | submission                   | Name of the JMS queue that has messages pertaining to `Submission` resources                                                                                |
+| `PASS_DEPOSIT_QUEUE_DEPOSIT_NAME`       | deposit                      | Name of the JMS queue that has messages pertaining to `Deposit` resources                                                                                   |
+| `PASS_DEPOSIT_REPOSITORY_CONFIGURATION` | classpath:/repositories.json | Points to a json file containing the configuration for the transport of custodial content to remote repositories. Values must be [Spring Resource URIs][1]. |
+| `PASS_CLIENT_URL`                       | localhost:8080               | URL used to communicate with the PASS Core API. Normally this variable does not need to be changed.                                                         |
+| `PASS_CLIENT_PASSWORD`                  | fakepassword                 | Password used for `Basic` HTTP authentication to the PASS Core API                                                                                          |
+| `PASS_CLIENT_USER`                      | fakeuser                     | Username used for `Basic` HTTP authentication to the PASS Core API                                                                                          |
+| `NIHMS_MAIL_HOST`                       |                              | Host URL of the email service that will receive NIHMS emails regarding deposit statuses.                                                                    |
+| `NIHMS_MAIL_PORT`                       |                              | Port of the email service that that will receive NIHMS emails regarding deposit statuses.                                                                   |
+| `NIHMS_MAIL_USERNAME`                   |                              | Email address that will receive the NIHMS emails regarding deposit statuses.                                                                                |
+| `NIHMS_MAIL_PASSWORD`                   |                              | Password of the email address that will receive the NIHMS emails regarding deposit statuses.                                                                |
+| `NIHMS_MAIL_TENANT_ID`                  |                              | The tenant ID if the `NIHMS_MAIL_HOST` is a cloud provided email services (e.g. Office 365).                                                                |
+| `NIHMS_MAIL_CLIENT_ID`                  |                              | The client ID if the `NIHMS_MAIL_HOST` is a cloud provided email services (e.g. Office 365).                                                                |
+| `NIHMS_MAIL_CLIENT_SECRET`              |                              | The client secret if the `NIHMS_MAIL_HOST` is a cloud provided email services (e.g. Office 365).                                                            |
+| `NIHMS_MAIL_AUTH`                       |                              | The type of authentication. Valid values are: `MS_EXCHANGE_OAUTH2` and `LOGIN`.                                                                             |
+| `PASS_DEPOSIT_NIHMS_EMAIL_FROM`         | nihms-help@ncbi.nlm.nih.gov  | The official email address that sends the error messages.                                                                                                   |
 
 ## Repositories Configuration
 
@@ -30,10 +46,10 @@ The Repository configuration contains the parameters used for connecting and dep
 repositories. The format of the configuration file is JSON, defining multiple downstream repositories in a single file.
 
 Each repository configuration has a top-level key that is used to identify a particular configuration. Importantly, each
-top-level key _must_ map to a [`Repository` resource][5] within the PASS repository. This implies that the top-level
+top-level key _must_ map to a `Repository` resource within the PASS repository. This implies that the top-level
 keys in `repositories.json` are not arbitrary. In fact, the top level key must be:
 
-* the value of a `Repository.repositoryKey` field (of a `Repository` resource in the PASS repository)
+* the value of a `Repository.repositoryKey` field, which is a `Repository` resource in the PASS repository.
 
 Deposit Services comes with a default repository configuration, but a production environment will want to override the
 default. Defaults are overridden by creating a copy of the default configuration, editing it to suit, and
@@ -41,7 +57,7 @@ setting `PASS_DEPOSIT_REPOSITORY_CONFIGURATION` to point to the new location.
 
 Deposit Services is configured at runtime by a configuration file referenced by the system
 property `pass.deposit.repository.configuration` or the environment variable `PASS_DEPOSIT_REPOSITORY_CONFIGURATION`. By
-default (i.e. if the system property or environment variable are not present) the classpath
+default, if the system property or environment variable are not present, the classpath
 resource `/repositories.json` is used.
 
 > Acceptable values for `PASS_DEPOSIT_REPOSITORY_CONFIGURATION` must be a form of [Spring Resource URI][1].
@@ -114,8 +130,7 @@ A possible repository configuration is replicated below:
   }
 }
 ```
-
-#### Customizing Repository Configuration Elements
+### Customizing Repository Configuration Elements
 
 The repository configuration above will not be suitable for production. A production deployment needs to provide
 updated authentication credentials and ensure the correct value for the default SWORD collection URL
@@ -133,3 +148,18 @@ file in `/etc/deposit-services.json`, then you would set the environment
 variable `PASS_DEPOSIT_REPOSITORY_CONFIGURATION=file:/etc/deposit-services.json` prior to starting Deposit Services.
 Likewise, if you kept the configuration accessible at a URL, you could
 use `PASS_DEPOSIT_REPOSITORY_CONFIGURATION=http://example.org/deposit-services.json`.
+
+
+## Configuring the NIHMS Email Service
+
+The NIHMS email service is responsible for parsing emails from NIHMS that contain different error codes on deposits. 
+Currently, NIHMS only communicates its deposit status via email. Setting up an email account that will receive emails
+from NIHMS is a prerequisite. The email account that is set up should be represented by the value of 
+`NIHMS_MAIL_USERNAME`. 
+
+There are two authentication protocols supported by this service. A regular smtp login credentials and Microsoft 
+Exchange oAuth2. By providing a value of `LOGIN` or `MS_EXCHANGE_OAUTH2` for the environmental value, it will determine
+which type of authentication to use. If using the `MS_EXCHANGE_OAUTH2` authentication type, then `NIHMS_MAIL_TENANT_ID`,
+`NIHMS_MAIL_CLIENT_ID`, and `NIHMS_MAIL_CLIENT_SECRET` are required as well.
+
+[1]: https://docs.spring.io/spring-framework/reference/core/resources.html#resources-implementations
