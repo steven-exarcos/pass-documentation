@@ -107,7 +107,7 @@ Deposit Services can be built by running:
 mvn clean install
 ```
 
-The main Deposit Services deployment artifact is found in `deposit-core/target/pass-deposit-service-exec.jar`. It is this
-jar file that is included in the 
+The main Deposit Services deployment artifact is found in `deposit-core/target/pass-deposit-service-exec.jar`. It is 
+this jar file that is included in the 
 [Docker image for Deposit Services](https://github.com/eclipse-pass/pass-support/pkgs/container/deposit-services-core), 
 and posted on the [GitHub Release page](https://github.com/eclipse-pass/pass-support/releases).

@@ -1,8 +1,8 @@
 # Deposit Services - Assemblers
 Developing a package provider primarily deals with extending or re-using `Assembler`-related abstract classes and
 implementations, but it helps to understand the context in which `Assembler`s operate. Assemblers are responsible for 
-gathering custodial and supplemental resources associated with a submission and returning a stream of those resources 
-(`PackageStream`), according to a packaging specification. Deposit Services will then stream the package to a downstream 
+gathering custodial and supplemental resources associated with a submission and returning a stream of those resources, 
+`PackageStream`, according to a packaging specification. Deposit Services will then stream the package to a downstream 
 repository via a `Transport`.
 
 ## Use Case
@@ -10,7 +10,7 @@ repository via a `Transport`.
 An `Assembler` implementation is required for every packaging specification you wish to support. For example, if you 
 want to produce [BagIt packages](https://tools.ietf.org/html/rfc8493) and 
 [DSpace METS packages](https://wiki.duraspace.org/display/DSPACE/DSpaceMETSSIPProfile), you would need two `Assembler` 
-implementations, each one responsible for producing packages that comport with their respective specifications.
+implementations, each one responsible for producing packages that align with their respective specifications.
 
 Another reason to develop an `Assembler` is to control how the metadata of a submission is mapped into your package. For
 example, if your DSpace installation requires custom metadata elements, you would need to develop or extend an
@@ -61,7 +61,7 @@ the `PackageStream` behaves like a Java `InputStream`: the bytes for the stream 
 file on disk, or retrieved from another network resource), and can generally only be read once.
 
 Practically, the `PackageStream` represents an archive file: either a ZIP, TAR, or some variant like TAR.GZ. This is
-encapsulated by the `ArchivingPackageStream`class. Re-using the `ArchivingPackageStream` class has the advantage
+encapsulated by the `ArchivingPackageStream` class. Re-using the `ArchivingPackageStream` class has the advantage
 that your package resources will be bundled up in a single archive file according to the options supplied to
 the `Assembler` (e.g. compression and archive type to use).
 
@@ -70,7 +70,7 @@ To instantiate an `ArchivingPackageStream` class requires an instance of `Packag
 ### PackageProvider API
 
 The `PackageProvider` interface was developed as an ad hoc lifecycle for streaming a package: there's a `start(...)`
-and `finish(...)` method, along with a `packagePath(...)` method.   `PackageProvider` also defines a new interface:
+and `finish(...)` method, along with a `packagePath(...)` method. `PackageProvider` also defines a new interface:
 `SupplementalResource`. This interface is returned by the `finish(...)` method, allowing the `PackageProvider`
 implementation to generate supplemental (i.e. BagIt tag files or METS.xml files) content after the rest of the package
 has been streamed.
@@ -81,7 +81,7 @@ customize the metadata that appears in the package.
 Because packaging specifications generally have something to say about what resources are included where in the package,
 a Package Provider is loosely coupled to a package specification. For example, a Package Provider that placed custodial
 resources in the `<package root>/foo` directory would be incompatible with a BagIt packaging specification, which
-requires custodial resources to appear under `<package root>/data`. Similarly, if your Package Provider is to comport
+requires custodial resources to appear under `<package root>/data`. Similarly, if your Package Provider is to align
 with a DSpace METS packaging scheme, it will need to produce a `<package root>/METS.xml` file with the required content.
 Therefore, any `PackageProvider` implementation can be used with any `Assembler` implementation as long as the package
 specification shared between the two is not violated.

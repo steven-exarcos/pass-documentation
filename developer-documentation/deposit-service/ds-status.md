@@ -55,9 +55,9 @@ RepositoryCopy status is enumerated in the `CopyStatus` class. Deposit services 
 * `REJECTED` (_terminal_): the copy should be considered to be invalid. Even if the custodial content is made available
   at the location indicated by the `RepositoryCopy`, it should not be mistaken for a successful transfer of custody.
 
-RepositoryCopy status is subservient to the Deposit status. They will always be congruent. For example, a RepositoryCopy
-cannot be `COMPLETE` if the Deposit is `REJECTED`. If a Deposit is `REJECTED`, then the RepositoryCopy must also
-be `REJECTED`.
+RepositoryCopy status is subservient to the `Deposit` status. They will always be consistent. For example, 
+a `RepositoryCopy` cannot be `COMPLETE` if the Deposit is `REJECTED`. If a `Deposit` is `REJECTED`, then the 
+`RepositoryCopy` must also be `REJECTED`.
 
 ## Common Permutations
 
@@ -70,6 +70,6 @@ There are some common permutations of these statuses that will be observed:
 * `IN_PROGRESS` `Submission`s may have zero or more `Deposit`s in any state.
 * `FAILED` `Submission`s should have zero `Deposit`s.
 * `ACCEPTED` `Deposit`s should have a `COMPLETE` `RepositoryCopy`.
-* `REJECTED` `Deposit`s will have a `REJECTED` `RepositoryCopy`
-* `SUBMITTED` `Deposit`s will have an `IN_PROGRESS` `RepositoryCopy`
-* `FAILED` `Deposit`s will have no `RepositoryCopy`
+* `REJECTED` `Deposit`s will have a `REJECTED` `RepositoryCopy`.
+* `SUBMITTED` `Deposit`s will have an `IN_PROGRESS` `RepositoryCopy`.
+* `FAILED` `Deposit`s will have no `RepositoryCopy`.

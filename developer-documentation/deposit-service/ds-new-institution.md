@@ -165,7 +165,12 @@ along with simple package formats used for integration tests.
   implementation.
 - `MetadataBuilder` and `Metadata`: Metadata and MetadataBuilder are similar to Resource and ResourceBuilder, except 
 that they provide for the package metadata, as opposed to individual files within the package.
-- `StreamWriter` and `DefaultStreamWriter`: TODO need content
+- `StreamWriter` and `DefaultStreamWriterImpl`: Uses the factory pattern to instantiate a new `ResourceBuilder` for each 
+resource being streamed. The `DefaultStreamWriterImpl` is responsible for handling the process of writing and packaging 
+the files associated with a `DepositSubmission`, and is one implementation of the `StreamWriter`. If you need to support
+a new packaging format that `DefaultStreamWriterImpl` doesn't handle (e.g., a different type of archive format or a 
+custom packaging scheme), creating a new class that implements `StreamWriter` would be a preferred method to add 
+different behavior to streaming resources.
 
 #### Metadata Mapping
 
