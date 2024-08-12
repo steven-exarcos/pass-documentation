@@ -111,7 +111,7 @@ Would you like to suggest a change to PASS or report a bug? This is done by subm
 * Ensure that dependencies are properly managed and up-to-date.
   * Check for any potential conflicts or unused dependencies.
 * Review commit messages.
-* Build the project and run tests locally using `mvn verify` or `mvn clean install`.
+* Build the project and run tests locally.
 
 ## Closing Issues
 
