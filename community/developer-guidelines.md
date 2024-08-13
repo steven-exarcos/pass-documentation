@@ -20,16 +20,16 @@ Would you like to suggest a change to PASS or report a bug? This is done by subm
 
 ## Testing
 
-PASS has three different types of tests that are run against the application, and defined by the team as:
-
-* **Unit Tests**: Unit tests focus on a single unit of code. They test very specific conditions, inputs, and expected outputs, validating that the unit behaves as intended. They are narrow in scope, and all other collaborators (e.g. other classes that are called by your class under test) are substituted with mocks or stubs. Unit tests do not guarantee the application will work as intended.
-* **Integration Tests**: They test the integration of your application with other parts that are not part of your application e.g. databases, external REST APIs. They are not as narrow as Unit Tests, but still test one integration point at a time. These tests live within the boundary of the application.
-* **Acceptance Tests**: They are a final validation step, ensuring PASS fits the workflow requirements for users. The [PASS Acceptance Tests](https://github.com/eclipse-pass/pass-acceptance-testing) runs through workflows using [Test Cafe](https://testcafe.io/) against an instance of PASS. All these tests must pass in order for PASS to be considered production ready.
-
 In general, we recommend the following procedures for testing: 
 
 * If you're planning to submit a code through a Pull Request (PR), please run tests locally first. For Java code, this can be done using `mvn verify` or `mvn clean install`. To test the complete project, [run pass docker](../welcome-guide/setup-run-pass.md) to test.
 * If you're planning to submit code which includes new tests, Martin Fowler’s [The Practical Testing Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html) is a great resource for understanding how to structure tests.
+
+PASS has three different types of tests that are run against the application, and defined as:
+
+* **Unit Tests**: Unit tests focus on a single unit of code. They test very specific conditions, inputs, and expected outputs, validating that the unit behaves as intended. They are narrow in scope, and all other collaborators (e.g. other classes that are called by your class under test) are substituted with mocks or stubs. Unit tests do not guarantee the application will work as intended.
+* **Integration Tests**: They test the integration of your application with other parts that are not part of your application e.g. databases, external REST APIs. They are not as narrow as Unit Tests, but still test one integration point at a time. These tests live within the boundary of the application.
+* **Acceptance Tests**: They are a final validation step, ensuring PASS fits the workflow requirements for users. The [PASS Acceptance Tests](https://github.com/eclipse-pass/pass-acceptance-testing) runs through workflows using [Test Cafe](https://testcafe.io/) against an instance of PASS. All these tests must pass in order for PASS to be considered production ready.
 
 ### Back-end
 
@@ -40,11 +40,11 @@ In general, we recommend the following procedures for testing:
     * In general, unit tests should run quickly.
 * **Integration Tests**
     * We recommend running integration tests in a test environment that mimics the production environment as closely as possible.
-    * Avoid making network requests to 3rd parties.
+    * When adding or updating integration tests, please avoid making network requests to 3rd parties.
          * If needed, use test containers, wiremock, or mockbean.
     * Integration tests should be as fast as possible.
 * **Acceptance Tests**
-    * Should be based on user requirements and work correctly from a user’s perspective.
+    * Acceptance tests are used in PASS to verify correct functionality based on user requirements, so these should work correctly from a user’s perspective.
     * Updated whenever there are changes to user requirements, significant changes are made to the application, or when they break.
     * Automated so they can be run frequently and consistently.
 
