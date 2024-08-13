@@ -1,13 +1,13 @@
 # Notification Services
 
 Notification Services (NS) is a service component in PASS that provides timely notification (e.g. via email) of events
-that occur as a Submission moves through a workflow.  Notifications may be strictly informational ("a submission was
+that occur as a Submission moves through a workflow. Notifications may be strictly informational ("a submission was
 canceled", "a submission was approved"), or they may prompt for action ("please review and submit", "please correct
 these things"). Notifications would be directed to the actors participating in the submission process.
 
 NS is a backend service component in PASS written in Java/Spring Boot. NS reacts asynchronously to `SubmissionEvent`
 messages emitted by the Pass-Core component by composing and dispatching notifications in the form of emails to the
-participants related to the event.  The NS is meant to be email-agnostic (e.g. implementations could deliver Slack
+participants related to the event. The NS is meant to be email-agnostic (e.g. implementations could deliver Slack
 messages, or be delivered interactively via reactive JavaScript), but the only notification dispatch currently
 implemented is email.
 
