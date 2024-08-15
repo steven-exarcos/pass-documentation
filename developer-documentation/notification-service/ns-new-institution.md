@@ -1,36 +1,24 @@
-# Notification Services - Steps for supporting new institution
+# Notification Services - Steps to Configure and Set Up for a New Institution
 
 This section describes the configuration and setting up the Notification Services for a new institution.
 The configuration process involves defining institution-specific settings, managing templates, and integrating with an
-email system.
+email system. Please note that the examples provided are for demonstration purposes and may require adjustments based on
+your institution’s environment and external services setup.
 
 ## Prerequisites
 
-* Gather your email service's settings (e.g., SMTP settings) and ensure the Email service is ready for integration.
-* Read through the [Notification Services Knowledge Needed](./ns-know-need.md)
-* Understand how to run [PASS Docker](../../welcome-guide/setup-run-pass.md) and pull individual docker images.
+* **Email Service Configuration**: Gather your institution's email service settings (e.g., SMTP host, port, authentication 
+details) and ensure the email service is fully operational and ready for integration with Notification Services.
+* **Familiarity with Notification Services**: Review the [Notification Services Knowledge Needed](./ns-know-need.md)
+* **AWS SQS Queue**: Notification Services require an SQS queue for message handling. For testing purposes, you can use 
+[LocalStack](https://www.localstack.cloud/) to simulate AWS services locally. 
 
-## Run Notification Services in Docker or Jar
-
-The easiest way to get notification up and running is to get the latest NS image from our GitHub Container Registry. Run
-the command below and be sure to replace `1.9.0-SNAPSHOT` with the version you wish to run:
-
-```shell
-docker pull ghcr.io/eclipse-pass/pass-notification-service:1.9.0
-```
-
-You can also download the Pass Support source code and build NS module to get the NS jar file that can be invoked by 
-running:
-
-```
-
-```
-
-## Simple Configuration
+## Setup a Simple Configuration
 
 This configuration is a simplified version of the configuration. See the [configuration page](./ns-configuration.md) and
-[template page](./ns-templates.md) for a more in-depth explanation of configuring NS . Ensure to replace email addresses
-with the email address from your institution.
+[template page](./ns-templates.md) for a more in-depth explanation of configuring NS. Be sure to replace email addresses
+with those from your institution. Save this JSON file to a location that can be referenced by a Docker container or a 
+running JAR file.
 
 ```json
 {
@@ -62,3 +50,34 @@ with the email address from your institution.
   ]
 }
 ```
+
+## Run Notification Services in Docker or Jar
+
+The easiest way to get notification up and running is to get the latest NS image from our GitHub Container Registry.
+
+Run the command below and be sure to replace `1.9.0` with the version you wish to run:
+
+```shell
+docker run --env=PASS_NOTIFICATION_CONFIGURATION=file:/ns-config/ns-config-json.json --env=AWS_REGION=us-east-1
+--env=AWS_ACCESS_KEY_ID={YOUR_ID}
+--env=AWS_SECRET_ACCESS_KEY={YOUR_KEY}
+--volume=/path-to-ns-config-file
+--workdir=/app 
+--runtime=runc -d ghcr.io/eclipse-pass/pass-notification-service:1.9.0
+```
+
+The docker env variable `PASS_NOTIFICATION_CONFIGURATION` points to the volume mounted `/path-to-ns-config-file`, which
+contains the JSON configuration. The `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are your AWS access ID and key.
+There are other environment variables to initialize that are found on the [configuration page](./ns-configuration.md#environment-variables)
+
+You can also download the [Pass Support source code](https://github.com/eclipse-pass/pass-support/releases) and build NS
+module to get the NS jar file that can be invoked by running:
+
+```shell
+java -Dpass.notification.configuration=file:/ns-config/ns-config-json.json -Daws.region=us-east-1 -Daws.accessKeyId=test -Daws.secretKey=test -jar pass-notification-service-exec.jar
+```
+
+## Supporting Other Types of Queue Services
+
+NS can be extended to support other types of queues, but would require further development. Modifying the `JMSConfig`
+to support other JMS providers will enable support for another type of queue service.
