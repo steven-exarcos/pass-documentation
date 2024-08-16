@@ -1,4 +1,4 @@
-# Notification Services - Steps to Configure and Set Up for a New Institution
+# Notification Services - Next Step / Institution Configuration
 
 This section describes the configuration and setting up the Notification Services for a new institution.
 The configuration process involves defining institution-specific settings, managing templates, and integrating with an
