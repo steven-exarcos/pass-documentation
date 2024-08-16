@@ -7,10 +7,10 @@ your institution’s environment and external services setup.
 
 ## Prerequisites
 
-* **Email Service Configuration**: Gather your institution's email service settings (e.g., SMTP host, port, authentication 
+* Email Service Configuration: Gather your institution's email service settings (e.g., SMTP host, port, authentication 
 details) and ensure the email service is fully operational and ready for integration with Notification Services.
-* **Familiarity with Notification Services**: Review the [Notification Services Knowledge Needed](./ns-know-need.md)
-* **AWS SQS Queue**: Notification Services require an SQS queue for message handling. For testing purposes, you can use 
+* Familiarity with Notification Services: Review the [Notification Services Knowledge Needed](./ns-know-need.md)
+* AWS SQS Queue: Notification Services require an SQS queue for message handling. For testing purposes, you can use 
 [LocalStack](https://www.localstack.cloud/) to simulate AWS services locally. 
 
 ## Setup a Simple Configuration
@@ -51,7 +51,7 @@ running JAR file.
 }
 ```
 
-## Run Notification Services in Docker or Jar
+## Run Notification Services in Docker or JAR
 
 The easiest way to get notification up and running is to get the latest NS image from our GitHub Container Registry.
 
@@ -71,13 +71,17 @@ contains the JSON configuration. The `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_
 There are other environment variables to initialize that are found on the [configuration page](./ns-configuration.md#environment-variables)
 
 You can also download the [Pass Support source code](https://github.com/eclipse-pass/pass-support/releases) and build NS
-module to get the NS jar file that can be invoked by running:
+module to get the NS JAR file that can be invoked by running:
 
 ```shell
 java -Dpass.notification.configuration=file:/ns-config/ns-config-json.json -Daws.region=us-east-1 -Daws.accessKeyId=test -Daws.secretKey=test -jar pass-notification-service-exec.jar
 ```
 
+The arguments `pass.notification.configuration`, `aws.region=us-east-1`, `aws.accessKeyId`, and `aws.secretKey` are the
+minimum set to run the JAR; however a fully functional NS will depend on the fulfillment of the [prerequisites](#prerequisites).
+
 ## Supporting Other Types of Queue Services
 
-NS can be extended to support other types of queues, but would require further development. Modifying the `JMSConfig`
-to support other JMS providers will enable support for another type of queue service.
+The default queue service is [AWS SQS](https://aws.amazon.com/sqs/). NS can be extended to support other types of queues,
+but would require further development. Modifying the `JMSConfig` to support other JMS providers will enable support for 
+another type of queue service.
