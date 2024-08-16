@@ -16,27 +16,27 @@ table below describes a submission workflow action, the submission event type cr
 
 ![Submission State Model](../../.gitbook/assets/submission-state.png)
 
-|What happened to the Submission |SubmissionEvent Type                             |Notification Recipient List
-|--------------------------------|-------------------------------------------------|----------------------------
-|AS Cancelled                    |CANCELLED                                        |Preparer
-|AS Submitted                    |SUBMITTED                                        |Preparer
-|AS Request Changes              |CHANGES_REQUESTED                                |Preparer
-|Preparer Cancelled              |CANCELLED                                        |AS
-|Preparer Request Approval       |APPROVAL_REQUESTED, APPROVAL_REQUESTED_NEWUSER   |AS
+| What happened to the Submission | SubmissionEvent Type                           | Notification Recipient List |
+|---------------------------------|------------------------------------------------|-----------------------------|
+| AS Cancelled                    | CANCELLED                                      | Preparer                    |
+| AS Submitted                    | SUBMITTED                                      | Preparer                    |
+| AS Request Changes              | CHANGES_REQUESTED                              | Preparer                    |
+| Preparer Cancelled              | CANCELLED                                      | AS                          |
+| Preparer Request Approval       | APPROVAL_REQUESTED, APPROVAL_REQUESTED_NEWUSER | AS                          |
 
 * AS = Authorized Submitter
 * Preparer = Proxy who has prepared the submitter on behalf of the AS
 
-`Notification.type`: The type of the `Notification`. In this case, there is a 1:1 correspondence between the 
-`SubmissionEvent` type and the `Notification` type.
+`Notification.type`: The type of the `Notification`. In this case, there is a 1:1 correspondence between the `SubmissionEvent`
+type and the `Notification` type.
 
-|Notification Type               |Description
-|--------------------------------|---------------------
-|SUBMISSION_APPROVAL_REQUESTED   |Preparer has requested approval of a Submission by an Authorized Submitter
-|SUBMISSION_APPROVAL_INVITE      |Preparer has requested approval of a Submission by an Authorized Submitter who does not have a User in PASS.
-|SUBMISSION_CHANGES_REQUESTED    |Authorized Submitter has requested changes to the submission by the Preparer.
-|SUBMISSION_SUBMISSION_SUCCESS   |Submission was successfully submitted by the Authorized Submitter
-|SUBMISSION_SUBMISSION_CANCELLED |Submission was cancelled by either the Authorized Submitter or Preparer
+| Notification Type               | Description                                                                                                  |
+|---------------------------------|--------------------------------------------------------------------------------------------------------------|
+| SUBMISSION_APPROVAL_REQUESTED   | Preparer has requested approval of a Submission by an Authorized Submitter                                   |
+| SUBMISSION_APPROVAL_INVITE      | Preparer has requested approval of a Submission by an Authorized Submitter who does not have a User in PASS. |
+| SUBMISSION_CHANGES_REQUESTED    | Authorized Submitter has requested changes to the submission by the Preparer.                                |
+| SUBMISSION_SUBMISSION_SUCCESS   | Submission was successfully submitted by the Authorized Submitter                                            |
+| SUBMISSION_SUBMISSION_CANCELLED | Submission was cancelled by either the Authorized Submitter or Preparer                                      |
 
 `Notification.parameters`: The model that is injected into the templating engine. The `parameters` map carries simple 
 strings or serialized JSON structures.
