@@ -1,6 +1,6 @@
 # Notification Services - Configuration
 
-The required runtime configuration for Notification Services (NS) is composed of a configuration file and a set of 
+The required runtime configuration for Notification Services is composed of a configuration file and a set of 
 environment variables.
 
 ## Configuration File
@@ -88,7 +88,7 @@ Here is a sample NS configuration file:
 
 ## Mode
 
-Notification Services (NS) has three runtime modes:
+Notification Services has three runtime modes:
 * `DISABLED`: No notifications will be composed or emitted.  All JMS messages received by NS will be immediately 
 acknowledged and subsequently discarded.
 * `DEMO`: Allows a whitelist, global carbon copy recipient list, and notification templates to be configured distinct 
@@ -104,25 +104,23 @@ to set the runtime mode.
 
 ## Notification Recipients
 
-The recipient(s) of a notification (e.g. email) is a function of a `{Submission, SubmissionEvent}` tuple.  After the 
+The recipient(s) of a notification (e.g. email) is a function of a `{Submission, SubmissionEvent}` tuple. After the 
 recipient list has been determined, it can be manipulated as discussed below.
 
 ### Whitelist
 
-Each configuration mode (discussed above) may have an associated whitelist. If the whitelist is empty, _all_ recipients
-for a given notification will receive an email. If the whitelist is _not empty_, the recipients for a given notification
-will be filtered, and _only_ whitelisted recipients will receive the notification. Having a whitelist for the `DEMO`
-mode is useful to prevent accidental spamming of end users with test notifications.
+Each configuration mode may have an associated whitelist. If the whitelist is empty, _all_ recipients for a given
+notification will receive an email. If the whitelist is _not empty_, the recipients for a given notification will be
+filtered, and _only_ whitelisted recipients will receive the notification. Having a whitelist for the `DEMO` mode is
+useful to prevent accidental spamming of end users with test notifications.
 
 Production should use an empty whitelist (i.e. all potential notification recipients are whitelisted).
 
 ### Global Carbon Copy Support
 
-Each configuration mode (discussed above) may specify one or more "global carbon copy" addresses. These addresses will 
-receive a copy of each email sent by Notification Services (NS). Global carbon copy addresses are implicitly
-whitelisted; they do not need to be explicitly configured in a whitelist.
-
-Blind carbon copy is also supported.
+Each configuration mode may specify one or more "global carbon copy" addresses. These addresses will receive a copy of 
+each email sent by Notification Services (NS). Global carbon copy addresses are implicitly whitelisted; they do not need
+to be explicitly configured in a whitelist. Blind carbon copy is also supported.
 
 Here is an example recipient configuration that specifies a global carbon copy and a global blind carbon copy:
 
@@ -147,9 +145,8 @@ Multiple email addresses may be specified.
 
 ### Example
 
-For example, let's say that NS is preparing to send a notification to `user@example.org`.
-
-If the runtime mode of NS is `DEMO`, and:
+For example, let's say that NS is preparing to send a notification to `user@example.org`. If the runtime mode of NS is `DEMO`
+, and:
 * The `DEMO` mode has no (or an empty) whitelist, then `user@example.org` and the global carbon copy address (for the `DEMO`
 mode) receives the notification.
 * The `DEMO` mode has a whitelist that does _not_ contain `user@example.org`, then only the global carbon copy address
