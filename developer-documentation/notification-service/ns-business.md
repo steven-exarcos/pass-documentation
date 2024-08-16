@@ -1,6 +1,10 @@
 # Notification Services - Business Logic
 
-The following is a list of the components responsible for notification business logic implementation.
+Notification Services listens for events during the submission process and generates email notifications to relevant 
+users. The main components of the business logic are `SubmissionEventListener`, `NotificationService`, and `Composer`. 
+The business logic handles events, composes notifications, and includes deep links that guide users directly to the 
+necessary actions within PASS. It ensures that notifications are accurate, secure, and properly validated to maintain 
+workflow integrity.
 
 ## SubmissionEventListener
 The `SubmissionEventListener` is the component responsible for connecting to a messaging source and reading 
