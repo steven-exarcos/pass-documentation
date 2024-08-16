@@ -74,7 +74,7 @@ You can also download the [Pass Support source code](https://github.com/eclipse-
 module to get the NS JAR file that can be invoked by running:
 
 ```shell
-java -Dpass.notification.configuration=file:/ns-config/ns-config-json.json -Daws.region=us-east-1 -Daws.accessKeyId=test -Daws.secretKey=test -jar pass-notification-service-exec.jar
+java -Dpass.notification.configuration=file:/ns-config/ns-config-json.json -Daws.region=us-east-1 -Daws.accessKeyId={YOUR_ID} -Daws.secretKey={YOUR_KEY} -jar pass-notification-service-exec.jar
 ```
 
 The arguments `pass.notification.configuration`, `aws.region=us-east-1`, `aws.accessKeyId`, and `aws.secretKey` are the
