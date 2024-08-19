@@ -1,6 +1,6 @@
 # Notification Services - Model
 
-![Notification Services Model](../../.gitbook/assets/notifications-model.png)
+<figure><img src="../../.gitbook/assets/notifications-model.png" alt="PASS Notification Model"><figcaption><p>PASS Notification Model</p></figcaption></figure>
 
 The `Notification` class is the central object in the model. It is used to capture the type of notification, for a given 
 submission, and to provide the data to the notification template.
@@ -14,7 +14,7 @@ Let's review the important attributes of `Notification`:
 The SubmissionEvent is the object created capturing the submission workflow event that generates the `Notification`. The 
 table below describes a submission workflow action, the submission event type created, and who receives the notification.
 
-![Submission State Model](../../.gitbook/assets/submission-state.png)
+<figure><img src="../../.gitbook/assets/submission-state.png" alt="Submission State Diagram"><figcaption><p>Submission State</p></figcaption></figure>
 
 | What happened to the Submission | SubmissionEvent Type                           | Notification Recipient List |
 |---------------------------------|------------------------------------------------|-----------------------------|
