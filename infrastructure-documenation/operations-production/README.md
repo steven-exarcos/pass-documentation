@@ -1,34 +1,45 @@
 # Operations/Production
 
-### This documentation is a WIP. It still needs to be reviewed and cleaned up.
+The operations and production workflows, architecture, and infrastructure are composed of a variety of technologies,
+layers, and techniques. The main important concept and understanding of this guide, is that PASS is designed to be 
+platform independent, with a few exceptions. This guide will describe and summarize the way JHU decided to deploy the 
+application, but this does mean it can't be done another way. One way of deploying PASS is using Amazon Web Services
+(AWS) cloud computing services. By using the scalable infrastructure we are able to quickly adapt to different demands 
+of usage and deploy infrastructure as code. It also aids in the CI/CD pipeline, providing consistent, efficient, and 
+quick deployments. In addition to deploying PASS, other operation activities will be described such as monitoring, 
+harvesting and loading data, and other communication between different services.
 
-----
+If you haven't already, a quick review of the Welcome Guide PASS Architecture article will provide a good foundation for
+understanding the operations and production environment of PASS.
 
-## Topic Summary
+In this guide we step through various topics on JHU Operations and Production:
 
-## Knowledge Needed / Skills Inventory
+- [Knowledge Needed / Skills Inventory](./ops-know-need.md)
+- [Technologies Utilized](./ops-tech-util.md)
+- Technical Deep Dive
+  - [PASS Design](./ops-design.md)
+  - [How to Deploy](./ops-status.md)
+  - [Monitoring](./ops-monitor.md)
+  - [Assemblers](./ds-assemblers.md)
+  - [Configuration](./ds-configuration.md)
+  - [Amazon Web Services (AWS) Architecture](./ops-aws-arch.md)
+- [Next Steps / Institution Configuration](./ds-new-institution.md)
 
-## Technologies Utilized
 
-- AWS
-- AWS account
-- AWS CLI
-- Docker
-- GitHub Actions
 
 ## Technical Deep Dive
 
 For each of the documents mentioned, please explain or give an example of the kind of content that should go in it.
 
-- design document, (diagram of pass)
-- how to deploy
-- How to build a new environment
-- Monitoring
-- Developer access to services / logs (ssh tunneling, ops server, etc)
-- Loader and Harvester jobs (COEUS, NIHMS ETL)
-- Overview of amazon architecture, and role of each component, sample traffic flow
-    - e.g. Ember app communicating with public services via the proxy
-    - e.g. operations tasks that may occur on the backend/private network
+- design document, (diagram of pass) + 
+- how to deploy + 
+- How to build a new environment -
+- Monitoring +
+- Developer access to services / logs (ssh tunneling, ops server, etc) - 
+- Loader and Harvester jobs (COEUS, NIHMS ETL) + 
+- Overview of amazon architecture, and role of each component, sample traffic flow +
+    - e.g. Ember app communicating with public services via the proxy +
+    - e.g. operations tasks that may occur on the backend/private network + 
 
 ### PASS Data & Backups
 
@@ -79,54 +90,13 @@ is ease of understanding. Java projects and Docker images should be moved to the
 I recommend that the Maven release process does not use a super module and instead releases projects separately in
 dependency order.
 
-### How to use aws sns notifications and cloudwatch for our monitoring
-
-### How to connect to a private PASS PROD database in AWS
-
-Because the PASS PROD database should not be Publicly Accessible, in order for developers to connect to the database
-with a SQL
-tool from their local machine for production support, there are a few steps that have to be performed to get connected.
-
-One solution is to configure a jumpbox to enable authorized developers to connect to the PROD database even though it is
-not Publicly
-Accessible. See this post for an explanation of the
-configuration: https://aws.amazon.com/blogs/database/securely-connect-to-an-amazon-rds-or-amazon-ec2-database-instance-remotely-with-your-preferred-gui/
+### How JHU Uses AWS SNS Notifications and Cloudwatch for Monitoring
 
 #### Assumptions
 
 - PASS running AWS using RDS for Postgres that is not publicly accessible.
 - Institution is using AWS SSO to authenticate.
 
-#### Instructions
-
-- Install aws cli v2
-    - https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
-- Authenticate aws cli
-- Go to your AWS SSO portal via <AWS_SSO_URL>
-- Click on <Production_Account>
-- Click on `Access keys` link next to PowerUserAccess
-- Do Option 2 on dialog
-- Open a terminal
-- Type `aws configure sso`
-- SSO session name (Recommended): <sso_name>
-- SSO start URL [None]: <AWS_SSO_URL>
-- SSO region [None]: <your_region>
-- SSO registration scopes [sso:account:access]:
-- A browser window will open, follow the instruction to confirm the code
-- Back in the terminal, when presented with a list of accounts, select the Production_Account account
-- When presented with roles, select the role with `PowerUserAccess` in the name
-- CLI default client Region [<your_region>]:
-- CLI default output format [None]:
-- CLI profile name [PowerUserAccess-AWS_Account_Number]:
-- Install ssm session manager plugin
-    - https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html
--
-
-Run `aws ssm start-session --profile PowerUserAccess-AWS_Account_Number --region <your_region> --target <bastio_ec2_id>
---document-name AWS-StartPortForwardingSessionToRemoteHost --parameters host="<RDS_hostname>",portNumber="<RDS_port>",localPortNumber="<local_port>"`
-
-Create a new server connection in pgAdmin or other dev sql tool. User 127.0.0.1 as server IP and <local_port> as port. Login
-with your read only postgres user.
 
 ### NIHMS API Token Generation
 
@@ -284,7 +254,7 @@ docker ps
 Then grab the container IDs and manually stop them.
 docker stop 03159019094f
 
-## Next Step / Institution Configuration
 
-## Related Information
+
+
 
