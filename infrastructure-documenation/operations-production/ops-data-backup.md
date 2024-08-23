@@ -1,4 +1,4 @@
-# [Operations/Production -]() Data & Backups
+# Operations/Production - Data & Backups
 
 Placeholder doc to summarize data in PASS.
 What are the data?

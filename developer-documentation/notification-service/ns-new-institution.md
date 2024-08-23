@@ -70,6 +70,8 @@ The docker env variable `PASS_NOTIFICATION_CONFIGURATION` points to the volume m
 contains the JSON configuration. The `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are your AWS access ID and key.
 There are other environment variables to initialize that are found on the [configuration page](./ns-configuration.md#environment-variables)
 
+**NOTE:** The AWS ID and key should only be used for testing and in production this should be managed through IAM roles.
+
 You can also download the [Pass Support source code](https://github.com/eclipse-pass/pass-support/releases) and build NS
 module to get the NS JAR file that can be invoked by running:
 

@@ -25,4 +25,4 @@ In this guide we step through various topics on JHU Operations and Production:
   * [Data & Backups](./ops-data-backup.md)
   * [Eclipse Operations](./ds-configuration.md)
   * [Amazon Web Services (AWS) Architecture](./ops-aws-arch.md)
-- [Next Steps / Institution Configuration](./ds-new-institution.md)
+- [Next Steps / Institution Configuration](./ops-new-institution.md)
