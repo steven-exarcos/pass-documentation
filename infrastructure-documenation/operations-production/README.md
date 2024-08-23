@@ -5,9 +5,10 @@ layers, and techniques. The main important concept and understanding of this gui
 platform independent, with a few exceptions. This guide will describe and summarize the way JHU decided to deploy the 
 application, but this does mean it can't be done another way. One way of deploying PASS is using Amazon Web Services
 (AWS) cloud computing services. By using the scalable infrastructure we are able to quickly adapt to different demands 
-of usage and deploy infrastructure as code. It also aids in the CI/CD pipeline, providing consistent, efficient, and 
-quick deployments. In addition to deploying PASS, other operation activities will be described such as monitoring, 
-harvesting and loading data, and other communication between different services.
+of usage. By using AWS, it opens up the ability to use infrastructure as code which gives more efficiencies by enabling
+reuse of infrastructure between environments and aids in the CI/CD pipeline, providing consistent and quick deployments.
+In addition to deploying PASS, other operation activities will be described such as monitoring, harvesting and loading 
+data, and other communication between different services.
 
 If you haven't already, a quick review of the Welcome Guide PASS Architecture article will provide a good foundation for
 understanding the operations and production environment of PASS.
