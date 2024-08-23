@@ -3,7 +3,6 @@
 PASS' production infrastructure and operations are composed of a variety of technologies. The chosen technology stack
 was desirable for its ease of setup, support for CI/CD, and scalability. 
 
-
 ## Technologies Utilized
 
 - [Amazon Web Services (AWS) Cloud Computing](https://aws.amazon.com): Many webservices are use for the majority of the
