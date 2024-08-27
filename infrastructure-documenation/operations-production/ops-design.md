@@ -1,1 +1,0 @@
-# Operations/Production - Production Design
