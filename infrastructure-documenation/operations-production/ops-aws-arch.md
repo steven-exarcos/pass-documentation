@@ -6,11 +6,13 @@ central backbone, coordinating the workflow through, Elide, a JSON:API that inte
 It stores documents using the Oxford Common File Layout (OCFL) on disk or through an S3 bucket, while the backend 
 services are written in Java using Spring Boot. Data Loaders handle the ingestion of journal, grant, and publication 
 data, while Deposit Services manage the deposits of submissions into various repositories like DSpace and NIH. The 
-architecture is deployed primarily on AWS, leveraging services such as EC2, ECS, S3, and SQS to ensure high availability,
-scalability, and security. This setup allows PASS to efficiently handle submission workflows and deposit services across
-diverse environments, adhering to institutional policies and data governance standards. It is important to note that the
-AWS architecture is a choice by JHU, but PASS can run on other cloud providers or run on infrastructure that is local to
-the institution. The different components of PASS and their associated production setup and operations will be discussed.
+architecture is deployed primarily on AWS, leveraging services such as Elastic Compute Cloud (EC2), Elastic Container 
+Service (ECS), Simple Storage Service (S3), and Simple Queue Service (SQS) to ensure high availability, scalability, 
+and security. This setup allows PASS to efficiently handle submission workflows and deposit services across diverse 
+environments, adhering to institutional policies and data governance standards. It is important to note that the AWS 
+architecture is a choice by JHU, but PASS can run on other cloud providers or run on infrastructure that is local to the
+institution. The different components of PASS and their associated production setup and operations will be discussed
+in this article.
 
 A quick review of the PASS design and application architecture from our [Deployment and Architecture page](../../welcome-guide%2Fdeployment-architecture.md)
 in the PASS Welcome Guide [welcome-guide](../../welcome-guide). Both the PASS design diagram and Application 
@@ -38,15 +40,18 @@ Architecture diagram, between the end users and the PASS ALB. It is responsible 
 out traffic and protect the internal virtual network.
 
 ## PASS Elastic Container Registry (ECR)
-
+ECR is a fully managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker 
+container images. It's leveraged in the PASS Application Architecture by giving a centralized repository images for the 
+PASS Core, PASS UI, Data Loaders, Deposit Services, and Notification Services.
 
 ## Data Loaders
 
-The Data Loaders (Journal, Grants, Publications) are executed as AWS Batch jobs within Fargate-based compute 
+The Data Loaders (Journal, Grants, Publications) are executed as AWS Batch jobs within ECS Fargate compute 
 environments, each designed to accommodate specific data processing needs. The batch jobs leverage AWS services like S3
-for configuration management, SQS for task scheduling and messaging, and ECS Fargate for executing the containerized 
-data loaders. The architecture also integrates AWS IAM roles and policies to manage access controls, ensuring that data
-loaders have the required permissions for accessing resources like S3 buckets and connecting to the PASS Core API.
+for configuration management, SQS for messaging, EventBridge Scheduler for scheduling batch jobs, and ECS Fargate for 
+executing the containerized data loaders. The architecture also integrates AWS IAM roles and policies to manage access 
+controls, ensuring that data loaders have the required permissions for accessing resources like S3 buckets and 
+connecting to the PASS Core API.
 
 ## Submission UI (PASS UI)
 PASS UI integrates with Shibboleth for authentication, providing a single sign-on experience for users. This ensures 
@@ -63,16 +68,25 @@ queuing to handle asynchronous communication between different components of the
 submission is made, a message is placed in an SQS queue, which is then processed by the deposit services.
 
 ## File and Bytes Persistence
-PASS Core uses Amazon S3 to store submission-related documents and metadata. The Oxford Common File Layout (OCFL) is 
-employed to organize these files, providing options for local disk storage or S3 bucket retention. The configuration of
-the File Service in PASS Core is done through environment variables. 
+PASS Core uses Amazon S3 to store submission-related documents and metadata. The OCFL is employed to organize these 
+files, providing options for local disk storage or S3 bucket retention. The configuration of the File Service in PASS 
+Core is done through environment variables that are set in the Systems Manager parameter store.
 
 ## Relational Database
 PASS Core uses Amazon RDS, specifically a PostgreSQL database, to store and manage data related to publications, 
 submissions, grants, and policies. The RDS instance resides within the same VPC and is not publicly accessible. The EC2
 instances running PASS Core communicate with the RDS instance over the VPC’s internal network. Security groups are
-configured to allow traffic between PASS Core and the RDS database, ensuring secure data access
+configured to allow traffic between PASS Core and the RDS database, ensuring secure data access.
 
 ## Deposit Services
+Deposit Services are responsible for processing submission data from PASS Core and ensuring it is correctly formatted 
+and packaged for deposit into external repositories. This involves transforming submission metadata and bundling content
+according to repository requirements. It is deployed as containerized applications using ECS Fargate. As described in
+the Application Architecture, Deposit services leverages SQS to handle the asynchronous processing of deposit tasks. 
+When a submission is ready for deposit, PASS Core places a message in an SQS queue, which Deposit Services then pick up
+for processing.
 
 ## Publication Queue
+SQS publication queue serves as a decoupling mechanism between the PASS Core and Deposit Services. Submissions are 
+processed asynchronously, resulting in a system that remains responsive and efficient. There are three queues that are
+used by the overall PASS environment: `deposit`, `submission`, and `submission-event`.
