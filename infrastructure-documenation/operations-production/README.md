@@ -19,6 +19,7 @@ In this guide we step through various topics on JHU Operations and Production:
 * [Technologies Utilized](./ops-tech-util.md)
 * Technical Deep Dive
   * [PASS Design & Amazon Web Services (AWS) Architecture](./ops-aws-arch.md)
+  * [PASS AWS Architecture Cost Estimates](./ops-aws-cost.md)
   * [Versioning](./ops-version.md)
   * [How to Deploy](./ops-deploy.md)
   * [Monitoring](./ops-monitor.md)
