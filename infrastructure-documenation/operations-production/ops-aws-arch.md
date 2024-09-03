@@ -47,7 +47,6 @@ an attached security group for permitting specific ports for inbound/outbound re
 containers. 
   * There are two target groups, one for the public ALB and one for the private ALB.
 
-
 ## Web Application Firewall (WAF)
 A WAF sits at the edge of the architecture boundary, as pictured in the PASS Application Architecture diagram, between
 the end users and the PASS ALB. It is responsible for applying a set of rules to filter out traffic and protect the
