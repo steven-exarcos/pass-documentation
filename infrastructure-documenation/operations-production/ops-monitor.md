@@ -44,4 +44,4 @@ created. You can query the Athena database using standard SQL in the Query Edito
 
 ## Dashboard
 A dashboard has been added to CloudWatch that shows high level metrics for the PASS app, triggered alarms, and errors in
-logs.
+logs. To learn more about CloudWatch dashboards visit the [CloudWatch User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Dashboards.html.)
