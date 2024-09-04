@@ -31,9 +31,11 @@ metrics that JHU PASS uses, but it is encouraged to see what metrics and their p
 PASS is in. More information regarding Cloud Watch and the metrics that can be monitored are on the [AWS documentation site](https://docs.aws.amazon.com/). 
 
 ## Synthetic Canary
-This is a simple synthetic CloudWatch Canary script that is calling the application every 10 minutes. If 403(the login
-page) is not returned, an alert will be triggered sending an email to PASS devops. Learn more about setting up a 
-synthetic canary on the [Cloud Watch User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries.html).
+Amazon CloudWatch Synthetics are configurable scripts than run a schedule and can monitor endpoints and APIs. Canaries 
+follow the same route and patterns as someone using the application. This enables the ability to detect problems before
+they happen. The JHU PASS configuration has a simple CloudWatch Synthetic Canary script that is calling the application
+every 10 minutes. If 403(the login page) is not returned, an alert will be triggered sending an email to PASS devops.
+Learn more about setting up a synthetic canary on the [Cloud Watch User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries.html).
 
 ## Logs
 CloudWatch Logs are used for logging from all PASS Docker containers. The Access Logs have been enabled on the Public 
