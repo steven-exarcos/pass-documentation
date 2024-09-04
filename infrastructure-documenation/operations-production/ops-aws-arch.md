@@ -61,6 +61,9 @@ with least privilege access.
 ## Certificate Manager
 The certificate for the PASS public domain name for JHU is in AWS Certificate Manager.
 
+## Simple Email Service (SES)
+SES is enabled in production mode for sending emails from the notifications service.
+
 ## PASS Elastic Container Registry (ECR)
 ECR is a fully managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker 
 container images. It's leveraged in the PASS Application Architecture by giving a centralized repository images for PASS
