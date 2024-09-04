@@ -33,7 +33,8 @@ is in. More information regarding Cloud Watch and the metrics that can be monito
 
 ## Synthetic Canary
 This is a simple synthetic CloudWatch Canary script that is calling the application every 10 minutes. If 403(the login
-page) is not returned, an alert will be triggered sending an email to PASS devops.
+page) is not returned, an alert will be triggered sending an email to PASS devops. Learn more about setting up a 
+synthetic canary on the [Cloud Watch User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries.html)
 
 ## Logs
 CloudWatch Logs are used for logging from all PASS Docker containers. The Access Logs have been enabled on the Public 
