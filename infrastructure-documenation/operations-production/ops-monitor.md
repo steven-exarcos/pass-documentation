@@ -7,10 +7,9 @@ an SNS topic to send email to PASS devops. The following are a subset of Alarms 
 * **Application Load Balancer (ALB)**
   * **HTTPCode_ELB_4XX_Count** - The number of HTTP 4XX client error codes that originate from the load balancer.
   * **TargetResponseTime** - The time elapsed, in seconds, after the request leaves the load balancer until the target
-  * **UnHealthyHostCount** - The number of unhealthy instances registered with your load balancer. An instance is 
-  considered unhealthy after it exceeds the unhealthy threshold configured for health checks. An unhealthy instance is 
-  considered healthy again after it meets the healthy threshold configured for health checks.
   starts to send the response headers.
+  * **UnHealthyHostCount** - The number of unhealthy instances registered with your load balancer. An instance is 
+  considered unhealthy after it exceeds the unhealthy threshold configured for health checks.
 * **Simple Queue Service (SQS)**
   * **NumberOfMessagesSent** - The number of messages added to a queue.
   * **ApproximateAgeOfOldestMessage** - The approximate age of the oldest non-deleted message in the queue.
@@ -28,13 +27,13 @@ an SNS topic to send email to PASS devops. The following are a subset of Alarms 
   using. This metric is obtained from the Docker runtime.
 
 There are a lot more metrics that can be collected and fine-tuned with different parameters. These are a sample of 
-metrics that JHU PASS uses, but it is encouraged to see what metrics and their parameters best fit the environment PASS
-is in. More information regarding Cloud Watch and the metrics that can be monitored are on the [AWS documentation site](https://docs.aws.amazon.com/). 
+metrics that JHU PASS uses, but it is encouraged to see what metrics and their parameters that best fit the environment
+PASS is in. More information regarding Cloud Watch and the metrics that can be monitored are on the [AWS documentation site](https://docs.aws.amazon.com/). 
 
 ## Synthetic Canary
 This is a simple synthetic CloudWatch Canary script that is calling the application every 10 minutes. If 403(the login
 page) is not returned, an alert will be triggered sending an email to PASS devops. Learn more about setting up a 
-synthetic canary on the [Cloud Watch User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries.html)
+synthetic canary on the [Cloud Watch User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries.html).
 
 ## Logs
 CloudWatch Logs are used for logging from all PASS Docker containers. The Access Logs have been enabled on the Public 
