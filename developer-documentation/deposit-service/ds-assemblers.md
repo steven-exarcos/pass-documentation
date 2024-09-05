@@ -1,4 +1,5 @@
 # Deposit Services - Assemblers
+
 Developing a package provider primarily deals with extending or re-using `Assembler`-related abstract classes and
 implementations, but it helps to understand the context in which `Assembler`s operate. Assemblers are responsible for 
 gathering custodial and supplemental resources associated with a submission and returning a stream of those resources, 
@@ -85,11 +86,6 @@ requires custodial resources to appear under `<package root>/data`. Similarly, i
 with a DSpace METS packaging scheme, it will need to produce a `<package root>/METS.xml` file with the required content.
 Therefore, any `PackageProvider` implementation can be used with any `Assembler` implementation as long as the package
 specification shared between the two is not violated.
-
-Examples: 
-* `DspaceMetsPackageProvider`
-* `NihmsPackageProvider`
-* `BagItPackageProvider`
 
 ## Assembler Development Recap
 
