@@ -174,9 +174,9 @@ run against live PASS environments. To enable the job that executes the Deployme
 as well.
 
 By default, Submissions created by Deployment Tests that are received by Deposit Services are fully processed; however,
-the Deposit is not actually sent to the remote repository. However, this can be changed by setting 
-`TEST_DATA_SKIP_DEPOSITS` to `false`, which will cause the Deposit to be sent to the remote repository. Additionally, 
-when skip deposits for test data is false, if the remote repository is a DSpace repository, the Deposit Item in DSpace 
-will be deleted by the Deployment Test Data Service.
+the Deposit is not actually sent to the remote repository. This can be changed by setting `TEST_DATA_SKIP_DEPOSITS` to 
+`false`, which will cause the Deposit to be sent to the remote repository. Additionally, when `TEST_DATA_SKIP_DEPOSITS`
+is `false`, if the remote repository is a DSpace repository, the Deposit Item in DSpace will be deleted by the 
+Deployment Test Data Service.
 
 [1]: https://docs.spring.io/spring-framework/reference/core/resources.html#resources-implementations
