@@ -187,5 +187,13 @@ must be set as Environment Variables (System Properties (-Dargs)):
 
 * `AWS_REGION` (`aws.region`): AWS region id (i.e. `us-east-1`)
 
-In order for NS to connect to AWS SQS, standard AWS access management needs to be configured on the deployed NS. See 
+In order for NS to access to AWS SQS, standard AWS access management needs to be configured on the deployed NS. See 
 [AWS IAM Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) for more information.
+
+For testing purposes, you may set AWS access keys for access:
+
+* `AWS_ACCESS_KEY_ID` (`aws.accessKeyId`): AWS Access Key to account with access to SQS queue
+* `AWS_SECRET_ACCESS_KEY` (`aws.secretKey`) : AWS Secret Access Key to account with access to SQS queue
+  
+**NOTE:** The AWS ID and key should only be used for testing and in production access should be managed through IAM roles.
+
