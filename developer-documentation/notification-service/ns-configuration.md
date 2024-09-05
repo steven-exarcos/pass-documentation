@@ -186,5 +186,6 @@ In order for notification services to connect to AWS SQS queue (the default mess
 must be set as Environment Variables (System Properties (-Dargs)):
 
 * `AWS_REGION` (`aws.region`): AWS region id (i.e. `us-east-1`)
-* `AWS_ACCESS_KEY_ID` (`aws.accessKeyId`): AWS Access Key to account with access to SQS queue
-* `AWS_SECRET_ACCESS_KEY` (`aws.secretKey`) : AWS Secret Access Key to account with access to SQS queue
+
+In order for NS to connect to AWS SQS, standard AWS access management needs to be configured on the deployed NS. See 
+[AWS IAM Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) for more information.
