@@ -38,7 +38,11 @@ parameters such as message queues, the base url of Pass-Core, etc.
 | `NIHMS_MAIL_CLIENT_ID`                  |                              | The client ID if the `NIHMS_MAIL_HOST` is a cloud provided email services (e.g. Office 365).                                                                |
 | `NIHMS_MAIL_CLIENT_SECRET`              |                              | The client secret if the `NIHMS_MAIL_HOST` is a cloud provided email services (e.g. Office 365).                                                            |
 | `NIHMS_MAIL_AUTH`                       |                              | The type of authentication. Valid values are: `MS_EXCHANGE_OAUTH2` and `LOGIN`.                                                                             |
-| `PASS_DEPOSIT_NIHMS_EMAIL_FROM`         | nihms-help@ncbi.nlm.nih.gov  | The official email address that sends the error messages.                                                                                                   |
+| `PASS_DEPOSIT_NIHMS_EMAIL_FROM`         | nihms-help@ncbi.nlm.nih.gov  | The official email address that sends the error messages.                                                                                                   |                                                                        |
+| `TEST_DATA_POLICY_TITLE`                |                              | The title of the Policy to associate to the Deployment Test Funder of the Test Grant.                                                                       |
+| `TEST_DATA_USER_EMAIL`                  |                              | The email of the User to set as the PI on the Test Grant.                                                                                                   |
+| `TEST_DATA_SKIP_DEPOSITS`               | true                         | Whether to skip sending the Deployment Test Deposit to the remote repository or not.                                                                        |
+| `TEST_DATA_DSPACE_REPO_KEY`             | JScholarship                 | The repository key of the DSpace repository, if exists, that will be used to delete Deployment Test Deposit Items if made.                                  |
 
 ## Repositories Configuration
 
@@ -161,5 +165,18 @@ There are two authentication protocols supported by this service. A regular smtp
 Exchange oAuth2. By providing a value of `LOGIN` or `MS_EXCHANGE_OAUTH2` for the environmental value, it will determine
 which type of authentication to use. If using the `MS_EXCHANGE_OAUTH2` authentication type, then `NIHMS_MAIL_TENANT_ID`,
 `NIHMS_MAIL_CLIENT_ID`, and `NIHMS_MAIL_CLIENT_SECRET` are required as well.
+
+## Configuring the Deployment Test Data Service
+
+The Deployment Test Data Service is responsible for cleaning up Submission/Deposit data created by Deployment Tests that
+run against live PASS environments. To enable the job that executes the Deployment Test Data Service,
+`pass.test.data.job.enabled` needs to be set to `true`. The `TEST_DATA*` environment variables need to be configured 
+as well.
+
+By default, Submissions created by Deployment Tests that are received by Deposit Services are fully processed; however,
+the Deposit is not actually sent to the remote repository. However, this can be changed by setting 
+`TEST_DATA_SKIP_DEPOSITS` to `false`, which will cause the Deposit to be sent to the remote repository. Additionally, 
+when skip deposits for test data is false, if the remote repository is a DSpace repository, the Deposit Item in DSpace 
+will be deleted by the Deployment Test Data Service.
 
 [1]: https://docs.spring.io/spring-framework/reference/core/resources.html#resources-implementations
