@@ -4,16 +4,26 @@ Some of those resources in our production environment are the Eclipse GitHub rep
 
 ## Eclipse Demo Website
 The Eclipse Demo website is used to demonstrate PASS to the community and potential adopters of PASS. The demo website 
-is hosted at `demo.eclipse-pass.org`. This site is deployed on demand using GitHub actions. 
-demo.eclipse-pass.org site is deployed on demand using GitHub actions
+is hosted at [demo.eclipse-pass.org](https://demo.eclipse-pass.org). This site is deployed on demand using GitHub 
+actions. The demo site uses a login page which is optional with other deployments as integrating with SSO can be 
+achieved at other institutions. To login use the following fake username and password: `nih-user` and `moo`. There are
+other types of users that can be tested in the demo environment and their logins are the same as the local docker setup.
+A list of these test accounts can be found in the Welcome Guide [Setup and Run PASS Locally](../../welcome-guide/setup-run-pass.md#run-pass-locally).
 
 ## Locally Hosted Demo Site
-Locally Run Via Docker Compose
-The demo.eclipse-pass.org site is managed using Docker Compose.
-To run locally first get a local copy of pass-docker then run it with the following commands
-cd pass-docker && \
-docker-compose -f eclipse-pass.base.yml -f eclipse-pass.demo.yml pull && \
-docker-compose -f eclipse-pass.base.yml -f eclipse-pass.demo.yml up
+The demo site can also be run locally using Docker. To run locally, download the Docker image as performed in the 
+Welcome Guide [Setup and Run PASS Locally](../../welcome-guide/setup-run-pass.md#run-pass-locally), and instead of 
+running:
+
+```shell
+docker compose -f docker-compose.yml -f eclipse-pass.local.yml up -d --no-build --quiet-pull --pull always
+```
+
+run the following docker command for the demo site:
+
+```shell
+docker compose -f eclipse-pass.base.yml -f eclipse-pass.demo.yml up --no-build --quiet-pull --pull always
+```
 
 ## Access Eclipse Servers
 To access the Eclipse infrastructure you will need a bastion.eclipse.org login. If you do not have a bastion login, then
