@@ -1,6 +1,6 @@
 # Deposit Services - Statuses
 
-Deposit services primarily acts on three types of resources: `Submission`, `Deposit`, and `RepositoryCopy`. Each of
+Deposit Services primarily acts on three types of resources: `Submission`, `Deposit`, and `RepositoryCopy`. Each of
 these resources carries a status. Managing and reacting to the values of resource statuses is a major function of 
 Deposit Services.
 

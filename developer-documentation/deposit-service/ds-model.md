@@ -1,4 +1,5 @@
 # Deposit Services - Model
+
 The Deposit Services data model describes the interaction between Deposit Services and the PASS data model, detailing 
 how various resources such as `Submission`, `Repository`, `Deposit`, and `RepositoryCopy` are managed. Additionally, it 
 outlines the internal data model, configuration, packaging, and transport mechanisms used by Deposit Services to 
@@ -6,7 +7,7 @@ facilitate the transfer and validation of submissions to downstream repositories
 
 ## PASS Model
 
-Deposit Services uses objects in the PASS data model, which are distinct from the Deposit Services' internal model).
+Deposit Services uses objects in the PASS data model, which are distinct from the Deposit Services' internal model.
 Objects in the PASS data model are persisted in the PASS core service. Thus, any interaction
 with PASS resources will require CRUD operations (using the PassClient) by Deposit
 Services.

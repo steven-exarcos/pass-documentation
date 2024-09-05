@@ -87,13 +87,13 @@ if it is in a _terminal_ state.
 
 Deposit Services is implemented using Spring Boot, which heavily relies on Spring-based annotations and conventions to
 create and populate a Spring `ApplicationContext`, arguably the most important object managed by the Spring runtime.
-If you are unfamiliar with sed annotations and conventions, the following resources would be beneficial to learning more
+If you are unfamiliar with said annotations and conventions, the following resources would be beneficial to learning more
 about them:
 
 * [Baeldung](https://www.baeldung.com/spring-application-context)
 * [Spring Boot Docs](https://docs.spring.io/spring-boot/documentation.html)
 
-The entrypoint into the Deposit Services is the `DepositApp`. Spring beans are created entirely in Java code by the 
+The entrypoint into the Deposit Services is the `DepositApp` class. Spring beans are created entirely in Java code by the 
 `DepositConfig` and `JmsConfig` classes.
 
 ## Build and Deployment
