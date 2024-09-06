@@ -52,7 +52,7 @@ The primary benefit of extending `AbstractAssembler` is that the logic for ident
 submission and creating their representation as `List<DepositSubmission>` is shared. Subclasses of `AbstractAssembler`
 must instantiate and return a `PackageStream`.
 
-Examples can be found at: `DspaceMetsAssembler`, `NihmsAssembler`, and `BagItAssembler`
+Examples can be found at: `DspaceMetsAssembler`, `NihmsAssembler`, `InvenioRdmAssembler`, and `BagItAssembler`
 
 ### PackageStream API
 
@@ -67,6 +67,11 @@ that your package resources will be bundled up in a single archive file accordin
 the `Assembler` (e.g. compression and archive type to use).
 
 To instantiate an `ArchivingPackageStream` class requires an instance of `PackageProvider`.
+
+There is also a `SimplePackageStream` class that contains the associated `DepositSubmission`, List of 
+`DepositFileResources`, and metadata to be sent to repository. This class may be used in integrations where the
+individual file resources are needed for processing the repository deposit. For example, the InvenioRDM integration is 
+one such repository.
 
 ### PackageProvider API
 
@@ -89,10 +94,12 @@ specification shared between the two is not violated.
 
 ## Assembler Development Recap
 
-Implementations of `AbstractAssembler` return an `ArchivingPackageStream` which uses a `PackageProvider` to path
-resources and generate supplemental metadata contained in the package.
+Implementations of `AbstractAssembler` that return a single archive for deposit will return an `ArchivingPackageStream` 
+which uses a `PackageProvider` to path resources and generate supplemental metadata contained in the package. For
+integrations that process each file resource, the `AbstractAssembler` implementation should return `SimplePackageStream`
+that can be used later by the `Transport` for processing.
 
-When developing your own `Assembler`, you will need to:
+_When developing your own `Assembler` that returns a `ArchivingPackageStream`, you will need to:_
 
 * Extend `AbstractAssembler`
 * Implement `PackageProvider`, including the logic to produce supplemental package content like BagIt tag files or
@@ -105,6 +112,15 @@ Examples of implemented package providers:
 * `DspaceMetsPackageProvider`
 * `NihmsPackageProvider`
 * `BagItPackageProvider`
+
+_When developing your own `Assembler` that returns a `SimplePackageStream`, you will need to:_
+
+* Extend `AbstractAssembler`
+* Construct `SimplePackageStream` return that from your `AbstractAssembler` implementation
+
+Examples of implemented such assemblers:
+
+* `InvenioRdmAssembler`
 
 ## Concurrency
 

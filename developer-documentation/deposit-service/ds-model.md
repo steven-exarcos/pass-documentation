@@ -115,13 +115,17 @@ resources_) include metadata describing the content, for example, BagIt tag file
 #### Abstract Assembler and Archiving Package Stream
 
 There are two abstract classes to help developers create `Assembler` implementations. The `AbstractAssembler`
-and `ArchivingPackageStream`.
+and `ArchivingPackageStream`. There is also a concrete class named `SimplePackageStream` that can be used for 
+non-archive integrations.
 
 The `AbstractAssembler` contains shared logic for building a list of custodial resources to be deposited. Concrete
 implementations accept the list of custodial resources (among other parameters, including the packaging specification)
 and produce the `PackageStream`.
 
 The `ArchivingPackageStream` contains shared logic for assembling multiple files into a single zip, tar, or tar.gz file.
+
+The `SimplePackageStream` contains the associated `DepositSubmission`, List of `DepositFileResources`, and returns
+metadata to be sent to repository.
 
 #### MetadataBuilder and PackageStream.Metadata
 
@@ -172,7 +176,7 @@ a `Transport` implementation.
 
 The `Assembler` and the `PackageProvider` create the package, and the `Transport` is the "how" of how a package is
 transferred to a downstream repository. Choosing the `Transport` to be used depends on the support of the downstream
-repository for things like S/FTP, SWORD, or other protocols.
+repository for things like S/FTP, SWORD, InvenioRDM (HTTP) or other protocols.
 
 For example, a BagIt `Assembler` and `PackageProvider` would produce BagIt packages. Those packages may be transported
 to downstream repositories using S/FTP, SWORDv2, or a custom Transport implementation. The `Transport` to be used is a
@@ -185,3 +189,8 @@ Supports the transport of the package stream using S/FTP.
 #### SWORDv2
 
 Supports the transport of the package stream using [SWORD protocol version 2](http://swordapp.github.io/SWORDv2-Profile/SWORDProfile.html).
+
+#### InvenioRDM
+
+Supports the transport of the package stream that will be sent to a InvenioRDM repository. This implementation uses
+HTTP to call the InvenioRDM REST API.
