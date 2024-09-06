@@ -19,7 +19,7 @@ Therefore, supporting new repositories or use cases requires novel code to be de
 In order to support a new downstream repository (e.g. Dataverse, Islandora), there are four high-level requirements to
 negotiate:
 
-1. Repository protocol: the protocol used to transmit the bytes to the repository (e.g., S/FTP, SWORD).
+1. Repository protocol: the protocol used to transmit the bytes to the repository (e.g., S/FTP, SWORD, HTTP).
 2. Custody transfer: mechanism used to determine whether a successful custody transfer took place.
 3. Package spec: governs physical characteristics of the package (structure, pathing, naming), and required or optional
    metadata (e.g., NIH bulk package spec, DSpace METS, BagIT).
@@ -32,23 +32,18 @@ The philosophy of the Deposit Service is that these requirements are a negotiati
 * Requirements to accommodate limitations in PASS.
 
 In order to satisfy their workflows, institutions will place requirements on packages, especially the metadata contained
-in the package. Universities, the NIH, or the NSF are not going to change their package requirements to conform with PASS.
+in the package. Universities, the NIH, or the NSF are not going to change their package requirements to conform with 
+PASS.
 
 ### Rationale for Packages
 
-The one thing PASS cannot negotiate is the package-oriented nature of the Deposit Service. The concept of a package is
-baked into the Assembler and Transport API. As a consequence, the following kinds of interactions are not supported by
-Deposit Services:
-* Transfer of discrete files: the Deposit Service does not transfer the files of a Submission one by one. Files submitted
-  to PASS by an end user are rolled up and transferred in a single archive file (i.e., a package).
-* Mapping to downstream data models: the Deposit Service does not, for example, create DSpace Communities, Collections, or
-  Items. It does not create LDP resources in Fedora. It does not create Islandora Nodes or Media. It will send a package,
-  and the downstream repository is responsible for receiving the package and mapping from the package model to the native
-  repository model.
+The package-oriented nature of the Deposit Service is the preferred way to send the files for a deposit. Sending a set
+of files in a single archive is the most predictable transport approach for completing the transfer of custody. 
 
-Packages are a shared concept that significantly reduce the number of repositories supported. Theoretically, if PASS 
-provides generalized support for popular package models, interoperability with a variety of downstream repositories will 
-be more easily achieved.
+_It is also possible to send each file separately if the integration requires it, but the DS transport implementation 
+must handle failure cases._ For example, if there is a failure in the middle of sending a set of file to the repository, 
+when DS retries the failed Deposit, the transport needs to ensure the Deposit in the repository is in a "good state" 
+before starting the transfer again.
 
 ### Interface Overview
 
@@ -61,7 +56,7 @@ If implementing a new repository the following interfaces will need to be implem
 
 ### Downstream Requirements
 
-The downstream repository must be able to receive a package, and ingest its content:
+If the downstream repository integration is receiving a single package, it must:
 
 * Unpack the package,
 * interpret its content,
@@ -72,6 +67,9 @@ Ideally a downstream repository will have some mechanism to determine and expose
 package has been accepted or rejected), but that is not a strict requirement. PASS will still function even if the
 downstream repo doesn't expose the status of a deposit attempt.
 
+If the downstream repository integration is receiving files separately, it is up to the DS Transport implementation to
+make the appropriate calls as the repository API specifies.
+
 ### Repository Protocol
 
 The repository protocol is primarily implemented by the Deposit Service Transport API. The Transport API is responsible
@@ -80,11 +78,12 @@ interpret the response for success or failure. In some cases, the response carri
 persisted (e.g., Deposit.depositStatusRef is captured from a SWORD response for the DepositStatusProcessor to act on
 later).
 
-The transport implementation is also responsible for indicating the location of the package, e.g. the folder (FTP) or
+The transport implementation is also responsible for indicating the location of the package, e.g. the folder (S/FTP) or
 collection (SWORD) the package will be transferred to within the downstream repository. These transport hints are
 supplied as key-value pairs to the underlying implementation.
 
-If the repository protocol is SWORDv2 or FTP, the existing implementation may be reused, otherwise write your own.
+If the repository protocol is SWORDv2, S/FTP, or InvenioRDM the existing implementation may be reused, otherwise write 
+your own.
 
 If the repository has a use case that is not handled by an existing implementation, it might be accommodated by
 supporting new transport hints for an existing implementation rather than writing a novel implementation. Supporting an
@@ -127,18 +126,18 @@ In practice, a faculty member would need to:
 
 PASS support staff would need to comb through logs, contact the downstream repository administrator, or take other
 action to determine the cause of the rejection.  PASS has no support for remediating submissions that failed because
-the downstream repository worklow rejected it.
+the downstream repository workflow rejected it.
 
 ### Package Specification
 
-Implementation of the Deposit Service `Assembler` and `Package Provider API`. If the packaging spec is NIHMS or BagIT, reuse
+For implementations of the DS `Assembler` and `Package Provider API`, if the packaging spec is NIHMS or BagIT, reuse
 existing implementations. If the packaging spec is DSpace METS, reuse existing implementation, and provide a metadata
-mapping in a package provider. If a new specification is being supported, write a new implementation of the Assembler,
-using shared implementations like AbstractAssembler and ArchivingPackageStream.
+mapping in a package provider. If a new specification is being supported, write a new implementation of the `Assembler`,
+using shared implementations like `AbstractAssembler` and `ArchivingPackageStream`.
 
-Concrete subclasses of AbstractAssembler are responsible for implementing the PackageProvider interface.
+Concrete subclasses of `AbstractAssembler` are responsible for implementing the `PackageProvider` interface.
 
-The complexity of creating a stream is encapsulated in ArchivingPackageStream, which is shared across all Assemblers
+The complexity of creating a stream is encapsulated in `ArchivingPackageStream`, which is shared across all Assemblers
 that produce a single archive file. They have allowed for the generation of packages for BagIt, DSpace METS, NIHMS,
 along with simple package formats used for integration tests.
 
@@ -147,12 +146,12 @@ along with simple package formats used for integration tests.
 - Custodial content: content supplied by the end user in a PASS Submission; these are PASS File entities.
 - Supplemental files: not to be confused with the PASS File role option of the same name; these are files that are
   generated by the Assembler, usually to comply with a package specification. E.g. a manifest of files and their
-  checksums, or a file containing metadata for the package. End users do not upload supplemental files, they are supplied
-  by the Assembler implementation.
+  checksums, or a file containing metadata for the package. End users do not upload supplemental files, they are 
+  supplied by the Assembler implementation.
 - Package Provider (discussed in the next topic): responsible for producing the supplemental files included in a package
-- Packages are streams, and are designed to be relatively performant. For example, a client of the Assembler API can open
-  a PackageStream and begin reading from it right away, and the stream won't block as long as the implementation continues
-  to supply bytes.
+- Packages are streams, and are designed to be relatively performant. For example, a client of the Assembler API can 
+  open a PackageStream and begin reading from it right away, and the stream won't block as long as the implementation 
+  continues to supply bytes.
 
 #### Important Abstractions in the Assembler API
 
