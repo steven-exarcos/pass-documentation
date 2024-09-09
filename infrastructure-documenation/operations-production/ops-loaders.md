@@ -1,5 +1,12 @@
 # Operations/Production - Data Loaders
 
+## Journal Data Loader
+The Journal Loader 
+
+## Grant Data Loader
+
+
+
 ## NIHMS Data Loader
 
 The NIHMS Data Loader Harvester process requires an NIHMS API Authentication token.  This token is available from the 
@@ -8,20 +15,19 @@ NIHMS/PACM utils page and is valid for three months.
 In order to obtain a NIHMS API Authentication token, you must create an account with NIH/ERA. See this page for 
 instructions on creating a User Account with NIH/eRACommons: [Create Commons Account](https://www.era.nih.gov/erahelp/ams_new/Content/Create_Accounts/Create_User_Accts/Create_Acct_External.htm)
 
-System Owner: The system owner is the NIH, but account management is delegated to a University’s Office of Sponsored
+* System Owner: The system owner is the NIH, but account management is delegated to a University’s Office of Sponsored
 Research. In JHU’s case, this is: Johns Hopkins University Research Administration (JHURA). For any other university
 setting up their own NIHMS data loader, it will be the Office of Sponsored Research that creates the account for the
 API key.
 
-Account Setup: In the case of JHU, the account needs to be set up by JHU Research Administration (JHURA). They will need
-to have the following permissions in order to create an account: SO, AO, AA, or BO and they cannot be affiliated with
-more than one institution.
+* Account Setup: In the case of JHU, the account needs to be set up by [JHU Research Administration](https://jhura.jhu.edu/).
+They will need to have the following permissions in order to create an account: SO, AO, AA, or BO and they cannot be 
+affiliated with more than one institution.
 
 If any modifications to the account need to be made, such as changing the associated email with the account, it will
 need to be done via the eRA administrator.
 
-Other Documentation:
-https://www.ncbi.nlm.nih.gov/pmc/utils/pacm/static/pacm-user-guide.pdf
+More information regarding the NIHMS Loader can be found in the [Developer Documentation NIHMS Loader section](../../developer-documentation/data-loaders/nihms-loader.md)
 
 ### NIHMS API Token Refresh Automation
 
