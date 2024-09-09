@@ -208,8 +208,7 @@ Once a PACM account is established, generating the token can be done via the [PA
 
 ### NIHMS Token Refresh
 
-The NIHMS harvester process requires an Authentication token. This token is available from the PACM utils page and is
-valid for three months. There is currently no API available to refresh the token.
+The NIHMS harvester process requires an Authentication token. This token is available from the PACM utils page and is valid for three months. There is currently no API available to refresh the token.
 
 In order to provide an automatic token refresh, there is a module within the NIHMS loader called `nihms-token-refresh` that performs an automatic refresh of the token and updates the AWS Parameter Store. More information about how this module works in a production environment can be found in the [Operation/Production Data Loaders section](../../infrastructure-documenation/operations-production/ops-loaders.md#nihms-api-token-refresh-automation).
 
