@@ -27,4 +27,4 @@ In this guide we step through various topics on JHU Operations and Production:
   * [Data & Backups](./ops-data-backup.md)
   * [Eclipse Demo Site](./ops-demo-eclipse.md)
   * [Eclipse Operations](./ops-eclipse.md)
-- [Next Steps / Institution Configuration](./ops-new-institution.md)
+* [Next Steps / Institution Configuration](./ops-new-institution.md)
