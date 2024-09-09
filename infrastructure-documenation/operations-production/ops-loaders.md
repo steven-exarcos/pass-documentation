@@ -1,24 +1,47 @@
 # Operations/Production - Data Loaders
+This section describes how the [Data Loaders](../../developer-documentation/data-loaders) are implemented in the JHU AWS
+production environment.
 
 ## Journal Data Loader
-The Journal Loader 
+
+* **AWS Batch:** The Journal Loader is executed as a batch job using AWS Batch. The Journal Loader batch job retrieves, 
+processes, and uploads journal data to the PASS system.
+* **EC2:** The batch job is executed in a specific Fargate-based compute environment within AWS. The environment is 
+deployed in the `jhupass-vpc` VPC.
+* **EventBridge:** AWS EventBridge is used to schedule the execution of the Journal Loader job.
 
 ## Grant Data Loader
 
-
+* **AWS Batch:** The Grant Loader is executed as a batch job using AWS Batch. The Grant Loader batch job pulls grant data
+from the COEUS/FIBI grant management databases that is used by Johns Hopkins University.
+* **EC2:** The batch job is executed in a specific Fargate-based compute environment within AWS. The environment is
+deployed in the `jhupass-vpc` VPC.
+* **S3:** The configuration of the Grant Loader is persisted in S3 buckets. The policy information `policy.properties` and
+`grant_update_timestamps` are stored in a S3 bucket.
+* **EventBridge:** AWS EventBridge is used to schedule the execution of the Grant Loader job. The target of the schedule is 
+a Step Function which breaks out the pulling and loading of data into separate steps. It also defines functionality for
+retrying failed loads with a certain number of attempts and interval wait time.
 
 ## NIHMS Data Loader
 
-The NIHMS Data Loader Harvester process requires an NIHMS API Authentication token.  This token is available from the 
+* **AWS Batch:** The NIHMS Loader is executed as a batch job using AWS Batch. It pulls data from the NLM’s Public Access 
+Compliance Monitor (PACM) API updating and creating submissions.
+* **EC2:** The batch job is executed in a specific Fargate-based compute environment within AWS. The environment is
+deployed in the `jhupass-vpc` VPC.
+* **EventBridge:** AWS EventBridge is used to schedule the execution of the NIHMS Loader job.
+
+### PACM API Token
+
+The NIHMS Data Loader Harvester process requires an NIHMS API Authentication token. This token is available from the 
 NIHMS/PACM utils page and is valid for three months. 
 
 In order to obtain a NIHMS API Authentication token, you must create an account with NIH/ERA. See this page for 
 instructions on creating a User Account with NIH/eRACommons: [Create Commons Account](https://www.era.nih.gov/erahelp/ams_new/Content/Create_Accounts/Create_User_Accts/Create_Acct_External.htm)
 
 * System Owner: The system owner is the NIH, but account management is delegated to a University’s Office of Sponsored
-Research. In JHU’s case, this is: Johns Hopkins University Research Administration (JHURA). For any other university
-setting up their own NIHMS data loader, it will be the Office of Sponsored Research that creates the account for the
-API key.
+Research. In JHU’s case, this is: [Johns Hopkins University Research Administration](https://jhura.jhu.edu/). For any 
+other university setting up their own NIHMS data loader, it will be the Office of Sponsored Research that creates the 
+account for the API key.
 
 * Account Setup: In the case of JHU, the account needs to be set up by [JHU Research Administration](https://jhura.jhu.edu/).
 They will need to have the following permissions in order to create an account: SO, AO, AA, or BO and they cannot be 
@@ -43,9 +66,9 @@ There is a Docker image available named `ghcr.io/eclipse-pass/pass-nihms-token-r
 
 To run the token refresh RPA, the following needs to be passed to the docker image as environment variables:
 
-`NIHMS_USER` : The ERA Commons login username  
-`NIHMS_PASSWORD` : The ERA Commons login password  
-`NIHMS_OUTFILE` : The full path to the file to write the new token
+* `NIHMS_USER` : The ERA Commons login username  
+* `NIHMS_PASSWORD` : The ERA Commons login password  
+* `NIHMS_OUTFILE` : The full path to the file to write the new token
 
 ```
 docker run -e NIHMS_USER=<era_user> -e NIHMS_PASSWORD=<era_password> -e NIHMS_OUTFILE=<path_to_outfile> ghcr.io/eclipse-pass/pass-nihms-token-refresh:<version>
