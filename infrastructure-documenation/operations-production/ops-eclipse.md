@@ -17,15 +17,3 @@ These [.eclipsefdn](https://github.com/eclipse-pass/.eclipsefdn) repo / tools gi
 * Branch protection rules
 
 Learn more about [Otterdog here](/docs/infra/otterdog.md).
-
-### Adding a New Repository
-To add a new repository it requires being a `committer` of the PASS project and performing the following steps: 
-
-* Forking the [eclipse-pass/.eclipsefdn repository](https://github.com/eclipse-pass/.eclipsefdn) into your own GH 
-account.
-* Create a feature branch off the `main` branch following the naming convention of our [developer guidelines](../../community/developer-guidelines.md#pull-request-workflow).
-* Modify the `eclipse-pass.jsonnet` with a new repository `orgs.newRepo('REPO_NAME_HERE')`.
-  * For the full configuration of the repository see the [Otterdog Jsonnet Configuration section](./ops-eclipse.md#otterdog-jsonnet-configuration).
-* Create a PR in the [.eclipsefdn repository](https://github.com/eclipse-pass/.eclipsefdn)
-* Include a project lead as a reviewer on the PR.
-* One of the release engineers from Eclipse will review the PR and perform the merge.
