@@ -25,6 +25,7 @@ recovery from accidental overwrites or deletions by restoring previous versions.
 By using AWS S3 buckets it provides [data durability](https://docs.aws.amazon.com/AmazonS3/latest/userguide/DataDurability.html) 
 by ensuring that stored data is highly protected against loss or corruption. It achieves this by replicating data across
 multiple devices in at least three distinct Availability Zones within an AWS Region. This redundancy helps S3 
-preserve data even in the case of hardware failures or the loss of an entire Availability Zone. Additionally, features 
-that can be managed such as versioning, object lock, and cross-region replication further enhance data protection by 
-safeguarding against accidental or malicious deletion and enabling disaster recovery.
+preserve data even in the case of hardware failures or the loss of an entire Availability Zone. There are also routine 
+procedures to verify the integrity of the data using checksums. Additionally, features that can be managed such as 
+versioning, object lock, and cross-region replication further enhance data protection by safeguarding against accidental
+or malicious deletion and enabling disaster recovery.
