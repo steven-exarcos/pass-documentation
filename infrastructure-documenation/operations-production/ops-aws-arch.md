@@ -92,8 +92,9 @@ buckets and connecting to the PASS Core API.
 There are two ALBs, one for handling external traffic and another for internal communication between the different 
 components of PASS. The public load balancers handles requests for the domain name. All traffic is forwarded to HTTPS,
 and there is a security group that is attached, allowing only inbound/outbound requests to specific ports. The other
-load balancer for internal communication has as similar setup but forwards to an internal host name. Similarly, it has
-an attached security group for permitting specific ports for inbound/outbound requests.
+load balancer for internal communication has as similar setup but is private meaning it is not accessible outside the 
+VPC private network. Similarly, it has an attached security group for permitting specific ports for inbound/outbound 
+requests.
 
 #### Target Groups
 Target Groups are used by ALBs to forward requests to the EC2 instances running the Pass-core/Pass-UI docker containers. 
