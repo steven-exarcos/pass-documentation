@@ -17,9 +17,11 @@ done to replicate a similar JHU infrastructure.
     grants, user information, and other metadata.
   * **S3 for Storage and Configuration Files:**
       * S3 is used for storing configuration files and temporary file storage submission artifacts.
-  * **Load Balancers:**
+  * **Application Load Balancers:**
     * Configure ALBs to handle incoming traffic for the PASS UI and ensure that traffic is routed to the correct backend
     services.
+    * There are two target groups, one for the public ALB and one for the private ALB, these will forward the 
+    appropriate container that is run in the PASS Core EC2 instance.
   * **SQS/SNS:**
     * SQS queues are used throughout the PASS application architecture. Notably they are used for messages related to 
     submissions, deposits, and submission events.
