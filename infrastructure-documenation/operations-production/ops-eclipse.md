@@ -5,7 +5,7 @@ One of those resources is the Eclipse GH repository configuration.
 
 ## Eclipse GitHub Repository Configuration
 
-The [.eclipsefdn](https://github.com/eclipse-pass/.eclipsefdn) repository enables the team to
+The [.eclipsefdn](https://github.com/eclipse-pass/.eclipsefdn) repository enables the team committers to
 [self-service several aspect of the eclipse organization](https://www.eclipse.org/projects/handbook/#resources-github-self-service)
 via a tool called [Otterdog](https://otterdog.readthedocs.io).
 
