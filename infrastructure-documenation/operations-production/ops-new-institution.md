@@ -38,6 +38,9 @@ done to replicate a similar JHU infrastructure.
     * JHU is integrated with Shibboleth SSO, which enables JHU users to login with their institutional credentials. It 
     is possible to integrate with other SSO solutions for authentication, but may require some additional development to
     handle the header variables.
+  * Web Application Firewall (WAF)
+    * Configure a WAF using a set of web ACLs that adhere to your institution's web security 
+    practices. AWS provides a good set of predefined rules that can be applied. 
 * **Data Loaders**
   * **Batch Jobs**
     * AWS Batch is composed of a Compute Environment, Job Queue, and Job Definition. AWS Batch uses the Job Definition 
