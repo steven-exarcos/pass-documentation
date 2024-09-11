@@ -3,15 +3,15 @@
 The PASS design supports flexible and scalable submission workflows of research publications. It consists of four main
 components: PASS UI, Data Loaders, PASS Core, and Deposit Services. PASS Core acts as the central backbone, coordinating
 the workflow through, Elide, a JSON:API that interfaces with various services. It stores documents using the 
-Oxford Common File Layout (OCFL) on disk or through an S3 bucket, while the backend services are written in Java using 
-Spring Boot. Data Loaders handle the ingestion of journal, grant, and publication data, while Deposit Services manage 
-the deposits of submissions into various repositories like DSpace, NIH, and InvenioRDM.
+[Oxford Common File Layout (OCFL)](https://ocfl.io/) on disk or through an S3 bucket, while the backend services are 
+written in Java using Spring Boot. Data Loaders handle the ingestion of journal, grant, and publication data, while 
+Deposit Services manage the deposits of submissions into various repositories like DSpace, NIH, and InvenioRDM.
 
 It is important to note that the AWS architecture described in this article reflects the choices made by JHU on how to 
-deploy PASS. PASS can be deployed in many ways such as run on other cloud providers or run on infrastructure that is 
-local to the institution. The different components of PASS and their associated production setup and operations that 
-will be discussed in this article are specific to JHU. Some of these items may be needed in another PASS deployment, but
-some may not all depending on the institution's architectural decisions.
+deploy PASS. The deployment can be done in various ways, including being hosted on other cloud providers or operated on 
+infrastructure managed locally by the institution. The different components of PASS and their associated production 
+setup and operations that will be discussed in this article are specific to JHU. Some of these items may be needed in 
+another PASS deployment, but some may not all depending on the institution's architectural decisions.
 
 The JHU PASS architecture is deployed on AWS, leveraging services such as Elastic Compute Cloud (EC2), Elastic Container 
 Service (ECS), Simple Storage Service (S3), and Simple Queue Service (SQS) to ensure high availability, scalability, and
@@ -42,13 +42,13 @@ with "least privilege" access.
 
 ### EC2 - PASS Core and UI
 PASS Core and UI are deployed on an EC2 instance. This instance is part of the main VPC and is configured to run the 
-PASS Core API/UI. Configuration files and deployment scripts for PASS Core/UI and 
-are stored in S3, allowing for easy access and management during deployments and updates. In addition, the AWS Systems 
-Manager parameter store contains configuration of environment variables in the PASS application. PASS Core uses SQS for 
-message queuing to handle asynchronous communication between different components of the PASS system. For example, when 
-a submission is made, a message is placed in an SQS queue, which is then processed by the deposit services. PASS-UI 
-interacts with AWS infrastructure by utilizing EC2 instances for hosting, ALBs for managing traffic, and S3 for storing 
-static assets.
+PASS Core API/UI. Configuration files and deployment scripts for PASS Core/UI and are stored in S3, allowing for easy 
+access and management during deployments and updates. In addition, the AWS Systems Manager parameter store contains 
+configuration of environment variables in the PASS application. PASS Core uses SQS for message queuing to handle 
+asynchronous communication between different components of the PASS system. For example, when a submission is made, a 
+message is placed in an SQS queue, which is then processed by the deposit services. PASS-UI interacts with AWS 
+infrastructure by utilizing EC2 instances for hosting, ALBs for managing traffic, and S3 for storing static assets.
+
 
 #### SSO - Shibboleth
 PASS Core/UI integrates with Shibboleth for authentication, providing a single sign-on experience for users. Shibboleth 
