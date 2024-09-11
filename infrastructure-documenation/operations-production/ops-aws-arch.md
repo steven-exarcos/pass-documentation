@@ -79,7 +79,7 @@ S3 bucket.
 #### Notification Services
 Notification Services are responsible for consuming messages from the submission event queues and sending notifications 
 via email. The Notification Service ECS task is configured to be able to access the ECR, SSM Parameter store, and SQS. 
-SES enabled in production mode for sending emails from the notifications service.
+SES is enabled in production mode for sending emails from the notifications service.
 
 #### Data Loaders
 The Data Loaders (Journal, Grant, Publication) are executed as AWS Batch jobs within ECS Fargate compute
@@ -95,17 +95,9 @@ and there is a security group that is attached, allowing only inbound/outbound r
 load balancer for internal communication has as similar setup but forwards to an internal host name. Similarly, it has
 an attached security group for permitting specific ports for inbound/outbound requests.
 
-* **Public PASS ALB**
-  * Public load balancer to handle requests for internet requests.
-  * HTTPS listener forwards requests to public Target Group.
-* **Private Pass Core ALB**
-  * Private load balancer to handle requests for VPC private network requests. Used by backend services/data loaders to 
-  communicate with Pass Core API. Private Hosted Zone used in Route 53.
-  * HTTP listener forwards requests to private Target Group.
-* **Target Groups**
-  * Target Groups are used by ALBs to forward requests to the EC2 instances running the Pass-core/Pass-UI docker 
-containers. 
-  * There are two target groups, one for the public ALB and one for the private ALB.
+#### Target Groups
+Target Groups are used by ALBs to forward requests to the EC2 instances running the Pass-core/Pass-UI docker containers. 
+There are two target groups, one for the public ALB and one for the private ALB.
 
 ### Web Application Firewall (WAF)
 A WAF sits at the edge of the architecture boundary, as pictured in the PASS Application Architecture diagram, between
@@ -120,15 +112,16 @@ SES is enabled in production mode for sending emails from the notifications serv
 
 ### PASS Elastic Container Registry (ECR)
 ECR is a fully managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker 
-container images. It's leveraged in the PASS Application Architecture by giving a private repository images for PASS
-Core, PASS UI, Data Loaders, Deposit Services, and Notification Services.
+container images. It's leveraged in the PASS Application Architecture by giving a private repository to store the
+released Docker images for PASS Core, PASS UI, Data Loaders, Deposit Services, and Notification Services.
 
 ### SQS Queues
-SQS publication queue serves as a decoupling mechanism between the PASS Core and Deposit Services. Submissions are
-processed asynchronously, resulting in a system that remains responsive and efficient. There are three queues that are
-used by the overall PASS environment: `deposit`, `submission`, and `submission-event`.
+SQS publication queue serves as a decoupling mechanism between the PASS Core and Deposit and Notification Services. 
+Submissions are processed asynchronously, resulting in a system that remains responsive and efficient. There are three 
+queues that are used by the overall PASS environment: `deposit`, `submission`, and `submission-event`.
 
 ### S3
-PASS Core uses Amazon S3 to store submission-related documents and metadata. The OCFL is employed to organize these
-files, providing options for local disk storage or S3 bucket retention. The configuration of the File Service in PASS
-Core is done through environment variables that are set in the Systems Manager parameter store.
+PASS uses S3 for configuration, deployment, and file storage. PASS Core uses Amazon S3 to store submission-related 
+documents and metadata. The OCFL is employed to organize these files, providing options for local disk storage or S3 
+bucket retention. The configuration of the File Service in PASS Core is done through environment variables that are set 
+in the Systems Manager parameter store.
