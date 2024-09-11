@@ -1,4 +1,5 @@
 # Operations/Production - How to Deploy
+
 In this article the JHU instance of PASS will be used to demonstrate how we deploy the application to production. As 
 with the JHU architecture decisions, deployment will be done in various ways and will likely vary between institutions 
 depending on their architecture. It is important to note that there is a process of testing and stepping through 
@@ -6,6 +7,7 @@ development and staging environments before deploying to production. This articl
 to a production environment.
 
 ## GitHub (GH) Automations
+
 [GitHub Actions](https://docs.github.com/en/actions) is used to deploy PASS to our production environment. We keep the 
 GH Workflow YAML and Python scripts in a private repository since this is a JHU specific deployment. The main workflow 
 `Production Deployment` is run from the GH web interface and releases a specified version of the main branch
