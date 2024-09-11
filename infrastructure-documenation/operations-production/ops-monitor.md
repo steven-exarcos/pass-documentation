@@ -5,6 +5,9 @@ There are several alarms setup in CloudWatch to monitor the health of the PASS s
 an SNS topic to send email to PASS devops. The following are a subset of Alarms to monitor the PASS application:
 
 * **Application Load Balancer (ALB)**
+  * **CPUUtilization (RDS)** - The CPU Utilization of the RDS instance. Normally will alarm if this metric is higher
+  than some threshold for an amount of time.
+  * **CloudWatch Log Errors** - Monitor will alarm if an ERROR log entry appears in PASS logs in cloudwatch.
   * **HTTPCode_ELB_4XX_Count** - The number of HTTP 4XX client error codes that originate from the load balancer.
   * **TargetResponseTime** - The time elapsed, in seconds, after the request leaves the load balancer until the target
   starts to send the response headers.
@@ -28,7 +31,8 @@ an SNS topic to send email to PASS devops. The following are a subset of Alarms 
 
 There are a lot more metrics that can be collected and fine-tuned with different parameters. These are a sample of 
 metrics that JHU PASS uses, but it is encouraged to see what metrics and their parameters that best fit the environment
-PASS is in. More information regarding Cloud Watch and the metrics that can be monitored are on the [AWS documentation site](https://docs.aws.amazon.com/). 
+PASS is in. More information regarding CloudWatch and the metrics that can be monitored are on the 
+[AWS documentation site](https://docs.aws.amazon.com/). 
 
 ## Synthetic Canary
 Amazon CloudWatch Synthetics are configurable scripts than run a schedule and can monitor endpoints and APIs. Canaries 
@@ -45,3 +49,7 @@ created. You can query the Athena database using standard SQL in the Query Edito
 ## Dashboard
 A dashboard has been added to CloudWatch that shows high level metrics for the PASS app, triggered alarms, and errors in
 logs. To learn more about CloudWatch dashboards visit the [CloudWatch User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Dashboards.html.)
+
+## Data Loader Failure Notifications
+It is important to know when one of the PASS Data Loader jobs fail to run. This can be done in EventBridge by creating
+a Rule that fires on AWS Batch Job failures and sends a notification using AWS SNS.

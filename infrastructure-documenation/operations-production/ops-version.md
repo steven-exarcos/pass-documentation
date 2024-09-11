@@ -1,8 +1,8 @@
 # Operations/Production - PASS Versioning
 
-A release of PASS is made up of Java artifacts, Node modules, and Docker images. Maven builds all the Java artifacts and
-many of the Docker images. The Node based pass-ember adapter is released to the NPM registry. The Node based pass-ui is
-released as a Docker image in pass-docker. The Maven releases are the most complicated part of the overall process.
+A release of PASS is made up of Java artifacts and Docker images. Maven builds all the Java artifacts and
+the associated Docker images. The Node based pass-ui is released as a Docker image. Docker images are published in 
+GitHub Container Registry which can be viewed in each repository's Packages. 
 
 There is a single version of PASS across all components. We've decided to take this approach due to several benefits,
 but the most important reason is the ease of understanding. PASS uses semantic versioning following this convention:
