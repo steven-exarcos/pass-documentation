@@ -202,6 +202,16 @@ Once access to PACM has been established, configuring the infrastructure where t
 
 Optionally as a last step, setting up the [NIH Manuscript Submission](https://www.nihms.nih.gov) account would enable seeing which submissions have been made and how far along they are in the process. Once a submission makes its way through this process it appears in the PubMed Central data. This can be useful when troubleshooting records that you might expect to be in the PubMed Central data.
 
+### Manual NIHMS Token Generation
+
+Once a PACM account is established, generating the token can be done via the [PACM Website](http://www.pubmedcentral.nih.gov/utils/pacm/). Use the eRA Commons login and sign in with your username and password. Note that the login instructions may be different for every institution as the authentication mechanism may differ. After logging in, use the link at the top of the page that is labeled `API Token`. This page will generate a new token every time it is accessed and your new API token will appear here. A token is valid for three months, and currently there is no way of deleting a token, so each page access will create a new token.
+
+### NIHMS Token Refresh
+
+The NIHMS harvester process requires an Authentication token. This token is available from the PACM utils page and is valid for three months. There is currently no API available to refresh the token.
+
+In order to provide an automatic token refresh, there is a module within the NIHMS loader called `nihms-token-refresh` that performs an automatic refresh of the token and updates the AWS Parameter Store. More information about how this module works in a production environment can be found in the [Operation/Production Data Loaders section](../../infrastructure-documenation/operations-production/ops-loaders.md#nihms-api-token-refresh-automation).
+
 ## Related Information
 
 The resources below will assist in setting up the accounts required to run the NIHMS Loader and understanding the submission process.

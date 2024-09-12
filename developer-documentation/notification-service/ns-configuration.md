@@ -1,6 +1,7 @@
-# Notification Services Configuration
+# Notification Services - Configuration
 
-The required runtime configuration for Notification Services (NS) is composed of a configuration file and a set of environment variables.
+The required runtime configuration for Notification Services is composed of a configuration file and a set of 
+environment variables.
 
 ## Configuration File
 The NS configuration file is referenced by the environment variable `PASS_NOTIFICATION_CONFIGURATION` or a system property 
@@ -87,35 +88,45 @@ Here is a sample NS configuration file:
 
 ## Mode
 
-Notification Services (NS) has three runtime modes:
-- `DISABLED`: No notifications will be composed or emitted.  All JMS messages received by NS will be immediately acknowledged and subsequently discarded.
-- `DEMO`: Allows a whitelist, global carbon copy recipient list, and notification templates to be configured distinct from the `PRODUCTION` mode.  Otherwise exactly the same as `PRODUCTION`.
-- `PRODUCTION`: Allows a whitelist, global carbon copy recipient list, and notification templates to be configured distinct from the `DEMO` mode.  Otherwise exactly the same as `DEMO`.
+Notification Services has three runtime modes:
+* `DISABLED`: No notifications will be composed or emitted.  All JMS messages received by NS will be immediately 
+acknowledged and subsequently discarded.
+* `DEMO`: Allows a whitelist, global carbon copy recipient list, and notification templates to be configured distinct 
+from the `PRODUCTION` mode.  Otherwise, exactly the same as `PRODUCTION`.
+* `PRODUCTION`: Allows a whitelist, global carbon copy recipient list, and notification templates to be configured 
+distinct from the `DEMO` mode.  Otherwise, exactly the same as `DEMO`.
 
-Configuration elements for both `PRODUCTION` and `DEMO` modes may reside in the same configuration file.  There is no need to have separate configuration files for a "demo" and "production" instance of NS.
+Configuration elements for both `PRODUCTION` and `DEMO` modes may reside in the same configuration file. There is no 
+need to have separate configuration files for a "demo" and "production" instance of NS.
 
-The environment variable `PASS_NOTIFICATION_MODE` (or its system property equivalent `pass.notification.mode`) is used to set the runtime mode.
+The environment variable `PASS_NOTIFICATION_MODE` (or its system property equivalent `pass.notification.mode`) is used 
+to set the runtime mode.
 
 ## Notification Recipients
 
-The recipient(s) of a notification (e.g. email) is a function of a `{Submission, SubmissionEvent}` tuple.  After the recipient list has been determined, it can be manipulated as discussed below.
+The recipient(s) of a notification (e.g. email) is a function of a `{Submission, SubmissionEvent}` tuple. After the 
+recipient list has been determined, it can be manipulated as discussed below.
 
 ### Whitelist
 
-Each configuration mode (discussed above) may have an associated whitelist.  If the whitelist is empty, _all_ recipients for a given notification will receive an email.  If the whitelist is _not empty_, the recipients for a given notification will be filtered, and _only_ whitelisted recipients will receive the notification.  Having a whitelist for the `DEMO` mode is useful to prevent accidental spamming of end users with test notifications.
+Each configuration mode may have an associated whitelist. If the whitelist is empty, _all_ recipients for a given
+notification will receive an email. If the whitelist is _not empty_, the recipients for a given notification will be
+filtered, and _only_ whitelisted recipients will receive the notification. Having a whitelist for the `DEMO` mode is
+useful to prevent accidental spamming of end users with test notifications.
 
 Production should use an empty whitelist (i.e. all potential notification recipients are whitelisted).
 
 ### Global Carbon Copy Support
 
-Each configuration mode (discussed above) may specify one or more "global carbon copy" addresses.  These addresses will receive a copy of each email sent by Notification Services (NS).  Global carbon copy addresses are implicitly whitelisted; they do not need to be explicitly configured in a whitelist.
-
-Blind carbon copy is also supported.
+Each configuration mode may specify one or more "global carbon copy" addresses. These addresses will receive a copy of 
+each email sent by Notification Services (NS). Global carbon copy addresses are implicitly whitelisted; they do not need
+to be explicitly configured in a whitelist. Blind carbon copy is also supported.
 
 Here is an example recipient configuration that specifies a global carbon copy and a global blind carbon copy:
 
 ```json
-"recipient-config": [
+{
+  "recipient-config": [
     {
       "mode": "DEMO",
       "fromAddress": "pass-noreply@jhu.edu",
@@ -124,49 +135,65 @@ Here is an example recipient configuration that specifies a global carbon copy a
       ],
       "global_bcc": [
         "pass-ops@jhu.edu"
-      ]          
+      ]
     }
-]
+  ]
+}
 ```
 
 Multiple email addresses may be specified.
 
 ### Example
 
-For example, let's say that NS is preparing to send a notification to `user@example.org`.
-
-If the runtime mode of NS is `DEMO`, and:
-- the `DEMO` mode has no (or an empty) whitelist, then `user@example.org` and the global carbon copy address (for the `DEMO` mode) receives the notification.
-- the `DEMO` mode has a whitelist that does _not_ contain `user@example.org`, then only the global carbon copy address receives the notification
-- the `DEMO` mode has a whitelist that _does contain_ `user@example.org`, then `user@example.org` and the global carbon copy address receives the notification
-- the `DEMO` mode has a whitelist that does _not_ contain `user@example.org` and there is no global carbon copy address (for the `DEMO` mode), then no notification will be dispatched
+For example, let's say that NS is preparing to send a notification to `user@example.org`. If the runtime mode of NS is `DEMO`
+, and:
+* The `DEMO` mode has no (or an empty) whitelist, then `user@example.org` and the global carbon copy address (for the `DEMO`
+mode) receives the notification.
+* The `DEMO` mode has a whitelist that does _not_ contain `user@example.org`, then only the global carbon copy address
+receives the notification.
+* The `DEMO` mode has a whitelist that _does contain_ `user@example.org`, then `user@example.org` and the global carbon
+copy address receives the notification.
+* The `DEMO` mode has a whitelist that does _not_ contain `user@example.org` and there is no global carbon copy address
+(for the `DEMO` mode), then no notification will be dispatched.
 
 If the runtime mode of NS is `PRODUCTION`, and:
-- the `PRODUCTION` mode has no (or an empty) whitelist, then `user@example.org` and the global carbon copy address (for the `PRODUCTION` mode) receives the notification.
-- the `PRODUCTION` mode has a whitelist that does _not_ contain `user@example.org`, then only the global carbon copy address receives the notification
-- the `PRODUCTION` mode has a whitelist that _does contain_ `user@example.org`, then `user@example.org` and the global carbon copy address receives the notification
-- the `PRODUCTION` mode has a whitelist that does _not_ contain `user@example.org` and there is no global carbon copy address (for the `PRODUCTION` mode), then no notification will be dispatched
+* The `PRODUCTION` mode has no (or an empty) whitelist, then `user@example.org` and the global carbon copy address (for
+the `PRODUCTION` mode) receives the notification.
+* The `PRODUCTION` mode has a whitelist that does _not_ contain `user@example.org`, then only the global carbon copy
+address receives the notification.
+* The `PRODUCTION` mode has a whitelist that _does contain_ `user@example.org`, then `user@example.org` and the global
+carbon copy address receives the notification.
+* The `PRODUCTION` mode has a whitelist that does _not_ contain `user@example.org` and there is no global carbon copy
+address (for the `PRODUCTION` mode), then no notification will be dispatched.
 
 ## Environment Variables
 
 Supported environment variables (system property analogs) and default values are:
 
-- `PASS_NOTIFICATION_QUEUE_EVENT_NAME` (`pass.notification.queue.event.name`): `event`
-- `PASS_NOTIFICATION_MODE` (`pass.notification.mode`): `DEMO`
-- `PASS_CLIENT_URL` (`pass.client.url`): `{PASS_CLIENT_URL:localhost:8080}`
-- `PASS_CLIENT_USER` (`pass.client.user`): `{PASS_CLIENT_USER:fakeuser}`
-- `PASS_CLIENT_PASSWORD` (`pass.client.password`): `${PASS_CLIENT_PASSWORD:fakepassword}`
-- `SPRING_MAIL_HOST` (`spring.mail.host`): `${SPRING_MAIL_HOST:localhost}`
-- `SPRING_MAIL_PORT` (`spring.mail.port`): `${SPRING_MAIL_PORT:587}`
-- `SPRING_MAIL_USERNAME` (`spring.mail.user`): `{SPRING_MAIL_USERNAME}`
-- `SPRING_MAIL_PASSWORD` (`spring.mail.pass`): `{SPRING_MAIL_PASSWORD}`
-- `SPRING_MAIL_PROTOCOL` (`spring.mail.transport`): `${SPRING_MAIL_PROTOCOL:SMTP}`
-- `PASS_NOTIFICATION_CONFIGURATION` (`pass.notification.configuration`): `classpath:/notification.json`
+* `PASS_NOTIFICATION_QUEUE_EVENT_NAME` (`pass.notification.queue.event.name`): `event`
+* `PASS_NOTIFICATION_MODE` (`pass.notification.mode`): `DEMO`
+* `PASS_CLIENT_URL` (`pass.client.url`): `{PASS_CLIENT_URL:localhost:8080}`
+* `PASS_CLIENT_USER` (`pass.client.user`): `{PASS_CLIENT_USER:fakeuser}`
+* `PASS_CLIENT_PASSWORD` (`pass.client.password`): `${PASS_CLIENT_PASSWORD:fakepassword}`
+* `SPRING_MAIL_HOST` (`spring.mail.host`): `${SPRING_MAIL_HOST:localhost}`
+* `SPRING_MAIL_PORT` (`spring.mail.port`): `${SPRING_MAIL_PORT:587}`
+* `SPRING_MAIL_USERNAME` (`spring.mail.user`): `{SPRING_MAIL_USERNAME}`
+* `SPRING_MAIL_PASSWORD` (`spring.mail.pass`): `{SPRING_MAIL_PASSWORD}`
+* `SPRING_MAIL_PROTOCOL` (`spring.mail.transport`): `${SPRING_MAIL_PROTOCOL:SMTP}`
+* `PASS_NOTIFICATION_CONFIGURATION` (`pass.notification.configuration`): `classpath:/notification.json`
 
-In order for notification services to connect to AWS SQS queue (the default messaging provider), the following variables must be set:
+In order for notification services to connect to AWS SQS queue (the default messaging provider), the following variables
+must be set as Environment Variables (System Properties (-Dargs)):
 
-As Environment Variables (System Properties (-Dargs)):
+* `AWS_REGION` (`aws.region`): AWS region id (i.e. `us-east-1`)
 
-- `AWS_REGION` (`aws.region`): AWS region id (i.e. `us-east-1`)
-- `AWS_ACCESS_KEY_ID` (`aws.accessKeyId`): AWS Access Key to account with access to SQS queue
-- `AWS_SECRET_ACCESS_KEY` (`aws.secretKey`) : AWS Secret Access Key to account with access to SQS queue
+In order for NS to access to AWS SQS, standard AWS access management needs to be configured on the deployed NS. See 
+[AWS IAM Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) for more information.
+
+For testing purposes, you may set AWS access keys for access:
+
+* `AWS_ACCESS_KEY_ID` (`aws.accessKeyId`): AWS Access Key to account with access to SQS queue
+* `AWS_SECRET_ACCESS_KEY` (`aws.secretKey`) : AWS Secret Access Key to account with access to SQS queue
+  
+**NOTE:** The AWS ID and key should only be used for testing and in production access should be managed through IAM roles.
+
