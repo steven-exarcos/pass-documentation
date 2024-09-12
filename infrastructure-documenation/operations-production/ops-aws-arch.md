@@ -45,12 +45,12 @@ with "least privilege" access.
 ### EC2 - PASS Core and UI
 
 PASS Core and UI are deployed on an EC2 instance. This instance is part of the main VPC and is configured to run the 
-PASS Core API/UI. Configuration files and deployment scripts for PASS Core/UI and are stored in S3, allowing for easy 
+PASS Core API/UI. Configuration files and deployment scripts for PASS Core/UI are stored in S3, allowing for easy 
 access and management during deployments and updates. In addition, the AWS Systems Manager parameter store contains 
 configuration of environment variables in the PASS application. PASS Core uses SQS for message queuing to handle 
 asynchronous communication between different components of the PASS system. For example, when a submission is made, a 
 message is placed in an SQS queue, which is then processed by the deposit services. PASS-UI interacts with AWS 
-infrastructure by utilizing EC2 instances for hosting, ALBs for managing traffic, and S3 for storing static assets.
+infrastructure by utilizing the EC2 instance for hosting, ALBs for managing traffic, and S3 for storing static assets.
 
 #### SSO - Shibboleth
 
@@ -59,11 +59,11 @@ is a single sign-on system that is used at JHU. The interoperability of this dep
 variables in the web browser that are passed by the identity provider. Please contact the PASS team for more information
 regarding how to integrate with SSO.
 
-### PASS Database - RDS
+### RDS - PASS Database
 
 PASS Core uses Amazon RDS, specifically a PostgreSQL database, to store and manage data related to publications,
 submissions, grants, and policies. The RDS instance resides within the same VPC and is not publicly accessible,
-consequently this means devops cannot connect directly to the database using SQL tools; however by using jumpbox it is
+consequently this means devops cannot connect directly to the database using SQL tools; however by using a jumpbox it is
 possible to connect via an SSM managed session if needed. The EC2 instances running PASS Core communicate with the RDS
 instance over the VPC’s internal network. Security groups are configured to allow traffic between PASS Core and the RDS
 database, ensuring secure data access.
@@ -123,7 +123,7 @@ The certificate for the PASS public domain name for JHU is in AWS Certificate Ma
 
 SES is enabled in production mode for sending emails from the notifications service.
 
-### PASS Elastic Container Registry (ECR)
+### Elastic Container Registry (ECR)
 
 ECR is a fully managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker 
 container images. It's leveraged in the PASS Application Architecture by giving a private repository to store the
@@ -140,4 +140,4 @@ queues that are used by the overall PASS environment: `deposit`, `submission`, a
 PASS uses S3 for configuration, deployment, and file storage. PASS Core uses Amazon S3 to store submission-related 
 documents and metadata. The OCFL is employed to organize these files, providing options for local disk storage or S3 
 bucket retention. The configuration of the File Service in PASS Core is done through environment variables that are set 
-in the Systems Manager parameter store.
+in the Systems Manager parameter store. Public access is blocked on all S3 buckets.

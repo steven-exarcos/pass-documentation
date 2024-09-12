@@ -18,7 +18,7 @@ workflows. The following GH workflows are part of the deployment:
 1. `Production Deployment:`
    * This is the main production deployment workflow, which orchestrates the deployment of various components of an 
    application to the production environment. It is triggered manually with a specified release version. The workflow 
-   consists of multiple jobs that utilize the above two workflows (`Publish to SNS Topic: Triggers Deployment to AWS` 
+   consists of multiple jobs that utilize two workflows (`Publish to SNS Topic: Triggers Deployment to AWS` 
    and `Deploy PASS Services and Data Loaders to ECS AWS`) to deploy different parts of the application, such as PASS 
    Core, Deposit Services, Notification Services, and the Data Loaders. Each job specifies its environment as 
    `Production` and uses the release version as the Docker image tag. The release version is set by clicking the
@@ -28,22 +28,21 @@ workflows. The following GH workflows are part of the deployment:
    * This workflow is designed to deploy an application to AWS by triggering an AWS SNS (Simple Notification Service) 
    topic. It accepts inputs such as environment, commit reference, secrets, and Docker image tag. The workflow includes 
    steps to checkout the repository, set up Python, install necessary Python packages (such as boto3 for AWS 
-   interactions), and run a Python script (`aws_sns_publish_topic.py`) that publishes a message to the SNS topic, 
-   initiating the deployment process in AWS.
+   interactions), and run a Python script that publishes a message to the SNS topic, initiating the deployment process 
+   in AWS.
 
 3. `Deploy PASS Services and Data Loaders to ECS AWS:`
    * This workflow focuses on deploying specific services and data loaders to AWS ECS (Elastic Container Service). 
    Similar to the previous workflow, it takes inputs like environment, Docker image name, secrets, and Docker image tag.
    The steps involve checking out the repository, setting up Python, installing necessary packages, and running a Python
-   deployment script (`aws_deploy_services_and_data_loaders.py`) that deploys the specified services and data loaders to
-   AWS.
+   deployment script that deploys the specified services and data loaders to AWS.
 
 ### Steps Performed During the Deployment to Production
 
 1. **Trigger the Deployment**:
    * The deployment to production is initiated manually through the `workflow_dispatch` event, requiring a specified 
    release version.
-2. **Deploy PASS Core Application**:
+2. **Deploy PASS Core/UI Application**:
    * The `deploy_pass_app` job uses the `Publish to SNS Topic: Triggers Deployment to AWS` workflow to deploy the core 
    application to the production environment. It provides the necessary inputs, including environment (`Production`), 
    commit reference, and Docker image tag, all set to the specified release version.

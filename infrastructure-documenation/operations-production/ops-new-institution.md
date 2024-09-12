@@ -7,8 +7,8 @@ done to replicate a similar JHU infrastructure.
 
 * **Infrastructure Setup**
   * **VPC Setup:**
-    * Create a VPC with both public and private subnets for deploying PASS. The public subnet can be used for the PASS 
-    user interface, while private subnets can host the core API services and backend components like the database.
+    * Create a VPC with both public and private subnets for deploying PASS. The public subnet should be used by the 
+    public ALB, while private subnets should host the PASS Docker images and other services like the database.
     * Ensure that security groups are defined to manage inbound and outbound traffic securely.
   * **EC2 and ECS for Core Services:**
       * Use EC2 instances to deploy PASS Core, PASS UI, and other related components.
@@ -18,8 +18,8 @@ done to replicate a similar JHU infrastructure.
   * **S3 for Storage and Configuration Files:**
       * S3 is used for storing configuration files and temporary file storage submission artifacts.
   * **Application Load Balancers:**
-    * Configure ALBs to handle incoming traffic for the PASS UI and ensure that traffic is routed to the correct backend
-    services.
+    * Configure ALBs to handle incoming traffic for the PASS Core/UI and ensure that traffic is routed to the correct 
+    backend services.
     * There are two target groups, one for the public ALB and one for the private ALB, these will forward the 
     appropriate container that is run in the PASS Core EC2 instance.
   * **SQS/SNS:**

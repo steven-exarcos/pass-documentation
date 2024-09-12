@@ -7,7 +7,7 @@ production environment.
 * **AWS Batch:** The Journal Loader is executed as a batch job using AWS Batch. The Journal Loader batch job retrieves, 
 processes, and uploads journal data to the PASS system.
 * **ECS:** The batch job is executed in ECS Fargate within AWS. The environment is 
-deployed in the `jhupass-vpc` VPC.
+deployed in the main VPC.
 * **EventBridge:** AWS EventBridge is used to schedule the execution of the Journal Loader job.
 
 ## Grant Data Loader
@@ -15,7 +15,7 @@ deployed in the `jhupass-vpc` VPC.
 * **AWS Batch:** The Grant Loader is executed as a batch job using AWS Batch. The Grant Loader batch job pulls grant data
 from the JHU grant management databases that is used by Johns Hopkins University.
 * **ECS:** The batch job is executed in ECS Fargate within AWS. The environment is
-deployed in the `jhupass-vpc` VPC.
+deployed in the main VPC and JHU connected VPC.
 * **S3:** The configuration of the Grant Loader is persisted in S3 buckets. The policy information `policy.properties` and
 `grant_update_timestamps` are stored in a S3 bucket.
 * **EventBridge:** AWS EventBridge is used to schedule the execution of the Grant Loader job. The target of the schedule is 
@@ -27,7 +27,7 @@ retrying failed loads with a certain number of attempts and interval wait time.
 * **AWS Batch:** The NIHMS Loader is executed as a batch job using AWS Batch. It pulls data from the NLM’s Public Access 
 Compliance Monitor (PACM) API updating and creating submissions.
 * **ECS:** The batch job is executed in ECS Fargate within AWS. The environment is
-deployed in the `jhupass-vpc` VPC.
+deployed in the main VPC.
 * **EventBridge:** AWS EventBridge is used to schedule the execution of the NIHMS Loader job.
 
 ### PACM API Token

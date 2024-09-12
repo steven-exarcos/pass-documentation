@@ -5,7 +5,7 @@ article describes the various cost factors and cost estimates sampling of runnin
 implementation.
 
 ## AWS Resource Cost Factors
-The table below contains the AWS resources used JHU and the configuration options that will impact the cost for each 
+The table below contains the AWS resources used by JHU and the configuration options that will impact the cost for each 
 resource most significantly. The order of the resources is based on percentage of the monthly expense, for instance AWS 
 RDS is the most expensive resource in our implementation. The JHU Configuration column has details for each resource as
 of September 2024 for what our system currently requires for compute, storage, IO, and monitoring. The [AWS Pricing Calculator](https://calculator.aws/#/) 

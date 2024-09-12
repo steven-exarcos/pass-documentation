@@ -1,7 +1,7 @@
 # Operations/Production - Eclipse Operations
 
-PASS is an Eclipse Foundation project and benefits the resources and knowledge that the Eclipse Foundation has to offer.
-One of those resources is the Eclipse GH repository configuration.
+PASS is an Eclipse Foundation project and benefits from the resources and knowledge that the Eclipse Foundation has to 
+offer. One of those resources is the Eclipse GH repository configuration.
 
 ## Eclipse GitHub Repository Configuration
 

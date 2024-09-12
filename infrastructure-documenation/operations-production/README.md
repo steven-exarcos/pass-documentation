@@ -3,7 +3,7 @@
 The operations and production workflows, architecture, and infrastructure are composed of a variety of technologies,
 layers, and techniques. The main important concept and understanding of this guide, is that PASS is designed to be 
 platform independent, with a few exceptions. This guide will describe and summarize the way JHU decided to deploy the 
-application, but this does mean it can't be done another way. One way of deploying PASS is using Amazon Web Services
+application, but this doesn't mean it can't be done another way. One way of deploying PASS is using Amazon Web Services
 (AWS) cloud computing services. By using the scalable infrastructure we are able to quickly adapt to different demands 
 of usage. By using AWS, it opens up the ability to use infrastructure as code which gives more efficiencies by enabling
 reuse of infrastructure between environments and aids in the CI/CD pipeline, providing consistent and quick deployments.
