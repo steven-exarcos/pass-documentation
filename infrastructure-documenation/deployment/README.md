@@ -2,11 +2,11 @@
 
 ## Table of Contents
 1. [Summary](#summary)
-2. [Deployment Architecture](#deployment-architecture)
-3. [AWS Infrastructure Components](#aws-infrastructure-components)
+2. [AWS Infrastructure Components](#aws-infrastructure-components)
+3. [Deep Dive: Deployment & Release](#deep-dive-deployment--release)
 4. [PASS Deployment Process](#pass-deployment-process)
 5. [PASS Release Process](#pass-release-process)
-6. [Related Information](#related-infomormation)
+6. [Related Information](#related-information)
 
 ## Summary
 

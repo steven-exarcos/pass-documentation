@@ -1,13 +1,12 @@
 # Eclipse PASS Cloud-Native Kubernetes Deployment Roadmap
 
 ## Table of Contents
-1. [Introduction](#introduction)
+1. [Summary](#summary)
 2. [Current State](#current-state)
 3. [Target Architecture](#target-architecture)
 4. [Roadmap Phases](#roadmap-phases)
 5. [Key Milestones](#key-milestones)
 6. [Challenges and Considerations](#challenges-and-considerations)
-7. [Timeline](#timeline)
 
 ## Summary
 
