@@ -9,7 +9,7 @@
 6. [Challenges and Considerations](#challenges-and-considerations)
 7. [Timeline](#timeline)
 
-## Introduction
+## Summary
 
 This document outlines the roadmap for transitioning the Eclipse Public Access Submission System (PASS) from its current Docker Compose-based deployment to a cloud-native Kubernetes deployment. This transition aims to improve scalability, resilience, and manageability of the PASS platform.
 

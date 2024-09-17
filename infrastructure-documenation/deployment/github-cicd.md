@@ -1,6 +1,6 @@
 # GitHub CI/CD Guide
 
-## Overview of GitHub Actions and Workflows
+## Summary
 
 GitHub Actions is a powerful [CI/CD](./github-cicd.md) platform integrated directly into GitHub repositories. It allows you to automate various software development workflows, including building, testing, and [deploying](./README.md) your code.
 
@@ -12,7 +12,7 @@ GitHub Actions is a powerful [CI/CD](./github-cicd.md) platform integrated direc
 4. **Actions**: Reusable units of code that can be shared across workflows.
 5. **Events**: Specific activities that trigger a workflow run.
 
-### Basic Workflow Structure
+### Workflow Action Structure
 
 ```yaml
 name: CI
@@ -80,6 +80,13 @@ on:
       AWS_SECRET_ACCESS_KEY:
         required: true
 ```
+### Best Practices
+
+1. Use reusable workflows for common tasks to maintain DRY principles.
+2. Leverage GitHub-hosted runners when possible to reduce maintenance overhead.
+3. Use environment protection rules for sensitive deployments.
+4. Regularly audit and rotate your secrets.
+5. Use GitHub Actions marketplace for pre-built actions to speed up development.
 
 ## AWS Integration
 
@@ -131,13 +138,7 @@ jobs:
 
 This workflow builds a Docker image and pushes it to Amazon ECR.
 
-## Best Practices
-
-1. Use reusable workflows for common tasks to maintain DRY principles.
-2. Leverage GitHub-hosted runners when possible to reduce maintenance overhead.
-3. Use environment protection rules for sensitive deployments.
-4. Regularly audit and rotate your secrets.
-5. Use GitHub Actions marketplace for pre-built actions to speed up development.
+## Related Information
 
 For more detailed information, refer to the [GitHub Actions documentation](https://docs.github.com/en/actions).
 ```

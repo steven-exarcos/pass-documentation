@@ -1,32 +1,20 @@
 # Eclipse PASS Deployment Guide
 
 ## Table of Contents
-1. [Overview](#overview)
+1. [Summary](#summary)
 2. [Deployment Architecture](#deployment-architecture)
-3. [Infrastructure Components](#infrastructure-components)
-4. [Deployment Process](#deployment-process)
-5. [Release Process](#release-process)
-6. [Additional Resources](#additional-resources)
+3. [AWS Infrastructure Components](#aws-infrastructure-components)
+4. [PASS Deployment Process](#pass-deployment-process)
+5. [PASS Release Process](#pass-release-process)
+6. [Related Information](#related-infomormation)
 
-## Overview
+## Summary
 
 The Public Access Submission System (PASS) is an open-source platform designed to streamline compliance with funder and institutional open access policies. This guide outlines the deployment process for PASS, which is adaptable to various architectures including cloud, hybrid, or on-premises environments.
 
 > **Note**: PASS is transitioning towards a cloud-native version. Expect ongoing changes to the architecture, infrastructure, and deployment process, such as moving from Docker Compose to Kubernetes or implementing Infrastructure as Code with Terraform. See (roadmap)[./roadmap.md] for more information.
 
-## Deployment Architecture
-
-The PASS deployment workflow involves:
-
-1. Code contributions to the Eclipse PASS Git repository
-2. GitHub Actions workflows for CI/CD
-3. AWS SQS for deployment initiation
-4. Liquibase for database schema management
-5. AWS RDS (PostgreSQL) for data storage
-
-This architecture serves as a template and should be adapted to meet specific organizational requirements.
-
-## Infrastructure Components
+## AWS Infrastructure Components
 
 The current PASS infrastructure in AWS includes:
 
@@ -37,13 +25,13 @@ The current PASS infrastructure in AWS includes:
 - **ALB**: Provides SSL for the frontend
 - **WAF**: Protects the frontend
 
-## Deployment Process
+## Deep Dive: Deployment & Release 
 
 ### Prerequisites
 - Docker and Docker Compose
 - Git
 
-### Steps for VM/EC2 Deployment Using Docker Compose
+### PASS Deployment Process
 
 1. Install dependencies:
    ```bash
@@ -67,7 +55,7 @@ The current PASS infrastructure in AWS includes:
      docker-compose up
    ```
 
-## Release Process
+### PASS Release Process
 
 PASS uses semantic versioning (`MAJOR.MINOR.PATCH`). The release process includes:
 
@@ -80,7 +68,7 @@ PASS uses semantic versioning (`MAJOR.MINOR.PATCH`). The release process include
 7. Updating infrastructure with new artifacts
 8. Generating release notes
 
-### GitHub Actions Workflow
+#### GitHub Actions Release Workflow
 
 The "Publish: Release All" workflow automates the release process:
 
@@ -89,14 +77,14 @@ The "Publish: Release All" workflow automates the release process:
 3. Builds and pushes Docker images
 4. Creates GitHub Releases
 
-For detailed configuration, refer to the `pass-complete-release.yml` file in the AWS-PASS-Deployment repository.
+For detailed configuration, refer to the [pass-complete-release.yml](https://github.com/eclipse-pass/main/blob/main/.github/workflows/pass-complete-release.yml) Actions workflow.
 
 Please refer to [github-cicd.md](./github-cicd.md) for further information on its useage.
 
-## Additional Resources
+## Related Information
 
 - [PASS main repository](https://github.com/eclipse-pass/main)
 - [PASS Docker repository](https://github.com/eclipse-pass/pass-docker)
 
-For further assistance or questions, please open an issue in the [PASS main repository](https://github.com/eclipse-pass/main/issues) or find us in [PASS Slack](#)!
+For further assistance or questions, please open an issue in the [PASS main repository](https://github.com/eclipse-pass/main/issues) or find us in the [PASS Slack](https://eclipse-pass.slack.com)!
 ```
