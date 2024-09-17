@@ -86,5 +86,4 @@ Please refer to [github-cicd.md](./github-cicd.md) for further information on it
 - [PASS main repository](https://github.com/eclipse-pass/main)
 - [PASS Docker repository](https://github.com/eclipse-pass/pass-docker)
 
-For further assistance or questions, please open an issue in the [PASS main repository](https://github.com/eclipse-pass/main/issues) or find us in the [PASS Slack](https://eclipse-pass.slack.com)!
-```
+For further assistance or questions, please open an issue in the [PASS main repository](https://github.com/eclipse-pass/main/issues) or find us in the [PASS Slack](https://eclipse-pass.slack.com).
