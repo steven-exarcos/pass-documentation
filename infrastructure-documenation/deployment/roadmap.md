@@ -95,5 +95,3 @@ The target architecture will leverage Kubernetes for orchestration and cloud-nat
 - Balancing resource allocation and cost optimization
 - Training team members on Kubernetes and cloud-native technologies
 - Ensuring security and compliance in the new architecture
-
----

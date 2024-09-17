@@ -133,7 +133,6 @@ jobs:
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
 ```
 
 This workflow builds a Docker image and pushes it to Amazon ECR.
@@ -141,4 +140,3 @@ This workflow builds a Docker image and pushes it to Amazon ECR.
 ## Related Information
 
 For more detailed information, refer to the [GitHub Actions documentation](https://docs.github.com/en/actions).
-```
