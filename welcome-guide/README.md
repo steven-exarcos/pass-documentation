@@ -7,16 +7,14 @@ Use Eclipse PASS to submit your manuscripts to funder and institutional publicat
 
 In this guide we step through various topics on PASS:
 
-- Research submissions overview
-- Problems Researchers face when submitting to different repositories
-- How PASS is solving submission challenges for researchers  
-- PASS at JHU
-- PASS demonstrations at Conferences
-- Technology stack
-- Deployment architecture
-- Latest release
-- PASS roadmap
-- Setup and run PASS
-- Collaboration with other institutions
-- Contributing to PASS
-- Developer documentation
+* Research submissions overview
+* Problems Researchers face when submitting to different repositories
+* How PASS is solving submission challenges for researchers  
+* PASS at JHU
+* PASS demonstrations at Conferences
+* Technology stack
+* Deployment architecture
+* Latest release
+* Setup and run PASS
+* Collaboration with other institutions
+* Contributing to PASS
