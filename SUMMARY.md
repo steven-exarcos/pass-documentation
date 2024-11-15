@@ -14,6 +14,7 @@
 * [Community](community/README.md)
   * [Developer Guidelines](community/developer-guidelines.md)
   * [PASS Roadmap](community/pass-roadmap.md)
+  * [Release Notes](community/release-notes.md)
 * [Developer Documentation](developer-documentation/README.md)
   * [Use Cases](developer-documentation/use-cases.md)
   * [PASS Core](developer-documentation/pass-core/README.md)
