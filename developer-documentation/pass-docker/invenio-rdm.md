@@ -24,7 +24,8 @@ The above commands starts by building the application docker image, once the doc
 
 ### Accessing the InvenioRDM Instance 
 
-* Visit https://127.0.0.1 in your browser
+* Visit [https://127.0.0.1/](https://127.0.0.1/) in your browser
+* Login using the credentials for the admin user in `invenio-rdm/pass-docker-invenio-rdm/app_data/users.yaml`
 * Click on the `user menu button` located in the top right corner 
 * Click on `Applications`
 * Click `New token` in the Personal access tokens

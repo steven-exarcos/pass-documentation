@@ -25,7 +25,7 @@ In order to run a local instance **_with_** deposit-service, ftp, dspace, you ca
 docker compose -p pass-docker -f docker-compose.yml -f eclipse-pass.local.yml -f docker-compose-deposit.yml -f docker-compose-dspace.yml up -d --no-build --quiet-pull --pull always
 ```
 
-##### Testing DSpace Integration with the a Local Test Instance of PASS
+##### Testing DSpace Integration with a Local Test Instance of PASS
 Run the following to create a test admin user in dspace:
 ```
 docker compose -p pass-docker -f dspace-cli.yml run --rm dspace-cli create-administrator -e test@test.edu -f admin -l user -p admin -c en
@@ -41,6 +41,8 @@ In order to run a local instance **_with_** deposit-service, ftp, InvenioRDM, yo
 
 Refer to [PASS Docker Testing InvenioRDM](./invenio-rdm.md) for instructions managing a local test InvenioRDM instance that will communicate with `pass-docker`.
 
+**Note this configuration for deposit services and InvenioRDM is for local testing only and is not intended for production.**
+
 First, start the local test InvenioRDM and add the `Access token` to the appropriate `env` file by following the steps highlighted in [PASS Docker Testing InvenioRDM](./invenio-rdm.md). 
 
 After the InvenioRDM service is up and running, run the following commands in the `pass-docker` directory:
@@ -48,6 +50,21 @@ After the InvenioRDM service is up and running, run the following commands in th
 ```console
 docker compose -p pass-docker -f docker-compose.yml -f eclipse-pass.local.yml -f docker-compose-deposit.yml -f docker-compose-deposit-invenio-rdm.yml up -d --no-build --quiet-pull --pull always
 ```
+
+#### InvenioRDM Submission Requirements
+
+When creating a Submission in PASS that will deposit into InvenioRDM with this local test configuration, there are a 
+few requirements for Submission input:
+
+* Open a browser and go to [http://localhost:8080/app/](http://localhost:8080/app/)
+* Login using the staff1 user
+* Create a new submission
+* On the Grants step, select the `invenio-test-awd-num-1` grant
+* On the Details step:
+  * Enter a Publisher
+  * Enter Publication Date (format: yyyy-mm-dd)
+  * Enter Author in format <last_name>, <first_name>
+
 
 ### Stopping a Local Instance
 In order to stop a local instance, you can run the following command:
