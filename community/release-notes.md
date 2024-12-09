@@ -1,3 +1,21 @@
+## Release v1.13.0
+### Date: December 9, 2024
+
+Release Manager: Mark Patton, JHU
+
+This release added SBOM creation to our release process. GitHub repository documentation now points to the new documentation site. Various code cleanups and dependency updates have been made to the Java backend. In addition work has started on support for direct deposit with the DSpace REST API.
+
+Tickets Completed: https://github.com/eclipse-pass/main/milestone/28?closed=1
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/1.13.0
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/1.13.0
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/1.13.0
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/1.13.0
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/1.13.0
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/1.13.0
+* pass-documentation - https://github.com/eclipse-pass/pass-documentation/releases/tag/1.13.0
+
 ## Release v1.12.0
 ### Date: October 31, 2024
 
